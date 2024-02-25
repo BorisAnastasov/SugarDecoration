@@ -1,17 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
+using SugarDecoration.Data.Models.Interfaces;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SugarDecoration.Data.Models
 {
     public class Review
     {
+        [Key]
         public int Id { get; set; }
-        public int CostumerId { get; set; }
+
+        [Required]
+        public string CostumerId { get; set; } = null!;
+
+        [ForeignKey(nameof(CostumerId))]
+        public IdentityUser Costumer { get; set; } = null!;
+
+        [Required]
         public int ProductId { get; set; }
-        public string Commment { get; set; }
+
+        [ForeignKey(nameof(ProductId))]
+        public IProduct Product { get; set; } = null!;
+
+        [Required]
+        public string Commment { get; set; } = null!;
+
+        [Required]
         public double Rating { get; set; }
     }
 }

@@ -1,21 +1,32 @@
 ﻿using SugarDecoration.Data.Models.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace SugarDecoration.Data.Models
 {
     public class Cake : IProduct
     {
+        [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        [Required]
+        public string Name { get; set; } = null!;
         public string? Description { get; set; }
+
+        [Required]
         public double Price { get; set; }
+
+        [Required]
         public int Layers { get; set; }
+
+        [Required]
         public int Portion { get; set; }
-        public string ImageUrl { get; set; }
-        public string Ingredients { get; set; }
+
+        [Required]
+        public string ImagePath { get; set; }
+        public string? Ingredients { get; set; }
+
+        [Required]
+        public int CategoryId { get; set; }
+        public IEnumerable<CakeCategory> BiscuitCategories { get; set; }
+                = new List<CakeCategory>();
     }
 }

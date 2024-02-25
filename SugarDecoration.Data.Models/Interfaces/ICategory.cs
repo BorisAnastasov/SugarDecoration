@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SugarDecoration.Data.Models
+namespace SugarDecoration.Data.Entities.Interfaces
 {
-    public class CategoryCake
+    public interface ICategory
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }
