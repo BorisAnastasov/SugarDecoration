@@ -10,12 +10,20 @@ namespace SugarDecoration.Data
         public SugarDecorationDbContext(DbContextOptions<SugarDecorationDbContext> options)
         : base(options) { }
 
-        public DbSet<Cake> Cakes { get; set; }
 
+        public DbSet<Cake> Cakes { get; set; }
         public DbSet<Biscuit> Biscuits{ get; set; }
         public DbSet<BiscuitCategory> BiscuitCategories{ get; set; }
         public DbSet<CakeCategory> CakeCategories{ get; set; }
         public DbSet<Review> Reviews{ get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            
+
+
+            base.OnModelCreating(builder);
+        }
 
 
 
