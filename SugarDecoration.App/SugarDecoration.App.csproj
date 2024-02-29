@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SugarDecoration.Data.Models\SugarDecoration.Data.Entities.csproj" />
     <ProjectReference Include="..\SugarDecoration.Data\SugarDecoration.Data.csproj" />
   </ItemGroup>
 

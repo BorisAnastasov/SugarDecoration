@@ -15,7 +15,6 @@ namespace SugarDecoration.Data.Models
         public string? Description { get; set; }
 
         [Required]
-        [Range()]
         public double Price { get; set; }
         [Required]
         public string ImagePath { get; set; } = null!;
