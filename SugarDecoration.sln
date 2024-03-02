@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.App", "Suga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.Data.Entities", "SugarDecoration.Data.Models\SugarDecoration.Data.Entities.csproj", "{A5A2514F-9219-4BE6-84F2-8737C91FA4B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarDecoration.Data", "SugarDecoration.Data\SugarDecoration.Data.csproj", "{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.Data", "SugarDecoration.Data\SugarDecoration.Data.csproj", "{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarDecoration.Services", "SugarDecoration.Services\SugarDecoration.Services.csproj", "{18D81CEC-D533-4DB5-BA21-50917F397A02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarDecoration.ViewModels", "SugarDecoration.ViewModels\SugarDecoration.ViewModels.csproj", "{380889FD-029A-4213-87FE-D28C8D27D18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarDecoration.Common", "SugarDecoration.Common\SugarDecoration.Common.csproj", "{63FF57F8-2D45-4209-981B-FDF209AA9805}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18D81CEC-D533-4DB5-BA21-50917F397A02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18D81CEC-D533-4DB5-BA21-50917F397A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18D81CEC-D533-4DB5-BA21-50917F397A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18D81CEC-D533-4DB5-BA21-50917F397A02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{380889FD-029A-4213-87FE-D28C8D27D18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{380889FD-029A-4213-87FE-D28C8D27D18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{380889FD-029A-4213-87FE-D28C8D27D18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{380889FD-029A-4213-87FE-D28C8D27D18B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63FF57F8-2D45-4209-981B-FDF209AA9805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63FF57F8-2D45-4209-981B-FDF209AA9805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63FF57F8-2D45-4209-981B-FDF209AA9805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63FF57F8-2D45-4209-981B-FDF209AA9805}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
