@@ -8,6 +8,6 @@ namespace SugarDecoration.Core.Contracts
 {
 	internal interface IProductService
 	{
-		 Task<>
+		 Task <>
 	}
 }
