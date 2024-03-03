@@ -15,4 +15,8 @@
     <ProjectReference Include="..\SugarDecoration.Data.Models\SugarDecoration.Data.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Seeding\" />
+  </ItemGroup>
+
 </Project>

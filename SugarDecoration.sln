@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.Data.Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.Data", "SugarDecoration.Data\SugarDecoration.Data.csproj", "{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarDecoration.Services", "SugarDecoration.Services\SugarDecoration.Services.csproj", "{18D81CEC-D533-4DB5-BA21-50917F397A02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.Services", "SugarDecoration.Services\SugarDecoration.Services.csproj", "{18D81CEC-D533-4DB5-BA21-50917F397A02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarDecoration.ViewModels", "SugarDecoration.ViewModels\SugarDecoration.ViewModels.csproj", "{380889FD-029A-4213-87FE-D28C8D27D18B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.ViewModels", "SugarDecoration.ViewModels\SugarDecoration.ViewModels.csproj", "{380889FD-029A-4213-87FE-D28C8D27D18B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarDecoration.Common", "SugarDecoration.Common\SugarDecoration.Common.csproj", "{63FF57F8-2D45-4209-981B-FDF209AA9805}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.Common", "SugarDecoration.Common\SugarDecoration.Common.csproj", "{63FF57F8-2D45-4209-981B-FDF209AA9805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarDecoration.Core", "SugarDecoration.Core\SugarDecoration.Core.csproj", "{AF44EF63-A714-4554-85A8-7A9F812CCC5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{63FF57F8-2D45-4209-981B-FDF209AA9805}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63FF57F8-2D45-4209-981B-FDF209AA9805}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63FF57F8-2D45-4209-981B-FDF209AA9805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF44EF63-A714-4554-85A8-7A9F812CCC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF44EF63-A714-4554-85A8-7A9F812CCC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF44EF63-A714-4554-85A8-7A9F812CCC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF44EF63-A714-4554-85A8-7A9F812CCC5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
