@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SugarDecoration.Core.Contracts
+namespace SugarDecoration.Core.Models
 {
-	internal interface IProductService
+	internal interface IProductServiceModel
 	{
-		 Task <Cak>
+
 	}
 }
