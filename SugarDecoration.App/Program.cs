@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Data;
+using SugarDecoration.Extensions;
 
 namespace SugarDecoration.App
 {
@@ -11,14 +12,11 @@ namespace SugarDecoration.App
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<SugarDecorationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            builder.Services.AddAplicationDbContext(builder.Configuration);
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<SugarDecorationDbContext>();
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddAplicationIdentity(builder.Configuration);
+
+            builder.Services.AddAplicationServices();
 
             var app = builder.Build();
 
