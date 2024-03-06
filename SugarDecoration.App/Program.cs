@@ -1,11 +1,8 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SugarDecoration.Data;
 using SugarDecoration.Extensions;
 
 namespace SugarDecoration.App
 {
-    public class Program
+	public class Program
     {
         public static void Main(string[] args)
         {
