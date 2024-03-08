@@ -1,23 +1,15 @@
-﻿using SugarDecoration.Infrastructure.Data.Categories;
-using SugarDecoration.Infrastructure.Data.Interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SugarDecoration.Infrastructure.Data.Models
 {
-	public class Biscuit:IProduct
+	public class Biscuit
 	{
 		[Key]
 		public int Id { get; set; }
 
 		[Required]
-		public string Name { get; set; }
-
-		[Required]
-		public double Price { get; set; }
-
-		[Required]
-		public string ImageUrl { get; set; }
+		public int Quantity { get; set; }
 
 		[Required]
 		public int CategoryId { get; set; }

@@ -1,4 +1,4 @@
-﻿using SugarDecoration.Infrastructure.Data.Interfaces;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,8 +19,12 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public int ProductId { get; set; }
 
         [ForeignKey(nameof(ProductId))]
-        public IProduct Product { get; set; } = null!;
+        public Product Product { get; set; } = null!;
 
+        [Required]
         public string CostumerId { get; set; } = null!;
+        public IdentityUser Costumer { get; set; } = null!;
+
+        public DateTime CreatedOn { get; set; }
     }
 }
