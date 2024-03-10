@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static SugarDecoration.Infrastructure.Constants.DataConstants.Cake;
+
 
 namespace SugarDecoration.Infrastructure.Data.Models
 {
@@ -9,10 +11,13 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public int Id { get; set; }
 
 		[Required]
-		[Range(1,5)]
+		[Range(LayersMin,LayersMax)]
         public int Layers { get; set; }
 
 		[Required]
+        public string Form { get; set; } = string.Empty;
+
+        [Required]
         public int Portions { get; set; }
 
 		[Required]

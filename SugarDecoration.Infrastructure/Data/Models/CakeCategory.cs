@@ -1,4 +1,4 @@
-﻿using SugarDecoration.Infrastructure.Data.Interfaces;
+﻿using SugarDecoration.Infrastructure.Data.Contracts;
 using System.ComponentModel.DataAnnotations;
 
 namespace SugarDecoration.Infrastructure.Data.Models

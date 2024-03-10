@@ -1,4 +1,4 @@
-﻿namespace SugarDecoration.Infrastructure.Data.Interfaces
+﻿namespace SugarDecoration.Infrastructure.Data.Contracts
 {
 	public interface ICategory
 	{
