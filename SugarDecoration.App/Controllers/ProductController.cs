@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SugarDecoration.Data;
+using SugarDecoration.Core;
 
 namespace SugarDecoration.App.Controllers
 {
