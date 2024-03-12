@@ -5,11 +5,9 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.App", "SugarDecoration.App\SugarDecoration.App.csproj", "{D19F8C31-AFB8-4BE6-B92A-43484FC222C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.Infrastructure", "SugarDecoration.Data\SugarDecoration.Infrastructure.csproj", "{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.Services", "SugarDecoration.Services\SugarDecoration.Services.csproj", "{18D81CEC-D533-4DB5-BA21-50917F397A02}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarDecoration.Core", "SugarDecoration.Core\SugarDecoration.Core.csproj", "{AF44EF63-A714-4554-85A8-7A9F812CCC5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarDecoration.Infrastructure", "SugarDecoration.Infrastructure\SugarDecoration.Infrastructure.csproj", "{657EAB64-8D03-4968-8283-C5D1A7CFCAF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +19,14 @@ Global
 		{D19F8C31-AFB8-4BE6-B92A-43484FC222C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D19F8C31-AFB8-4BE6-B92A-43484FC222C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D19F8C31-AFB8-4BE6-B92A-43484FC222C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE9A5C7C-C261-4D2D-90F1-C5354E4F9618}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18D81CEC-D533-4DB5-BA21-50917F397A02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18D81CEC-D533-4DB5-BA21-50917F397A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18D81CEC-D533-4DB5-BA21-50917F397A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18D81CEC-D533-4DB5-BA21-50917F397A02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF44EF63-A714-4554-85A8-7A9F812CCC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF44EF63-A714-4554-85A8-7A9F812CCC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF44EF63-A714-4554-85A8-7A9F812CCC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF44EF63-A714-4554-85A8-7A9F812CCC5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{657EAB64-8D03-4968-8283-C5D1A7CFCAF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{657EAB64-8D03-4968-8283-C5D1A7CFCAF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{657EAB64-8D03-4968-8283-C5D1A7CFCAF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{657EAB64-8D03-4968-8283-C5D1A7CFCAF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
