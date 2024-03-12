@@ -1,4 +1,7 @@
 using SugarDecoration.Extensions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SugarDecoration.Infrastructure.Data;
 
 namespace SugarDecoration.App
 {
@@ -7,6 +10,7 @@ namespace SugarDecoration.App
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
 
             // Add services to the container.
             builder.Services.AddAplicationDbContext(builder.Configuration);
