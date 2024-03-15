@@ -26,5 +26,6 @@ namespace SugarDecoration.Infrastructure.Data.Models
 		[ForeignKey(nameof(CategoryId))]
 		public CakeCategory Category { get; set; } = null!;
 
+		public Product Product { get; set; } = null!;
     }
 }
