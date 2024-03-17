@@ -10,7 +10,6 @@ namespace SugarDecoration.Core.Services
     public class CakeService : ICakeService
     {
         private readonly SugarDecorationDb _context;
-
         public CakeService(SugarDecorationDb context)
         {
             _context = context;
@@ -67,7 +66,6 @@ namespace SugarDecoration.Core.Services
             await _context.Cakes.AddAsync(cake);
             await _context.SaveChangesAsync();  
         }
-
         public async Task<CakeFormViewModel> EditCakeAsync(int id)
         {
             var cake = await _context.Cakes.FindAsync(id);
@@ -87,7 +85,6 @@ namespace SugarDecoration.Core.Services
 
             return cakeModel;
         }
-
         public Task DeleteCakeAsync(int id)
         {
             throw new NotImplementedException();

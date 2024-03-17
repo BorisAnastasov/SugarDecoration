@@ -1,4 +1,4 @@
-﻿namespace SugarDecoration.Core.Models.Cake
+﻿namespace SugarDecoration.Core.ViewModels.Cake
 {
     public class AllCakeViewModel
     {
