@@ -11,8 +11,6 @@
 	{
 		public SugarDecorationDb(DbContextOptions<SugarDecorationDb> options) : base(options)
 		{
-			Database.EnsureDeleted();
-			Database.EnsureCreated();
 		}
 
 		//Tables

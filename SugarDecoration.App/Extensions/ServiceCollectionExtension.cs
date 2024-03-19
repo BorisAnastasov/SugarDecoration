@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.Services;
 using SugarDecoration.Infrastructure.Data;
 
 namespace SugarDecoration.Extensions
@@ -8,6 +10,7 @@ namespace SugarDecoration.Extensions
 	{
 		public static IServiceCollection AddAplicationServices(this IServiceCollection services)
 		{
+			services.AddScoped<ICakeService, CakeService>();
 			return services;
 		}
 		public static IServiceCollection AddAplicationDbContext(this IServiceCollection services, IConfiguration config)

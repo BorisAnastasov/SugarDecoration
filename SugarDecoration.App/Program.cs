@@ -2,6 +2,7 @@ using SugarDecoration.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Infrastructure.Data;
+using SugarDecoration.Core.Services;
 
 namespace SugarDecoration.App
 {
