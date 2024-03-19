@@ -17,7 +17,7 @@ namespace SugarDecoration.App.Controllers
         {
             var cakes = await _cakeService.GetAllCakesAsync();
 
-            return View(cakes);
+            return View("AllCakes", cakes);
         }
 
     }

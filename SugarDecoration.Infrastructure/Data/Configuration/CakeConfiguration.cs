@@ -16,6 +16,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				Portions = 35,
 				Form = "кръгла",
 				CategoryId = 1,
+				ProductId = 1,
 			},
 			new Cake
 			{
@@ -23,7 +24,8 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				Layers = 2,
 				Portions = 30,
 				Form = "кръгла",
-				CategoryId = 1
+				CategoryId = 1,
+				ProductId = 2,
 			},
 			new Cake
 			{
@@ -31,9 +33,30 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				Layers = 2,
 				Portions = 30,
 				Form = "кръгла",
-				CategoryId = 1
+				CategoryId = 1,
+				ProductId = 3,
+			},
+			new Cake
+			{
+				Id = 4,
+				Layers = 1,
+				Portions = 20,
+				Form = "кръгла",
+				CategoryId = 2,
+				ProductId = 4,
+
+			},
+			new Cake
+			{
+				Id = 5,
+				Layers = 2,
+				Portions = 30,
+				Form = "кръгла",
+				CategoryId = 1,
+				ProductId = 5,
 			}
 			);
+
 		}
 
 	}

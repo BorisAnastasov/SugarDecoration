@@ -28,6 +28,11 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 			{
 				Id = 4,
 				Name = "18+",
+			},
+			new CakeCategory 
+			{
+				Id = 5,
+				Name = "Специални поводи"
 			}
 			);
 		}

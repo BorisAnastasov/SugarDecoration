@@ -17,7 +17,7 @@ namespace SugarDecoration.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.25")
+                .HasAnnotation("ProductVersion", "6.0.27")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -283,9 +283,14 @@ namespace SugarDecoration.Infrastructure.Migrations
                     b.Property<int>("Portions")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Cakes");
 
@@ -296,7 +301,8 @@ namespace SugarDecoration.Infrastructure.Migrations
                             CategoryId = 1,
                             Form = "кръгла",
                             Layers = 3,
-                            Portions = 35
+                            Portions = 35,
+                            ProductId = 1
                         },
                         new
                         {
@@ -304,7 +310,8 @@ namespace SugarDecoration.Infrastructure.Migrations
                             CategoryId = 1,
                             Form = "кръгла",
                             Layers = 2,
-                            Portions = 30
+                            Portions = 30,
+                            ProductId = 2
                         },
                         new
                         {
@@ -312,7 +319,26 @@ namespace SugarDecoration.Infrastructure.Migrations
                             CategoryId = 1,
                             Form = "кръгла",
                             Layers = 2,
-                            Portions = 30
+                            Portions = 30,
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            Form = "кръгла",
+                            Layers = 1,
+                            Portions = 20,
+                            ProductId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 1,
+                            Form = "кръгла",
+                            Layers = 2,
+                            Portions = 30,
+                            ProductId = 5
                         });
                 });
 
@@ -352,6 +378,11 @@ namespace SugarDecoration.Infrastructure.Migrations
                         {
                             Id = 4,
                             Name = "18+"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Специални поводи"
                         });
                 });
 
@@ -432,7 +463,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 3, 9, 17, 33, 24, 388, DateTimeKind.Local).AddTicks(3772),
+                            CreatedOn = new DateTime(2024, 3, 18, 23, 1, 30, 434, DateTimeKind.Local).AddTicks(4038),
                             ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t1.6435-9/45418292_1900224123436935_5112515879866728448_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=eFIio2QbBlEAX9Yzjue&_nc_ht=scontent-sof1-1.xx&oh=00_AfBoQ7qqdl47HZ7hWnAk-no9njwdW7bf1dMJizkc5xCsOQ&oe=6613AA58",
                             Price = 100.0,
                             Rating = 0.0,
@@ -441,7 +472,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 3, 9, 17, 33, 24, 388, DateTimeKind.Local).AddTicks(3800),
+                            CreatedOn = new DateTime(2024, 3, 18, 23, 1, 30, 434, DateTimeKind.Local).AddTicks(4084),
                             ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t31.18172-8/11950324_881502548642436_5301516909345454510_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=im4NrlMRDwoAX906LIT&_nc_ht=scontent-sof1-1.xx&oh=00_AfANMiRCdEFjBHMKqzdVQ8CfmwHERZjyswaGHkTpw3deDw&oe=66139F73",
                             Price = 120.0,
                             Rating = 0.0,
@@ -450,11 +481,29 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2024, 3, 9, 17, 33, 24, 388, DateTimeKind.Local).AddTicks(3803),
+                            CreatedOn = new DateTime(2024, 3, 18, 23, 1, 30, 434, DateTimeKind.Local).AddTicks(4089),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/118890298_3193596277433040_3828589938106568560_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dMYD1Y2twPAAX-5TIdq&_nc_oc=AQmB6ydQvkgot9gup32CReBa78Uc9nJ0lxvLge5csyOGMtoviBAviNqd5ot6C3mvjZ4&_nc_ht=scontent-sof1-2.xx&oh=00_AfCKvMW1pK86G0-3Uvc3A4efBy5a7ZXvntK3EIguunlpsg&oe=6613AE2C",
                             Price = 150.0,
                             Rating = 0.0,
                             Title = "Съпруг и съпруга с червени рози и бели цветя"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedOn = new DateTime(2024, 3, 18, 23, 1, 30, 434, DateTimeKind.Local).AddTicks(4094),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t31.18172-8/11940464_881502551975769_3150965239804644226_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=lIiz0CvrQOAAX8yrHv6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDS01MUNTFuECPkpvob8zZZXmMJKbYgvCTwQahwOQCQIg&oe=6620333B",
+                            Price = 120.0,
+                            Rating = 0.0,
+                            Title = "бели цветя"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedOn = new DateTime(2024, 3, 18, 23, 1, 30, 434, DateTimeKind.Local).AddTicks(4106),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/81678509_2608157715976902_8711874778027261952_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dn9ncHjKXt8AX8V4imn&_nc_oc=Adjiqz8TQNQuH0VsI2W2J8AQwDjcgr4XPGHPeTXPJ2qkeaZqY5bGxFIsMXkoAPWg4Jo&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAjqqJ0cgKuP1WozZm7dEPBE_51dVR12bcJ2UmxChzeYg&oe=66201CA0",
+                            Price = 110.0,
+                            Rating = 0.0,
+                            Title = "бели цветя"
                         });
                 });
 
@@ -562,7 +611,15 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SugarDecoration.Infrastructure.Data.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Cart", b =>
