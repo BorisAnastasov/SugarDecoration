@@ -1,5 +1,4 @@
-﻿using SugarDecoration.Core.Models.Cake;
-using SugarDecoration.Core.ViewModels.Cake;
+﻿using SugarDecoration.Core.ViewModels.Cake;
 
 namespace SugarDecoration.Core.Contracts
 {

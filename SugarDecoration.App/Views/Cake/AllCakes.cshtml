@@ -3,18 +3,24 @@
 	ViewBag.Title = "All Cakes";
 }
 
-<h1 class="text-center">@ViewBag.Title</h1>
+<div class="container">
+    <h1 class="text-center">@ViewBag.Title</h1>
+     <div class="row">
+        @foreach (var cake in Model)
+        {
+            <div class="col6 col-md-3 col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="@cake.ImageUrl">
+                    <div class="card-body">
+                        <h5 class="card-title">@cake.Title</h5>
+                        <p class="text-center">@cake.Price лв.</p>
+                        <a class="btn btn-primary"
+                           asp-controller="Cake"
+                           asp-action="Details">Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+     </div>
+</div>
 
-@foreach (var cake in Model)
-{
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="@cake.ImageUrl">
-        <div class="card-body">
-            <h5 class="card-title">@cake.Title</h5>
-            <p class="text-center">@cake.Price лв.</p>
-            <a class="btn btn-primary"
-                   asp-controller="Cake"
-                   asp-action="Details">Details</a>
-        </div>
-    </div>
-}

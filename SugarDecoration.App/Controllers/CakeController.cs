@@ -19,5 +19,12 @@ namespace SugarDecoration.App.Controllers
             return View("AllCakes", cakes);
         }
 
+        public async Task<IActionResult> CakeDetails(int id) 
+        {
+            var cake = await _cakeService.GetCakeDetailsByIdAsync(id);
+
+            return View();
+        }
+
     }
 }

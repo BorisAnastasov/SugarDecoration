@@ -1,39 +1,12 @@
-﻿.flex-basis-0 {
-    flex-basis: 0%;
+﻿
+.bgc-60 {
+    background-color: rgb(220, 242, 241);
 }
-.flex-basis-10 {
-    flex-basis: 10%;
+
+.bgc-30 {
+    background-color: rgb(54, 84, 134);
 }
-.flex-basis-20 {
-    flex-basis: 20%;
-}
-.flex-basis-30 {
-    flex-basis: 30%;
-}
-.flex-basis-40 {
-    flex-basis: 40%;
-}
-.flex-basis-50 {
-    flex-basis: 50%;
-}
-.flex-basis-60 {
-    flex-basis: 60%;
-}
-.flex-basis-70 {
-    flex-basis: 70%;
-}
-.flex-basis-80 {
-    flex-basis: 80%;
-}
-.flex-basis-90 {
-    flex-basis: 90%;
-}
-.flex-basis-30 {
-    flex-basis: 30%;
-}
-.flex-basis-30 {
-    flex-basis: 30%;
-}
-.flex-basis-100px {
-    flex-basis: 100px;
+
+.bgc-10 {
+    background-color: rgb(15, 16, 53);
 }
