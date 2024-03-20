@@ -3,7 +3,17 @@
 	ViewBag.Title = "Details about the cake";
 }
 
-<section>
-	<img />
-	
-</section>
+<div class="container">
+	<div class="row">
+		<div class="col-sm">
+			<img src="@Model.ImageUrl" class="w-50"/>
+		</div>
+		<div class="col-sm">
+			<h1>@Model.Title</h1>
+			<p>@Model.Price lv.</p>
+			<p>@Model.Form </p>
+			<p>@Model.Portions portions</p>
+			<p>@Model.Layers</p>
+		</div>
+	</div>
+</div>

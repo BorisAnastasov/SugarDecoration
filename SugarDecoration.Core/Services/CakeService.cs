@@ -38,6 +38,10 @@ namespace SugarDecoration.Core.Services
         {
             var cake = await _context.Cakes.FindAsync(id);
 
+            var product = await _context.Products.FindAsync(cake.ProductId);
+
+            cake.Product = product;
+
             var cakeModel = new DetailsCakeViewModel
             {
                 Id = cake.Id,

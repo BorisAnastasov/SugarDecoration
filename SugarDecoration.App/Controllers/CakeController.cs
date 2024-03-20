@@ -23,7 +23,7 @@ namespace SugarDecoration.App.Controllers
         {
             var cake = await _cakeService.GetCakeDetailsByIdAsync(id);
 
-            return View();
+            return View(cake);
         }
 
     }
