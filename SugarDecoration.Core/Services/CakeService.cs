@@ -55,7 +55,7 @@ namespace SugarDecoration.Core.Services
 
             return cakeModel;
         }
-        public async Task AddCakeAsync(CakeFormViewModel model, int productId)
+        public async Task AddCakeAsync(FormCakeViewModel model, int productId)
         {
             var cake = new Cake
             {
@@ -69,12 +69,12 @@ namespace SugarDecoration.Core.Services
             await _context.Cakes.AddAsync(cake);
             await _context.SaveChangesAsync();  
         }
-        public async Task<CakeFormViewModel> EditCakeAsync(int id)
+        public async Task<FormCakeViewModel> EditCakeAsync(int id)
         {
             var cake = await _context.Cakes.FindAsync(id);
 
 
-            var cakeModel = new CakeFormViewModel
+            var cakeModel = new FormCakeViewModel
             {
                 Title = cake.Product.Title,
                 Price = cake.Product.Price.ToString(),

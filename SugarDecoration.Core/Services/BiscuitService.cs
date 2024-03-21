@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.ViewModels.Biscuit;
 using SugarDecoration.Core.ViewModels.Cake;
 using SugarDecoration.Infrastructure.Data;
+using SugarDecoration.Infrastructure.Data.Contracts;
+using SugarDecoration.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,25 +15,34 @@ namespace SugarDecoration.Core.Services
 {
 	public class BiscuitService : IBiscuitService
 	{
-		private readonly SugarDecorationDb _context;
-		public BiscuitService(SugarDecorationDb context)
+		private readonly IRepository repository;
+		public BiscuitService(IRepository _repository)
 		{
-			_context = context;
-		}
-		public async Task<IEnumerable<AllCakeViewModel>> GetAllBiscuitsAsync()
-		{
-			var biscuits = await _context.Biscuits
-											.AsNoTracking()
-											.Select(new AllBiscuitViewModel 
-											{
-												
-											}).ToListAsync();	
+			repository = _repository;
 		}
 
-
-		public Task AddBiscuitAsync(CakeFormViewModel model, int productId)
+		public async Task<IEnumerable<AllBiscuitViewModel>> GetAllBiscuitsAsync()
 		{
-			
+			var biscuits = await repository
+								.AllReadOnly<Biscuit>()
+								.Select(b => new AllBiscuitViewModel
+								{
+									Id = b.Id,
+									Title = b.Product.Title,
+									Price = b.Product.Price.ToString(),
+									ImageUrl = b.Product.ImageUrl
+								}).ToListAsync();
+
+			return biscuits;
+		}
+
+		public Task AddBiscuitAsync(FormBiscuitViewModel model, int productId)
+		{
+			var biscuit = new Biscuit() 
+			{
+				Quantity = model.Quantity,
+				CategoryId = model.Category
+			}
 		}
 
 		public Task DeleteBiscuitAsync(int id)
@@ -38,7 +50,7 @@ namespace SugarDecoration.Core.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<CakeFormViewModel> EditBiscuitAsync(int id)
+		public Task<FormBiscuitViewModel> EditBiscuitAsync(int id)
 		{
 			throw new NotImplementedException();
 		}
@@ -48,9 +60,9 @@ namespace SugarDecoration.Core.Services
 			throw new NotImplementedException();
 		}
 
-		
 
-		public Task<DetailsCakeViewModel> GetBiscuitDetailsByIdAsync(int id)
+
+		public Task<DetailsBiscuitViewModel> GetBiscuitDetailsByIdAsync(int id)
 		{
 			throw new NotImplementedException();
 		}
