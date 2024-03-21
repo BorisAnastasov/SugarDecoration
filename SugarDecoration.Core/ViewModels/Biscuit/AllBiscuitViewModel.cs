@@ -1,6 +1,4 @@
-﻿using SugarDecoration.Infrastructure.Data.Models;
-
-namespace SugarDecoration.Core.ViewModels.Biscuit
+﻿namespace SugarDecoration.Core.ViewModels.Biscuit
 {
 	public class AllBiscuitViewModel
 	{

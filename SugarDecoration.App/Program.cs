@@ -14,11 +14,11 @@ namespace SugarDecoration.App
             
 
             // Add services to the container.
-            builder.Services.AddAplicationDbContext(builder.Configuration);
+            builder.Services.AddApplicationDbContext(builder.Configuration);
 
-            builder.Services.AddAplicationIdentity(builder.Configuration);
+            builder.Services.AddApplicationIdentity(builder.Configuration);
 
-            builder.Services.AddAplicationServices();
+            builder.Services.AddApplicationServices();
 
             var app = builder.Build();
 
