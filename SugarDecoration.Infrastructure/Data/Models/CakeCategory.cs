@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SugarDecoration.Infrastructure.Data.Models
 {
-    public class CakeCategory : ICategory
+    public class CakeCategory
     {
         [Key]
         public int Id { get; set; }

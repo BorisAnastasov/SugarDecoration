@@ -1,4 +1,6 @@
-﻿namespace SugarDecoration.Core.ViewModels.Biscuit
+﻿using SugarDecoration.Core.ViewModels.CakeCategory;
+
+namespace SugarDecoration.Core.ViewModels.Biscuit
 {
 	public class FormBiscuitViewModel
 	{
@@ -6,10 +8,10 @@
 		public string Title { get; set; } = string.Empty;
 		public string Price { get; set; } = string.Empty;
 		public int Quantity { get; set; }
-		public string Category { get; set; } = null!;
+		public int CategoryId { get; set; }
 		public string ImageUrl { get; set; } = string.Empty;
 		public DateTime CreatedOn { get; set; }
-
-        public IEnumerable<> MyProperty { get; set; }
+        public IEnumerable<CakeCategoryViewModel> CakeCategories { get; set; }
+					= new List<CakeCategoryViewModel>();
     }
 }

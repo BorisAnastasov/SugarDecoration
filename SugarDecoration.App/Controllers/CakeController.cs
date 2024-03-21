@@ -26,5 +26,12 @@ namespace SugarDecoration.App.Controllers
             return View(cake);
         }
 
+        public async Task<IActionResult> DeleteCake(int id) 
+        {
+            await _cakeService.DeleteCakeAsync(id);
+
+            return View();
+        }
+
     }
 }

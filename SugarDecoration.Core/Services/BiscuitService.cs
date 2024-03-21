@@ -1,15 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.ViewModels.Biscuit;
-using SugarDecoration.Core.ViewModels.Cake;
-using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SugarDecoration.Core.Services
 {
@@ -36,23 +29,29 @@ namespace SugarDecoration.Core.Services
 			return biscuits;
 		}
 
-		public Task AddBiscuitAsync(FormBiscuitViewModel model, int productId)
+		public async Task AddBiscuitAsync(FormBiscuitViewModel model, int productId)
 		{
-			var biscuit = new Biscuit() 
+			var biscuit = new Biscuit()
 			{
 				Quantity = model.Quantity,
-				CategoryId = model.Category
-			}
-		}
+				CategoryId = model.CategoryId,
+				ProductId = productId
+			};
 
-		public Task DeleteBiscuitAsync(int id)
+			await repository.AddAsync(biscuit);
+			await repository.SaveChangesAsync();
+        }
+
+		public async Task DeleteBiscuitAsync(int id)
 		{
-			throw new NotImplementedException();
-		}
+			await repository.DeleteAsync<Biscuit>(id);
+			await repository.SaveChangesAsync();
+        }
 
 		public Task<FormBiscuitViewModel> EditBiscuitAsync(int id)
 		{
 			throw new NotImplementedException();
+
 		}
 
 		public Task<bool> ExistsByIdAsync(int id)
