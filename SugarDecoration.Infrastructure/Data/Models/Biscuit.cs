@@ -16,5 +16,11 @@ namespace SugarDecoration.Infrastructure.Data.Models
 
 		[ForeignKey(nameof(CategoryId))]
 		public BiscuitCategory Category { get; set; } = null!;
+
+		[Required]
+		public int ProductId { get; set; }
+
+		[ForeignKey(nameof(ProductId))]
+		public Product Product { get; set; } = null!;
     }
 }
