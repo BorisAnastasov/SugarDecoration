@@ -42,7 +42,7 @@ namespace SugarDecoration.Infrastructure.Data.Contracts
 				.Where(search)
 				.AsNoTracking();
 		}
-		public async Task DeleteAsync<T>(int id) where T : class
+		public async Task DeleteAsync<T>(object id) where T : class
 		{
 			T entity = await GetByIdAsync<T>(id);
 

@@ -2,95 +2,95 @@
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.ViewModels.Cake;
 using SugarDecoration.Infrastructure.Data;
+using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
 
 namespace SugarDecoration.Core.Services
 {
-    public class CakeService : ICakeService
-    {
-        private readonly SugarDecorationDb _context;
-        public CakeService(SugarDecorationDb context)
-        {
-            _context = context;
-        }
-        public async Task<IEnumerable<AllCakeViewModel>> GetAllCakesAsync()
-        {
-            var cakes = await _context.Cakes
-                                .AsNoTracking()
-                                .Select(c => new AllCakeViewModel
-                                {
-                                    Id = c.Id,
-                                    Title = c.Product.Title,
-                                    Price = c.Product.Price.ToString(),
-                                    Layers = c.Layers,
-                                    ImageUrl = c.Product.ImageUrl
+	public class CakeService : ICakeService
+	{
+		private readonly IRepository repository;
+		public CakeService(IRepository _repository)
+		{
+			repository = _repository;
+		}
+		public async Task<IEnumerable<AllCakeViewModel>> GetAllCakesAsync()
+		{
+			var cakes = await repository.AllReadOnly<Cake>()
+								.Select(c => new AllCakeViewModel
+								{
+									Id = c.Id,
+									Title = c.Product.Title,
+									Price = c.Product.Price.ToString(),
+									Layers = c.Layers,
+									ImageUrl = c.Product.ImageUrl
 
-                                }).ToListAsync();
-            return cakes;
-        }
-        public async Task<bool> ExistsByIdAsync(int id)
-        {
-            var cake = await _context.Cakes.FindAsync(id);
+								}).ToListAsync();
+			return cakes;
+		}
+		public async Task<bool> ExistsByIdAsync(int id)
+		{
+			var cake = await repository.GetByIdAsync<Cake>(id);
 
-            return cake != null;//when null return false, otherwise true
-        }
-        public async Task<DetailsCakeViewModel> GetCakeDetailsByIdAsync(int id)
-        {
-            var cake = await _context.Cakes.FindAsync(id);
+			return cake != null;//when null return false, otherwise true
+		}
+		public async Task<DetailsCakeViewModel> GetCakeDetailsByIdAsync(int id)
+		{
+			var cake = await repository.GetByIdAsync<Cake>(id);
 
-            var product = await _context.Products.FindAsync(cake.ProductId);
+			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
 
-            cake.Product = product;
+			cake.Product = product;
 
-            var cakeModel = new DetailsCakeViewModel
-            {
-                Id = cake.Id,
-                Title = cake.Product.Title,
-                Price = cake.Product.Price.ToString(),
-                Layers = cake.Layers,
-                Form = cake.Form,
-                Portions = cake.Portions,
-                ImageUrl = cake.Product.ImageUrl
-            };
+			var cakeModel = new DetailsCakeViewModel
+			{
+				Id = cake.Id,
+				Title = cake.Product.Title,
+				Price = cake.Product.Price.ToString(),
+				Layers = cake.Layers,
+				Form = cake.Form,
+				Portions = cake.Portions,
+				ImageUrl = cake.Product.ImageUrl
+			};
 
-            return cakeModel;
-        }
-        public async Task AddCakeAsync(FormCakeViewModel model, int productId)
-        {
-            var cake = new Cake
-            {
-                Id = productId,
-                Layers = model.Layers,
-                Form = model.Form,
-                Portions= model.Portions,
-                CategoryId = model.CategoryId,
-            };
+			return cakeModel;
+		}
+		public async Task AddCakeAsync(FormCakeViewModel model, int productId)
+		{
+			var cake = new Cake
+			{
+				Id = productId,
+				Layers = model.Layers,
+				Form = model.Form,
+				Portions = model.Portions,
+				CategoryId = model.CategoryId,
+			};
 
-            await _context.Cakes.AddAsync(cake);
-            await _context.SaveChangesAsync();  
-        }
-        public async Task<FormCakeViewModel> EditCakeAsync(int id)
-        {
-            var cake = await _context.Cakes.FindAsync(id);
+			await repository.AddAsync(cake);
+			await repository.SaveChangesAsync();
+		}
+		public async Task EditCakeAsync(FormCakeViewModel model, int cakeId)
+		{
+			var cake = await repository.GetByIdAsync<Cake>(cakeId);
+			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
 
+			product.Title = model.Title;
+			product.Price = double.Parse(model.Price);
+			cake.Layers = model.Layers;
+			cake.Form = model.Form;
+			cake.Portions = model.Portions;
+			cake.CategoryId = model.CategoryId;
+			product.ImageUrl = model.ImageUrl;
+			product.CreatedOn = model.CreatedOn;
 
-            var cakeModel = new FormCakeViewModel
-            {
-                Title = cake.Product.Title,
-                Price = cake.Product.Price.ToString(),
-                Layers = cake.Layers,
-                Form = cake.Form,
-                Portions = cake.Portions,
-                CategoryId = cake.CategoryId,
-                ImageUrl = cake.Product.ImageUrl,
-                CreatedOn = cake.Product.CreatedOn
-            };
+			await repository.SaveChangesAsync();
+		}
+		public async Task DeleteCakeAsync(int id)
+		{
+			await repository.DeleteAsync<Cake>(id);
 
-            return cakeModel;
-        }
-        public Task DeleteCakeAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		}
+
+		
+	}
 }

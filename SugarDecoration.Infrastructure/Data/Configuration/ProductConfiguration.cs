@@ -9,6 +9,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 		public void Configure(EntityTypeBuilder<Product> builder)
 		{
 			builder.HasData(
+			//Cakes
 			new Product
 			{
 				Id = 1,
@@ -48,10 +49,41 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				Price = 110.00,
 				CreatedOn = DateTime.Now,
 				ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/81678509_2608157715976902_8711874778027261952_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dn9ncHjKXt8AX8V4imn&_nc_oc=Adjiqz8TQNQuH0VsI2W2J8AQwDjcgr4XPGHPeTXPJ2qkeaZqY5bGxFIsMXkoAPWg4Jo&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAjqqJ0cgKuP1WozZm7dEPBE_51dVR12bcJ2UmxChzeYg&oe=66201CA0"
-			}
-
-
-			);
+			},
+			//Biscuits
+			new Product 
+			{
+				Id = 6,
+				Title = "Коледни елхи",
+				Price = 10.00,
+				CreatedOn = DateTime.Now,
+				ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/127996258_3428591943933471_6613145035034934063_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rPtEwbVYSpsAX8PKZXU&_nc_ht=scontent.fsof10-1.fna&oh=00_AfD393zUJS7ZhFbPMSxqEvvGouqHlkLrInYKA97sq2Hdvg&oe=6624BF3F"
+            },
+            new Product
+            {
+                Id = 7,
+                Title = "Коледни фигури",
+                Price = 12.00,
+                CreatedOn = DateTime.Now,
+                ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.18169-9/12301697_913490672110290_3131707004579174335_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ORKDJKSWeZoAX_k70au&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCU2TCno1TEOAxjtlDR3eVOY3eJcWK_lWlPD7c2VyMphg&oe=6624A21A"
+            },
+            new Product
+            {
+                Id = 8,
+                Title = "Еднорог",
+                Price = 15.00,
+                CreatedOn = DateTime.Now,
+                ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/346885612_1175653887168525_5354008429856402980_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=hObhR06Be5kAX-tTgc6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDokQeGR3jVPFokGOf4T-2ErzAqwXyrUMnNwn7NHqgQdw&oe=66025108"
+            },
+            new Product
+            {
+                Id = 9,
+                Title = "Баба Марта",
+                Price = 13.00,
+                CreatedOn = DateTime.Now,
+                ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/429942016_1126158058806458_357351569670082917_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=52_xuh-8AD8AX8IJkDL&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC2GOft8pteFCSZoG6CAy8Ot_y5swfu7kOtrW4GqwPhkw&oe=6602E783"
+            }
+            );
 		}
 	}
 }
