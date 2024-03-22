@@ -28,7 +28,6 @@ namespace SugarDecoration.Core.Services
 
 			return biscuits;
 		}
-
 		public async Task AddBiscuitAsync(FormBiscuitViewModel model, int productId)
 		{
 			var biscuit = new Biscuit()
@@ -41,29 +40,48 @@ namespace SugarDecoration.Core.Services
 			await repository.AddAsync(biscuit);
 			await repository.SaveChangesAsync();
         }
-
 		public async Task DeleteBiscuitAsync(int id)
 		{
 			await repository.DeleteAsync<Biscuit>(id);
 			await repository.SaveChangesAsync();
         }
-
-		public Task<FormBiscuitViewModel> EditBiscuitAsync(int id)
+		public async Task EditBiscuitAsync(FormBiscuitViewModel model, int biscuitId)
 		{
-			throw new NotImplementedException();
+            var biscuit = await repository.GetByIdAsync<Biscuit>(biscuitId);
+            var product = await repository.GetByIdAsync<Product>(biscuit.ProductId);
 
+            product.Title = model.Title;
+            product.Price = double.Parse(model.Price);
+            biscuit.Quantity = model.Quantity;
+            biscuit.CategoryId = model.CategoryId;
+            product.ImageUrl = model.ImageUrl;
+            product.CreatedOn = model.CreatedOn;
+
+            await repository.SaveChangesAsync();
+
+        }
+		public async Task<bool> ExistsByIdAsync(int id)
+		{
+			var biscuit = await repository.GetByIdAsync<Biscuit>(id);
+
+			return biscuit!=null;
 		}
-
-		public Task<bool> ExistsByIdAsync(int id)
+		public async Task<DetailsBiscuitViewModel> GetBiscuitDetailsByIdAsync(int id)
 		{
-			throw new NotImplementedException();
-		}
+			var biscuit = await repository.GetByIdAsync<Biscuit>(id);
+			var product = await repository.GetByIdAsync<Product>(biscuit.ProductId);
 
+			var biscuitModel = new DetailsBiscuitViewModel
+			{
+				Id = id,
+				Title = product.Title,
+				Price = product.Price.ToString(),
+				Quantity = biscuit.Quantity,
+				Category = biscuit.Category.Name,
+				ImageUrl = product.ImageUrl
+			};
 
-
-		public Task<DetailsBiscuitViewModel> GetBiscuitDetailsByIdAsync(int id)
-		{
-			throw new NotImplementedException();
+			return biscuitModel;
 		}
 	}
 }

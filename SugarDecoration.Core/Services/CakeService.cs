@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.ViewModels.Cake;
-using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
 
 namespace SugarDecoration.Core.Services
 {
-	public class CakeService : ICakeService
+    public class CakeService : ICakeService
 	{
 		private readonly IRepository repository;
 		public CakeService(IRepository _repository)
@@ -90,7 +89,6 @@ namespace SugarDecoration.Core.Services
 			await repository.DeleteAsync<Cake>(id);
 
 		}
-
 		
 	}
 }
