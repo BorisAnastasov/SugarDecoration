@@ -1,8 +1,9 @@
 ﻿using SugarDecoration.Core.ViewModels.CakeCategory;
+using SugarDecoration.Core.ViewModels.Contracts;
 
 namespace SugarDecoration.Core.ViewModels.Biscuit
 {
-	public class FormBiscuitViewModel
+	public class FormBiscuitViewModel:IFormProductViewModel
 	{
 		public int Id { get; set; }
 		public string Title { get; set; } = string.Empty;
