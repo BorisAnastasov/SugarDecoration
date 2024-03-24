@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.ViewModels;
 using System.Diagnostics;
 
@@ -6,16 +7,19 @@ namespace SugarDecoration.App.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
+        private readonly IHomeService homeService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> _logger, IHomeService _homeService)
         {
-            _logger = logger;
+            logger = _logger;
+            homeService = _homeService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var products = await homeService.TakeFiveProducts();
+            return View(products);
         }
 
         public IActionResult Privacy()

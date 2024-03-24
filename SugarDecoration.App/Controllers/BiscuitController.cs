@@ -24,7 +24,7 @@ namespace SugarDecoration.App.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditBiscuit(int id)
+        public IActionResult EditBiscuit()
         {
             var biscuit = new FormBiscuitViewModel();
             return View(nameof(EditBiscuit), biscuit);

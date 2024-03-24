@@ -13,6 +13,7 @@ namespace SugarDecoration.Extensions
 		{
 			services.AddScoped<ICakeService, CakeService>();
 			services.AddScoped<IBiscuitService, BiscuitService>();
+			services.AddTransient<IHomeService, HomeService>();
 			return services;
 		}
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)

@@ -1,39 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
-using SugarDecoration.Core.ViewModels.Contracts;
 using SugarDecoration.Core.ViewModels.Home;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
 
 namespace SugarDecoration.Core.Services
 {
-	public class ProductService : IProductService
+	public class HomeService:IHomeService
 	{
 		private readonly IRepository repository;
 
-		public ProductService(IRepository _repository)
+		public HomeService(IRepository _repository)
 		{
 			repository = _repository;
 		}
 
-		public async Task<int> AddProductAsync(IFormProductViewModel model)
-		{
-			var product = new Product
-			{
-				Title = model.Title,
-				Price = double.Parse(model.Price),
-				ImageUrl = model.ImageUrl,
-				CreatedOn = model.CreatedOn
-			};
-
-			await repository.AddAsync(product);
-			await repository.SaveChangesAsync();
-
-			return product.Id;
-
-		}
-
-		public async Task<IEnumerable<ProductIndexServiceModel>> TakeFiveProducts()	
+		public async Task<IEnumerable<ProductIndexServiceModel>> TakeFiveProducts()
 		{
 			var products = await repository
 									.AllReadOnly<Product>()
