@@ -15,6 +15,7 @@ namespace SugarDecoration.Extensions
 			services.AddScoped<ICakeService, CakeService>();
 			services.AddScoped<IBiscuitService, BiscuitService>();
 			services.AddTransient<IHomeService, HomeService>();
+			services.AddScoped<IProductService, ProductService>();
 			return services;
 		}
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
@@ -31,11 +32,14 @@ namespace SugarDecoration.Extensions
 		}
 		public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
 		{
-			services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+			//services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+			//{
+			//	options.SignIn.RequireConfirmedAccount = false;
+			//}).AddEntityFrameworkStores<SugarDecorationDb>();
+			services.AddDefaultIdentity<IdentityUser>(options =>
 			{
 				options.SignIn.RequireConfirmedAccount = false;
 			}).AddEntityFrameworkStores<SugarDecorationDb>();
-
 			return services;
 		}
 	}

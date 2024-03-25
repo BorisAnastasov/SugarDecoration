@@ -82,18 +82,34 @@ namespace SugarDecoration.Core.Services
 
 			return cake.ProductId;
 		}
-		public async Task DeleteCakeAsync(int id)
+		public async Task DeleteCakeConfirmedAsync(int id)
 		{
 			await repository.DeleteAsync<Cake>(id);
 
 			await repository.SaveChangesAsync();
 
 		}
-		public async Task<int> GetProductId(int cakeId) 
+        public async Task<DeleteCakeViewModel> DeleteCakeAsync(int id)
+        {
+            var cake = await repository.GetByIdAsync<Cake>(id);
+            var product = await repository.GetByIdAsync<Product>(cake.ProductId);
+
+			var model = new DeleteCakeViewModel
+			{
+				Id = id,
+				Title = product.Title,
+				CreatedOn = product.CreatedOn
+			};
+
+			return model;
+        }
+        public async Task<int> GetProductId(int cakeId) 
 		{
 			var cake = await repository.GetByIdAsync<Cake>(cakeId);
 
 			return cake.ProductId;
 		}
-	}
+
+       
+    }
 }

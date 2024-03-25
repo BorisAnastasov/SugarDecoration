@@ -31,12 +31,21 @@ namespace SugarDecoration.App.Controllers
             return View(nameof(CakeDetails),cake);
         }
 
-        [HttpPost]
+
+        [HttpGet]
         public async Task<IActionResult> DeleteCake(int id) 
         {
-			await cakeService.DeleteCakeAsync(id);
+            var model = await cakeService.DeleteCakeAsync(id);
 
-            return View();
+            return View(nameof(DeleteCake), model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCakeConfirmed(int id) 
+        {
+			await cakeService.DeleteCakeConfirmedAsync(id);
+
+            return RedirectToAction(nameof(AllCakes));
         }
 
         [HttpGet]
