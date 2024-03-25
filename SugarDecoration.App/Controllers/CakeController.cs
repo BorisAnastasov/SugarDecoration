@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NuGet.Protocol.Core.Types;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.ViewModels.Cake;
 
@@ -7,17 +6,19 @@ namespace SugarDecoration.App.Controllers
 {
 	public class CakeController : BaseController
 	{
-        private ICakeService _cakeService;
+        private readonly ICakeService cakeService;
+        private readonly IProductService productService;
 
-        public CakeController(ICakeService cakeService)
+        public CakeController(ICakeService _cakeService, IProductService _productService)
         {
-            _cakeService = cakeService;
+            cakeService = _cakeService;
+            productService = _productService;
         }
 
         [HttpGet]
         public async Task<IActionResult> AllCakes()
         {
-            var cakes = await _cakeService.GetAllCakesAsync();
+            var cakes = await cakeService.GetAllCakesAsync();
 
             return View(nameof(AllCakes), cakes);
         }
@@ -25,7 +26,7 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
         public async Task<IActionResult> CakeDetails(int id) 
         {
-            var cake = await _cakeService.GetCakeDetailsByIdAsync(id);
+            var cake = await cakeService.GetCakeDetailsByIdAsync(id);
 
             return View(nameof(CakeDetails),cake);
         }
@@ -33,7 +34,7 @@ namespace SugarDecoration.App.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteCake(int id) 
         {
-            await _cakeService.DeleteCakeAsync(id);
+			await cakeService.DeleteCakeAsync(id);
 
             return View();
         }
@@ -49,10 +50,29 @@ namespace SugarDecoration.App.Controllers
         [HttpPost]
         public async Task<IActionResult> EditCake(FormCakeViewModel model, int id) 
         {
-            await _cakeService.EditCakeAsync(model, id);
+            int productId = await cakeService.EditCakeAsync(model, id);
+            await productService.EditProductAsync(model, productId);
 
             return RedirectToAction(nameof(CakeDetails), new { id });
         }
 
-    }
+        [HttpGet]
+        public async Task<IActionResult> AddCake() 
+        {
+            var cake = new FormCakeViewModel();
+
+            return View(cake);
+        }
+
+		[HttpPost]
+		public async Task<IActionResult> AddCake(FormCakeViewModel model)
+		{
+            var productId = await productService.AddProductAsync(model);
+
+            await cakeService.AddCakeAsync(model, productId);
+
+			return RedirectToAction(nameof(AllCakes));
+		}
+
+	}
 }

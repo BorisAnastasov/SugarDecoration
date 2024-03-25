@@ -15,5 +15,11 @@
 			public const int LayersMax = 5;
 			public const int LayersMin = 1;
 		}
+
+		public static class ApplicationUser 
+		{
+			public const int FirstNameLength = 20; 
+			public const int LastNameLength = 30; 
+        }
 	}
 }

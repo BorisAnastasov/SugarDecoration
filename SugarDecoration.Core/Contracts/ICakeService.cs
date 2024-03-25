@@ -8,7 +8,8 @@ namespace SugarDecoration.Core.Contracts
         Task<bool> ExistsByIdAsync(int id);
         Task<DetailsCakeViewModel> GetCakeDetailsByIdAsync(int id);
         Task AddCakeAsync(FormCakeViewModel model, int productId);
-        Task EditCakeAsync(FormCakeViewModel model, int id);
+        Task<int> EditCakeAsync(FormCakeViewModel model, int id);
         Task DeleteCakeAsync(int id);
+        Task<int> GetProductId(int cakeId);
     }
 }

@@ -15,7 +15,6 @@ namespace SugarDecoration.Core.Services
 		{
 			repository = _repository;
 		}
-
 		public async Task<int> AddProductAsync(IFormProductViewModel model)
 		{
 			var product = new Product
@@ -27,10 +26,21 @@ namespace SugarDecoration.Core.Services
 			};
 
 			await repository.AddAsync(product);
-			await repository.SaveChangesAsync();
 
 			return product.Id;
 
+		}
+
+		public async Task EditProductAsync(IFormProductViewModel model, int id)
+		{
+			var product = await repository.GetByIdAsync<Product>(id);
+
+			product.Title = model.Title;
+			product.Price = double.Parse(model.Price);
+			product.ImageUrl = model.ImageUrl;
+			product.CreatedOn = model.CreatedOn;
+
+			await repository.SaveChangesAsync();
 		}
 
 		public async Task<IEnumerable<ProductIndexServiceModel>> TakeFiveProducts()	
@@ -47,5 +57,7 @@ namespace SugarDecoration.Core.Services
 
 			return products;
 		}
+
+
 	}
 }

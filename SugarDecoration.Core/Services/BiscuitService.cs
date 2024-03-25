@@ -45,20 +45,14 @@ namespace SugarDecoration.Core.Services
 			await repository.DeleteAsync<Biscuit>(id);
 			await repository.SaveChangesAsync();
         }
-		public async Task EditBiscuitAsync(FormBiscuitViewModel model, int biscuitId)
+		public async Task<int> EditBiscuitAsync(FormBiscuitViewModel model, int biscuitId)
 		{
             var biscuit = await repository.GetByIdAsync<Biscuit>(biscuitId);
-            var product = await repository.GetByIdAsync<Product>(biscuit.ProductId);
-
-            product.Title = model.Title;
-            product.Price = double.Parse(model.Price);
+			
             biscuit.Quantity = model.Quantity;
             biscuit.CategoryId = model.CategoryId;
-            product.ImageUrl = model.ImageUrl;
-            product.CreatedOn = model.CreatedOn;
 
-            await repository.SaveChangesAsync();
-
+			return biscuit.ProductId;
         }
 		public async Task<bool> ExistsByIdAsync(int id)
 		{

@@ -8,7 +8,7 @@ namespace SugarDecoration.Core.Contracts
 		Task<bool> ExistsByIdAsync(int id);
 		Task<DetailsBiscuitViewModel> GetBiscuitDetailsByIdAsync(int id);
 		Task AddBiscuitAsync(FormBiscuitViewModel model, int productId);
-		Task EditBiscuitAsync(FormBiscuitViewModel model, int id);
+		Task<int> EditBiscuitAsync(FormBiscuitViewModel model, int id);
 		Task DeleteBiscuitAsync(int id);
 	}
 }

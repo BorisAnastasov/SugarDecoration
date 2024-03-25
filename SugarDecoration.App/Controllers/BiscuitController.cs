@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.ViewModels.Biscuit;
-using SugarDecoration.Infrastructure.Data.Models;
 
 namespace SugarDecoration.App.Controllers
 {
-    public class BiscuitController : BaseController
+	public class BiscuitController : BaseController
     {
         private readonly IBiscuitService biscuitService;
         private readonly IProductService productService;
@@ -33,10 +32,11 @@ namespace SugarDecoration.App.Controllers
         [HttpPost]
         public async Task<IActionResult> EditBiscuit(FormBiscuitViewModel model,int id)
         {
-            await biscuitService.EditBiscuitAsync(model, id);
+			int productId = await biscuitService.EditBiscuitAsync(model, id);
+			await productService.EditProductAsync(model, productId);
 
-            return RedirectToAction(nameof(AllBiscuits));
-        }
+			return RedirectToAction(nameof(BiscuitDetails), new { id });
+		}
 
         [HttpPost]
         public async Task<IActionResult> DeleteBiscuit(int id) 
@@ -59,7 +59,7 @@ namespace SugarDecoration.App.Controllers
         {
             var biscuit = new FormBiscuitViewModel();
 
-            return View(nameof(AddBiscuit), biscuit);
+            return View(biscuit);
         }
 
         [HttpPost]

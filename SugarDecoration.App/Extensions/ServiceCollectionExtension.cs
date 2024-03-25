@@ -4,6 +4,7 @@ using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Services;
 using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
+using SugarDecoration.Infrastructure.Data.IdentityModels;
 
 namespace SugarDecoration.Extensions
 {
@@ -30,7 +31,7 @@ namespace SugarDecoration.Extensions
 		}
 		public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
 		{
-			services.AddDefaultIdentity<IdentityUser>(options =>
+			services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 			{
 				options.SignIn.RequireConfirmedAccount = false;
 			}).AddEntityFrameworkStores<SugarDecorationDb>();

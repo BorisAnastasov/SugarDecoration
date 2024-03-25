@@ -30,6 +30,18 @@
 			builder.Entity<CartProduct>()
 			.HasKey(cp => new { cp.CartId, cp.ProductId });
 
+			builder.Entity<Cake>()
+							.HasOne(c => c.Product)
+							.WithMany()
+							.HasForeignKey(c => c.ProductId)
+							.OnDelete(DeleteBehavior.Cascade);
+
+			builder.Entity<Biscuit>()
+							.HasOne(b => b.Product)
+							.WithMany()
+							.HasForeignKey(b => b.ProductId)
+							.OnDelete(DeleteBehavior.Cascade);
+
 			builder.ApplyConfiguration(new ProductConfiguration());
 			builder.ApplyConfiguration(new CakeCategoryConfiguration());
 			builder.ApplyConfiguration(new CakeConfiguration());
