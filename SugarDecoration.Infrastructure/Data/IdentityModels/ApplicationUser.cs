@@ -6,10 +6,10 @@ namespace SugarDecoration.Infrastructure.Data.IdentityModels
 {
     public class ApplicationUser : IdentityUser<int>
     {
-        [StringLength(FirstNameLength)]
+        [StringLength(FirstNameMaxLength)]
         public string FirstName { get; set; } = string.Empty;
 
-        [StringLength(LastNameLength)]
+        [StringLength(LastNameMaxLength)]
         public string LastName { get; set; } = string.Empty;
 
     }

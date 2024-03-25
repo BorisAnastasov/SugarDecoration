@@ -14,12 +14,24 @@
 		{
 			public const int LayersMax = 5;
 			public const int LayersMin = 1;
+
+			public const int FormMaxLength = 30;
+			public const int FormMinLength = 3;
+
+			public const int PortionsMax = 100;
+			public const int PortionsMin = 5;
 		}
 
-		public static class ApplicationUser 
+		public static class Category 
 		{
-			public const int FirstNameLength = 20; 
-			public const int LastNameLength = 30; 
+			public const int NameMaxLength = 30; 
+			public const int NameMinLength = 3; 
         }
+
+		public static class ApplicationUser
+		{
+			public const int FirstNameMaxLength = 20;
+			public const int LastNameMaxLength = 30;
+		}
 	}
 }

@@ -15,9 +15,11 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public int Layers { get; set; }
 
 		[Required]
+		[StringLength(FormMaxLength)]
         public string Form { get; set; } = string.Empty;
 
         [Required]
+		[Range(PortionsMax,PortionsMin)]
         public int Portions { get; set; }
 
 		[Required]
