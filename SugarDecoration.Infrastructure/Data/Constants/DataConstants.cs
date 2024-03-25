@@ -8,6 +8,9 @@
 			public const int TitleMinLength = 5;
 
 			public const int RatingMax = 5;
+			public const int RatingMin = 1;
+
+			public const int ImageUrlMaxLength = 300;
 		}
 
 		public static class Cake
@@ -32,6 +35,15 @@
 		{
 			public const int FirstNameMaxLength = 20;
 			public const int LastNameMaxLength = 30;
+		}
+
+		public static class Review 
+		{
+			public const int RatingMax = 5;
+			public const int RatingMin = 1;
+
+			public const int CommentMaxLength = 100;
+			public const int CommentMinLength =3;
 		}
 	}
 }

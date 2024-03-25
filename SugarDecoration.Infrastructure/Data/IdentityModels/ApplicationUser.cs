@@ -4,7 +4,7 @@ using static SugarDecoration.Infrastructure.Constants.DataConstants.ApplicationU
 
 namespace SugarDecoration.Infrastructure.Data.IdentityModels
 {
-    public class ApplicationUser : IdentityUser<int>
+    public class ApplicationUser : IdentityUser
     {
         [StringLength(FirstNameMaxLength)]
         public string FirstName { get; set; } = string.Empty;

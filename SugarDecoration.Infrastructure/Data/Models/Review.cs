@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static SugarDecoration.Infrastructure.Constants.DataConstants.Review;
+
 
 namespace SugarDecoration.Infrastructure.Data.Models
 {
@@ -10,9 +12,11 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength(CommentMaxLength)]
         public string Comment { get; set; } = string.Empty;
 
         [Required]
+        [Range(RatingMax, RatingMin)]
         public double Rating { get; set; }
 
         [Required]
@@ -25,6 +29,7 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public string CostumerId { get; set; } = null!;
         public IdentityUser Costumer { get; set; } = null!;
 
+        [Required]
         public DateTime CreatedOn { get; set; }
     }
 }

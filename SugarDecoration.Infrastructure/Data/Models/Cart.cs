@@ -11,9 +11,17 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [Required]
         public string CostumerId { get; set; } = null!;
         public IdentityUser Costumer { get; set; } = null!;
-        public double TotalPrice { get; set; }
+
+        public double TotalPrice { get; set; } = 0.00;
+
+        [Required]
         public DateTime CreatedOn { get; set; }
-        public DateTime ModifiedOn { get; set;}
+
+        [Required]
+        public DateTime ModifiedOn { get; set; }
+
+        public IEnumerable<CartProduct> CartProducts { get; set; } 
+                = new List<CartProduct>();
 
 
     }

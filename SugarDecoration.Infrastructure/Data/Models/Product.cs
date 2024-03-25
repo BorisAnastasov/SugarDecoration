@@ -16,15 +16,20 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [Required]
 		public double Price { get; set; }
 
-
+        [Range(RatingMax,RatingMin)]
         public double Rating { get; set; }
 
         [Required]
+        [StringLength(ImageUrlMaxLength)]
         public string ImageUrl { get; set; } = string.Empty;
 
         [Required]
         public DateTime CreatedOn { get; set; }
 
-        public IEnumerable<Review> Reviews { get; set; } = new List<Review>();
+        public IEnumerable<Review> Reviews { get; set; }
+                = new List<Review>();
+
+        public IEnumerable<CartProduct> CartProducts { get; set; } 
+                = new List<CartProduct>();
     }
 }
