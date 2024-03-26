@@ -43,20 +43,20 @@ namespace SugarDecoration.Core.Services
 			await repository.SaveChangesAsync();
 		}
 
-		public async Task<IEnumerable<ProductIndexServiceModel>> TakeFiveProducts()	
-		{
-			var products = await repository
-									.AllReadOnly<Product>()
-									.Take(5)
-									.Select(p => new ProductIndexServiceModel
-									{
-										Id = p.Id,
-										Title = p.Title,
-										ImageUrl = p.ImageUrl
-									}).ToListAsync();
+		//public async Task<IEnumerable<ProductIndexServiceModel>> TakeFiveProducts()	
+		//{
+		//	var products = await repository
+		//							.AllReadOnly<Product>()
+		//							.Take(5)
+		//							.Select(p => new ProductIndexServiceModel
+		//							{
+		//								Id = p.Id,
+		//								Title = p.Title,
+		//								ImageUrl = p.ImageUrl
+		//							}).ToListAsync();
 
-			return products;
-		}
+		//	return products;
+		//}
 
 
 	}

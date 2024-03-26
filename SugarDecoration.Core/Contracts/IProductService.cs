@@ -7,7 +7,7 @@ namespace SugarDecoration.Core.Contracts
     {
         Task<int> AddProductAsync(IFormProductViewModel model);
         Task EditProductAsync(IFormProductViewModel model, int id);
-        Task<IEnumerable<ProductIndexServiceModel>> TakeFiveProducts();
+        //Task<IEnumerable<ProductIndexServiceModel>> TakeFiveProducts();
 
 	}
 }
