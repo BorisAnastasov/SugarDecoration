@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
-using SugarDecoration.Core.ViewModels;
+using SugarDecoration.Core.ViewModels.Error;
 using System.Diagnostics;
 
 namespace SugarDecoration.App.Controllers
@@ -22,7 +22,7 @@ namespace SugarDecoration.App.Controllers
             return View(products);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
             return View();
         }

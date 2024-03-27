@@ -1,4 +1,4 @@
-namespace SugarDecoration.Core.ViewModels
+namespace SugarDecoration.Core.ViewModels.Error
 {
     public class ErrorViewModel
     {

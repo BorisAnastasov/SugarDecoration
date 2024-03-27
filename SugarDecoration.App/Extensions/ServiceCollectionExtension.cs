@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SugarDecoration.App.ModelBinders;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Services;
 using SugarDecoration.Infrastructure.Data;
@@ -16,6 +17,13 @@ namespace SugarDecoration.Extensions
 			services.AddScoped<IBiscuitService, BiscuitService>();
 			services.AddTransient<IHomeService, HomeService>();
 			services.AddScoped<IProductService, ProductService>();
+
+			services.AddControllersWithViews()
+					.AddMvcOptions(options =>
+					{
+						options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+					});
+
 			return services;
 		}
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
