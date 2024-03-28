@@ -3,9 +3,10 @@
 	using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore;
 	using SugarDecoration.Infrastructure.Data.Configuration;
+	using SugarDecoration.Infrastructure.Data.IdentityModels;
 	using SugarDecoration.Infrastructure.Data.Models;
 
-	public class SugarDecorationDb : IdentityDbContext
+	public class SugarDecorationDb : IdentityDbContext<ApplicationUser>
 	{
 		public SugarDecorationDb(DbContextOptions<SugarDecorationDb> options) : base(options)
 		{

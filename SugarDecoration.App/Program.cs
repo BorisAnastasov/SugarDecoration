@@ -26,6 +26,7 @@ namespace SugarDecoration.App
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
+                app.UseExceptionHandler();
             }
             else
             {
