@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SugarDecoration.Infrastructure.Data.IdentityModels;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static SugarDecoration.Infrastructure.Constants.DataConstants.Review;
@@ -27,7 +28,7 @@ namespace SugarDecoration.Infrastructure.Data.Models
 
         [Required]
         public string CostumerId { get; set; } = null!;
-        public IdentityUser Costumer { get; set; } = null!;
+        public ApplicationUser Costumer { get; set; } = null!;
 
         [Required]
         public DateTime CreatedOn { get; set; }

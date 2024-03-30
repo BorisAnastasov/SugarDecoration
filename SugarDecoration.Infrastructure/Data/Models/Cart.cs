@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SugarDecoration.Infrastructure.Data.IdentityModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace SugarDecoration.Infrastructure.Data.Models
@@ -10,7 +11,7 @@ namespace SugarDecoration.Infrastructure.Data.Models
 
         [Required]
         public string CostumerId { get; set; } = null!;
-        public IdentityUser Costumer { get; set; } = null!;
+        public ApplicationUser Costumer { get; set; } = null!;
 
         public double TotalPrice { get; set; } = 0.00;
 

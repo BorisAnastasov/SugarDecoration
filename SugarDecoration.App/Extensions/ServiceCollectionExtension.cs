@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SugarDecoration.App.CustomFilters;
 using SugarDecoration.App.ModelBinders;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Services;
 using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.IdentityModels;
+using System.Collections;
 
 namespace SugarDecoration.Extensions
 {
 	public static class ServiceCollectionExtension
-	{
+	{ 
+
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services)
 		{
 			services.AddScoped<ICakeService, CakeService>();
@@ -22,7 +25,8 @@ namespace SugarDecoration.Extensions
 					.AddMvcOptions(options =>
 					{
 						options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-					});
+                        options.Filters.Add(new AuthorizeUser());
+                    });
 
 			return services;
 		}
@@ -40,15 +44,14 @@ namespace SugarDecoration.Extensions
 		}
 		public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
 		{
-			//services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-			//{
-			//	options.SignIn.RequireConfirmedAccount = false;
-			//}).AddEntityFrameworkStores<SugarDecorationDb>();
-			services.AddDefaultIdentity<IdentityUser>(options =>
+			services.AddDefaultIdentity<ApplicationUser>(options =>
 			{
 				options.SignIn.RequireConfirmedAccount = false;
-			}).AddEntityFrameworkStores<SugarDecorationDb>();
+			})
+			.AddRoles<IdentityRole>()
+			.AddEntityFrameworkStores<SugarDecorationDb>();
 			return services;
 		}
+
 	}
 }

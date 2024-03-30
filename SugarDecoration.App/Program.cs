@@ -1,8 +1,5 @@
+using SugarDecoration.App.CustomFilters;
 using SugarDecoration.Extensions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SugarDecoration.Infrastructure.Data;
-using SugarDecoration.Core.Services;
 
 namespace SugarDecoration.App
 {
@@ -20,13 +17,20 @@ namespace SugarDecoration.App
 
             builder.Services.AddApplicationServices();
 
+            builder.Services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthorizeUser());
+                options.Filters.Add(typeof(AuthorizeUser));
+
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
-                app.UseExceptionHandler();
+                app.UseExceptionHandler("/Error");
             }
             else
             {

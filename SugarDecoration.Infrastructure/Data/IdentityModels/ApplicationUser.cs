@@ -6,11 +6,11 @@ namespace SugarDecoration.Infrastructure.Data.IdentityModels
 {
     public class ApplicationUser : IdentityUser
     {
-        [StringLength(FirstNameMaxLength)]
-        public string FirstName { get; set; } = string.Empty;
-
-        [StringLength(LastNameMaxLength)]
-        public string LastName { get; set; } = string.Empty;
-
-    }
+		[Required]
+		[StringLength(FirstNameMaxLength)]
+		public string FirstName { get; set; } = null!;
+		[Required]
+		[StringLength(LastNameMaxLength)]
+		public string LastName { get; set; } = null!;
+	}
 }

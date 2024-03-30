@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.ViewModels.Cake;
+using SugarDecoration.App.CustomFilters;
 
 namespace SugarDecoration.App.Controllers
 {
@@ -33,6 +35,7 @@ namespace SugarDecoration.App.Controllers
 
 
         [HttpGet]
+        [AuthorizeUser("Admin")]
         public async Task<IActionResult> DeleteCake(int id) 
         {
             var model = await cakeService.DeleteCakeAsync(id);
