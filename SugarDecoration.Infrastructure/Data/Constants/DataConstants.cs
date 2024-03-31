@@ -10,7 +10,7 @@
 			public const int RatingMax = 5;
 			public const int RatingMin = 1;
 
-			public const int ImageUrlMaxLength = 300;
+			public const int ImageUrlMaxLength = 1000;
 		}
 
 		public static class Cake

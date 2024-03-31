@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SugarDecoration.App.CustomFilters;
 using SugarDecoration.App.ModelBinders;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Services;
@@ -21,12 +20,7 @@ namespace SugarDecoration.Extensions
 			services.AddTransient<IHomeService, HomeService>();
 			services.AddScoped<IProductService, ProductService>();
 
-			services.AddControllersWithViews()
-					.AddMvcOptions(options =>
-					{
-						options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-                        options.Filters.Add(new AuthorizeUser());
-                    });
+			
 
 			return services;
 		}

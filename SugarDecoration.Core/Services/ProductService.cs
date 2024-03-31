@@ -20,7 +20,7 @@ namespace SugarDecoration.Core.Services
 			var product = new Product
 			{
 				Title = model.Title,
-				Price = double.Parse(model.Price),
+				Price = decimal.Parse(model.Price),
 				ImageUrl = model.ImageUrl,
 				CreatedOn = model.CreatedOn
 			};
@@ -36,7 +36,7 @@ namespace SugarDecoration.Core.Services
 			var product = await repository.GetByIdAsync<Product>(id);
 
 			product.Title = model.Title;
-			product.Price = double.Parse(model.Price);
+			product.Price = decimal.Parse(model.Price);
 			product.ImageUrl = model.ImageUrl;
 			product.CreatedOn = model.CreatedOn;
 

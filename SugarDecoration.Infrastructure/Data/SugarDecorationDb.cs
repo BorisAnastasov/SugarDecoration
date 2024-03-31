@@ -18,11 +18,13 @@
 		public virtual DbSet<Biscuit> Biscuits { get; set; } = null!;
 		public virtual DbSet<Review> Reviews { get; set; } = null!;
 		public virtual DbSet<Cart> Carts { get; set; } = null!;
-		public virtual DbSet<CartProduct> CartsProducts { get; set; } = null!;
+		public virtual DbSet<CartItem> CartItems { get; set; } = null!;
+		public virtual DbSet<Order> Orders { get; set; } = null!;
+		public virtual DbSet<OrderItem> OrderItems { get; set; } = null!;
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-			builder.Entity<CartProduct>()
+			builder.Entity<CartItem>()
 			.HasKey(cp => new { cp.CartId, cp.ProductId });
 
 			builder.Entity<Cake>()
@@ -37,9 +39,13 @@
 							.HasForeignKey(b => b.ProductId)
 							.OnDelete(DeleteBehavior.Cascade);
 
-			builder.ApplyConfiguration(new ProductConfiguration());
+
+
+            builder.ApplyConfiguration(new ProductConfiguration());
 			builder.ApplyConfiguration(new CakeCategoryConfiguration());
+			builder.ApplyConfiguration(new BiscuitCategoryConfiguration());
 			builder.ApplyConfiguration(new CakeConfiguration());
+			builder.ApplyConfiguration(new BiscuitConfiguration());
 
 
 			base.OnModelCreating(builder);

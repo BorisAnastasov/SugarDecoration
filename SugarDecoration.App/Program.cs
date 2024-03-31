@@ -1,4 +1,3 @@
-using SugarDecoration.App.CustomFilters;
 using SugarDecoration.Extensions;
 
 namespace SugarDecoration.App
@@ -17,12 +16,7 @@ namespace SugarDecoration.App
 
             builder.Services.AddApplicationServices();
 
-            builder.Services.AddMvc(options =>
-            {
-                options.Filters.Add(new AuthorizeUser());
-                options.Filters.Add(typeof(AuthorizeUser));
-
-            });
+            
 
             var app = builder.Build();
 

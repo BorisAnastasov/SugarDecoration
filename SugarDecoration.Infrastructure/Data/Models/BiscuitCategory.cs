@@ -1,15 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using static SugarDecoration.Infrastructure.Constants.DataConstants.Category;
 
 namespace SugarDecoration.Infrastructure.Data.Models
 {
+    [Comment("Category for biscuit")]
 	public class BiscuitCategory
     {
         [Key]
+        [Comment("Category identifier")]
         public int Id { get; set; }
 
         [Required]
         [StringLength(NameMaxLength)]
+        [Comment("Category name")]
         public string Name { get; set; } = string.Empty;
     }
 }

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.ViewModels.Cake;
-using SugarDecoration.App.CustomFilters;
 
 namespace SugarDecoration.App.Controllers
 {
@@ -18,11 +17,12 @@ namespace SugarDecoration.App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "")]
         public async Task<IActionResult> AllCakes()
         {
             var cakes = await cakeService.GetAllCakesAsync();
 
-            return View(nameof(AllCakes), cakes);
+            return View(cakes);
         }
 
         [HttpGet]
@@ -35,7 +35,7 @@ namespace SugarDecoration.App.Controllers
 
 
         [HttpGet]
-        [AuthorizeUser("Admin")]
+        [Authorize(Roles = "")]
         public async Task<IActionResult> DeleteCake(int id) 
         {
             var model = await cakeService.DeleteCakeAsync(id);
@@ -54,13 +54,13 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
         public async Task<IActionResult> EditCake(int id) 
         {
-            var cake = new FormCakeViewModel();
+            var cake = new CakeFormModel();
 
             return View(nameof(EditCake), cake);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditCake(FormCakeViewModel model, int id) 
+        public async Task<IActionResult> EditCake(CakeFormModel model, int id) 
         {
             int productId = await cakeService.EditCakeAsync(model, id);
             await productService.EditProductAsync(model, productId);
@@ -71,13 +71,13 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
         public async Task<IActionResult> AddCake() 
         {
-            var cake = new FormCakeViewModel();
+            var cake = new CakeFormModel();
 
             return View(cake);
         }
 
 		[HttpPost]
-		public async Task<IActionResult> AddCake(FormCakeViewModel model)
+		public async Task<IActionResult> AddCake(CakeFormModel model)
 		{
             var productId = await productService.AddProductAsync(model);
 

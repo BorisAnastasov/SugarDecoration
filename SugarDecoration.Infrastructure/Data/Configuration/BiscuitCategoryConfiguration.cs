@@ -8,22 +8,38 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<BiscuitCategory> builder)
         {
-            builder.HasData(
-            new BiscuitCategory
+            builder.HasData(SeedBiscuitCategories());
+        }
+
+        private static List<BiscuitCategory> SeedBiscuitCategories() 
+        {
+            var biscuitCategories = new List<BiscuitCategory>();
+
+            var biscuitCategory = new BiscuitCategory
             {
                 Id = 1,
-                Name = "Коледни",
-            },
-            new BiscuitCategory
+                Name = "Коледни"
+            };
+
+            biscuitCategories.Add(biscuitCategory);
+
+            biscuitCategory = new BiscuitCategory
             {
                 Id = 2,
-                Name = "Декоративни",
-            },
-            new BiscuitCategory
+                Name = "Декоративни"
+            };
+
+            biscuitCategories.Add(biscuitCategory);
+
+            biscuitCategory = new BiscuitCategory
             {
                 Id = 3,
-                Name = "Специален повод",
-            });
+                Name = "Специален повод"
+            };
+
+            biscuitCategories.Add(biscuitCategory);
+
+            return biscuitCategories;
         }
     }
 }

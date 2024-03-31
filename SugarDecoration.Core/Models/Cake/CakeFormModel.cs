@@ -2,7 +2,7 @@
 
 namespace SugarDecoration.Core.ViewModels.Cake
 {
-    public class FormCakeViewModel:IFormProductViewModel
+    public class CakeFormModel:IFormProductViewModel
     {
         public string Title { get; set; } = string.Empty;
         public string Price { get; set; } = string.Empty;

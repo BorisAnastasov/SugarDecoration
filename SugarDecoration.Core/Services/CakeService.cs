@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.ServiceModels.Cake;
 using SugarDecoration.Core.ViewModels.Cake;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
@@ -13,27 +14,26 @@ namespace SugarDecoration.Core.Services
 		{
 			repository = _repository;
 		}
-		public async Task<IEnumerable<AllCakeViewModel>> GetAllCakesAsync()
+		public async Task<AllCakeQueryModel> GetAllCakesAsync()
 		{
 			var cakes = await repository.AllReadOnly<Cake>()
-								.Select(c => new AllCakeViewModel
+								.Select(c => new CakeServiceModel
 								{
 									Id = c.Id,
 									Title = c.Product.Title,
 									Price = c.Product.Price.ToString(),
-									Layers = c.Layers,
 									ImageUrl = c.Product.ImageUrl
-
 								}).ToListAsync();
-			return cakes;
-		}
-		public async Task<bool> ExistsByIdAsync(int id)
-		{
-			var cake = await repository.GetByIdAsync<Cake>(id);
 
-			return cake != null;//when null return false, otherwise true
+			var cakeQuery = new AllCakeQueryModel
+			{
+				Cakes = cakes,
+				TotalCakeCount = cakes.Count
+			};
+			return cakeQuery;
 		}
-		public async Task<DetailsCakeViewModel> GetCakeDetailsByIdAsync(int id)
+		
+		public async Task<CakeDetailsViewModel> GetCakeDetailsByIdAsync(int id)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(id);
 
@@ -41,7 +41,7 @@ namespace SugarDecoration.Core.Services
 
 			cake.Product = product;
 
-			var cakeModel = new DetailsCakeViewModel
+			var cakeModel = new CakeDetailsViewModel
 			{
 				Id = cake.Id,
 				Title = cake.Product.Title,
@@ -54,7 +54,7 @@ namespace SugarDecoration.Core.Services
 
 			return cakeModel;
 		}
-		public async Task AddCakeAsync(FormCakeViewModel model, int productId)
+		public async Task AddCakeAsync(CakeFormModel model, int productId)
 		{
 			var cake = new Cake
 			{
@@ -68,7 +68,7 @@ namespace SugarDecoration.Core.Services
 			await repository.AddAsync(cake);
 			await repository.SaveChangesAsync();
 		}
-		public async Task<int> EditCakeAsync(FormCakeViewModel model, int cakeId)
+		public async Task<int> EditCakeAsync(CakeFormModel model, int cakeId)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(cakeId);
 			
@@ -109,7 +109,16 @@ namespace SugarDecoration.Core.Services
 
 			return cake.ProductId;
 		}
+        public async Task<bool> ExistsByIdAsync(int id)
+        {
+            var cake = await repository.GetByIdAsync<Cake>(id);
 
-       
+            return cake != null;//when null return false, otherwise true
+        }
+
+        Task<IEnumerable<AllCakeQueryModel>> ICakeService.GetAllCakesAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

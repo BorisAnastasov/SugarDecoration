@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SugarDecoration.App.Controllers
 {
 	[Authorize]
-	public class BaseController:Controller
+	public class BaseController : Controller
 	{
 	}
 }
