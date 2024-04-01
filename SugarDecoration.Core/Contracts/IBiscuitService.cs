@@ -1,4 +1,5 @@
-﻿using SugarDecoration.Core.ViewModels.Biscuit;
+﻿using SugarDecoration.Core.Models.Biscuit;
+using SugarDecoration.Core.ViewModels.Biscuit;
 
 namespace SugarDecoration.Core.Contracts
 {

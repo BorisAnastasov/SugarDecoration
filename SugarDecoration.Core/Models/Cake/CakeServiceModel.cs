@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static SugarDecoration.Infrastructure.Constants.DataConstants.Cake;
-using static SugarDecoration.Infrastructure.Constants.DataConstants.Product;
 using static SugarDecoration.Core.Constants.MessageConstants;
+using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
 
 
-namespace SugarDecoration.Core.ServiceModels.Cake
+namespace SugarDecoration.Core.Models.Cake
 {
-    public class CakeServiceModel
+	public class CakeServiceModel
     {
         public int Id { get; set; }
 
@@ -17,11 +16,12 @@ namespace SugarDecoration.Core.ServiceModels.Cake
         public string Title { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
-        //
         public string Price { get; set; } = string.Empty;
 
         [Required(ErrorMessage =RequiredMessage)]
-        [MaxLength(ImageUrlMaxLength, ErrorMessage =LengthMessage)]
+        [StringLength(ImageUrlMaxLength,
+            MinimumLength =ImageUrlMinLength,
+            ErrorMessage =LengthMessage)]
         public string ImageUrl { get; set; } = string.Empty;
     }
 }

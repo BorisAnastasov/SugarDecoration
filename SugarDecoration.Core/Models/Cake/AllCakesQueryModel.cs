@@ -1,8 +1,6 @@
-﻿using SugarDecoration.Core.ServiceModels.Cake;
-
-namespace SugarDecoration.Core.ViewModels.Cake
+﻿namespace SugarDecoration.Core.Models.Cake
 {
-    public class AllCakeQueryModel
+	public class AllCakesQueryModel
     {
         public int TotalCakeCount { get; set; }
 

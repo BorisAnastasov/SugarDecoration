@@ -1,7 +1,7 @@
-﻿using SugarDecoration.Core.ViewModels.CakeCategory;
-using SugarDecoration.Core.ViewModels.Contracts;
+﻿using SugarDecoration.Core.Models.CakeCategory;
+using SugarDecoration.Core.Models.Contracts;
 
-namespace SugarDecoration.Core.ViewModels.Biscuit
+namespace SugarDecoration.Core.Models.Biscuit
 {
 	public class FormBiscuitViewModel:IFormProductViewModel
 	{

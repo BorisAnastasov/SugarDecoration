@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static SugarDecoration.Infrastructure.Constants.DataConstants.Cake;
+using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Cake;
 
 
 namespace SugarDecoration.Infrastructure.Data.Models

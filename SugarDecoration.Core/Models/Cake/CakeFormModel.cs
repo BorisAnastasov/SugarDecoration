@@ -1,6 +1,7 @@
-﻿using SugarDecoration.Core.ViewModels.Contracts;
+﻿using SugarDecoration.Core.Models.CakeCategory;
+using SugarDecoration.Core.Models.Contracts;
 
-namespace SugarDecoration.Core.ViewModels.Cake
+namespace SugarDecoration.Core.Models.Cake
 {
     public class CakeFormModel:IFormProductViewModel
     {
@@ -11,6 +12,8 @@ namespace SugarDecoration.Core.ViewModels.Cake
         public string ImageUrl { get; set; } = string.Empty;
         public int Portions { get; set; }
         public int CategoryId { get; set; }
+        public IEnumerable<CakeCategoryViewModel> Categories { get; set; } 
+                    = new List<CakeCategoryViewModel>();
         public DateTime CreatedOn { get; set; }
 
 

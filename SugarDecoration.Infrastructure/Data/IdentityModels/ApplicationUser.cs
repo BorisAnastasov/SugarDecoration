@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using static SugarDecoration.Infrastructure.Constants.DataConstants.ApplicationUser;
+using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.ApplicationUser;
 
 namespace SugarDecoration.Infrastructure.Data.IdentityModels
 {

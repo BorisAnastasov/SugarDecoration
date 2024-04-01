@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
-using SugarDecoration.Core.ViewModels.Biscuit;
+using SugarDecoration.Core.Models.Biscuit;
 
 namespace SugarDecoration.App.Controllers
 {
-	public class BiscuitController : BaseController
+    public class BiscuitController : BaseController
     {
         private readonly IBiscuitService biscuitService;
         private readonly IProductService productService;

@@ -1,4 +1,4 @@
-﻿namespace SugarDecoration.Core.ViewModels.CakeCategory
+﻿namespace SugarDecoration.Core.Models.CakeCategory
 {
 	public  class CakeCategoryViewModel
 	{

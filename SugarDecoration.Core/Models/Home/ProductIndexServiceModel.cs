@@ -1,4 +1,4 @@
-﻿namespace SugarDecoration.Core.ViewModels.Home
+﻿namespace SugarDecoration.Core.Models.Home
 {
     public class ProductIndexServiceModel
 	{

@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
+using SugarDecoration.App.Extensions;
+using SugarDecoration.App.ModelBinders;
 using SugarDecoration.Extensions;
 
 namespace SugarDecoration.App
@@ -16,9 +19,14 @@ namespace SugarDecoration.App
 
             builder.Services.AddApplicationServices();
 
-            
+			builder.Services.AddControllersWithViews(options =>
+			{
+				options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+			});
 
-            var app = builder.Build();
+			builder.Services.AddRazorPages();
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -45,6 +53,8 @@ namespace SugarDecoration.App
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
+
+            app.SeedRoles();
 
             app.Run();
         }

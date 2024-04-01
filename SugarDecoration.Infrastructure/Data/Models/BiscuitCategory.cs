@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using static SugarDecoration.Infrastructure.Constants.DataConstants.Category;
+using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Category;
 
 namespace SugarDecoration.Infrastructure.Data.Models
 {

@@ -1,9 +1,4 @@
-﻿using SugarDecoration.Core.ViewModels.Home;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SugarDecoration.Core.Models.Home;
 
 namespace SugarDecoration.Core.Contracts
 {

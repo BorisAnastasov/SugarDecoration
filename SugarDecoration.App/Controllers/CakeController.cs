@@ -1,24 +1,32 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
-using SugarDecoration.Core.ViewModels.Cake;
+using SugarDecoration.Core.Models.Cake;
+using SugarDecoration.Core.Models.CakeCategory;
+using SugarDecoration.Infrastructure.Data.Contracts;
+using SugarDecoration.Infrastructure.Data.Models;
 
 namespace SugarDecoration.App.Controllers
 {
 	public class CakeController : BaseController
 	{
+        private const string Admin = "Administrator";
+
         private readonly ICakeService cakeService;
         private readonly IProductService productService;
+        private readonly IRepository repository;
 
-        public CakeController(ICakeService _cakeService, IProductService _productService)
+        public CakeController(ICakeService _cakeService,
+                            IProductService _productService,
+                            IRepository _repository)
         {
             cakeService = _cakeService;
             productService = _productService;
+            repository = _repository;
         }
 
         [HttpGet]
-        [Authorize(Roles = "")]
-        public async Task<IActionResult> AllCakes()
+        public async Task<IActionResult> All()
         {
             var cakes = await cakeService.GetAllCakesAsync();
 
@@ -26,46 +34,59 @@ namespace SugarDecoration.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CakeDetails(int id) 
+        public async Task<IActionResult> Details(int id) 
         {
             var cake = await cakeService.GetCakeDetailsByIdAsync(id);
 
-            return View(nameof(CakeDetails),cake);
+            if (cake == null)
+            {
+                return BadRequest();
+            }
+
+            return View(cake);
         }
 
 
         [HttpGet]
-        [Authorize(Roles = "")]
-        public async Task<IActionResult> DeleteCake(int id) 
+        [Authorize(Roles = Admin)]
+        public async Task<IActionResult> Delete(int id) 
         {
             var model = await cakeService.DeleteCakeAsync(id);
 
-            return View(nameof(DeleteCake), model);
+            if (model == null) 
+            {
+                return BadRequest();
+            }
+
+            return View(nameof(Delete), model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteCakeConfirmed(int id) 
+        public async Task<IActionResult> DeleteConfirmed(int id) 
         {
 			await cakeService.DeleteCakeConfirmedAsync(id);
 
-            return RedirectToAction(nameof(AllCakes));
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditCake(int id) 
+        public async Task<IActionResult> Edit(int id) 
         {
-            var cake = new CakeFormModel();
+            var cake = new CakeFormModel() 
+            {
+                Categories = GetCategories()
+            };
 
-            return View(nameof(EditCake), cake);
+            return View(nameof(Edit), cake);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditCake(CakeFormModel model, int id) 
+        public async Task<IActionResult> Edit(CakeFormModel model, int id) 
         {
             int productId = await cakeService.EditCakeAsync(model, id);
             await productService.EditProductAsync(model, productId);
 
-            return RedirectToAction(nameof(CakeDetails), new { id });
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         [HttpGet]
@@ -83,8 +104,17 @@ namespace SugarDecoration.App.Controllers
 
             await cakeService.AddCakeAsync(model, productId);
 
-			return RedirectToAction(nameof(AllCakes));
+			return RedirectToAction(nameof(All));
 		}
 
-	}
+
+        private IEnumerable<CakeCategoryViewModel> GetCategories()
+         => repository.AllReadOnly<CakeCategory>()
+             .Select(b => new CakeCategoryViewModel()
+             {
+                 Id = b.Id,
+                 Name = b.Name
+             });
+
+    }
 }

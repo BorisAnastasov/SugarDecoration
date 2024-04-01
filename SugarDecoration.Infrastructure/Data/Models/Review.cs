@@ -2,7 +2,7 @@
 using SugarDecoration.Infrastructure.Data.IdentityModels;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static SugarDecoration.Infrastructure.Constants.DataConstants.Review;
+using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Review;
 
 
 namespace SugarDecoration.Infrastructure.Data.Models

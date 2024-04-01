@@ -1,4 +1,4 @@
-﻿namespace SugarDecoration.Infrastructure.Constants
+﻿namespace SugarDecoration.Infrastructure.Data.Constants
 {
 	public static class DataConstants
 	{
@@ -11,6 +11,7 @@
 			public const int RatingMin = 1;
 
 			public const int ImageUrlMaxLength = 1000;
+			public const int ImageUrlMinLength = 0;
 		}
 
 		public static class Cake

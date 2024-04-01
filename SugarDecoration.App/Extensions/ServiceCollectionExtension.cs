@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SugarDecoration.App.ModelBinders;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Services;
 using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.IdentityModels;
-using System.Collections;
+using static SugarDecoration.Infrastructure.Data.Constants.RoleConstants;
+
 
 namespace SugarDecoration.Extensions
 {
@@ -17,12 +17,16 @@ namespace SugarDecoration.Extensions
 		{
 			services.AddScoped<ICakeService, CakeService>();
 			services.AddScoped<IBiscuitService, BiscuitService>();
-			services.AddTransient<IHomeService, HomeService>();
+			services.AddScoped<IHomeService, HomeService>();
 			services.AddScoped<IProductService, ProductService>();
 
-			
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Administrator", policy => policy.RequireRole(AdminRoleName));
+                options.AddPolicy("User", policy => policy.RequireRole(UserRoleName));
+            });
 
-			return services;
+            return services;
 		}
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
 		{
@@ -31,6 +35,7 @@ namespace SugarDecoration.Extensions
 				options.UseSqlServer(connectionString));
 
 			services.AddScoped<IRepository, Repository>();
+
 
 			services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -44,6 +49,7 @@ namespace SugarDecoration.Extensions
 			})
 			.AddRoles<IdentityRole>()
 			.AddEntityFrameworkStores<SugarDecorationDb>();
+
 			return services;
 		}
 

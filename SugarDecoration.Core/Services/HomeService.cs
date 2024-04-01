@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
-using SugarDecoration.Core.ViewModels.Home;
+using SugarDecoration.Core.Models.Home;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
 

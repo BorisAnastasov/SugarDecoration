@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SugarDecoration.Core.ViewModels.Contracts
+﻿namespace SugarDecoration.Core.Models.Contracts
 {
-    public interface IFormProductViewModel
+	public interface IFormProductViewModel
     {
         public string Title { get; set; }
         public string Price { get; set; }

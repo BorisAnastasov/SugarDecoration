@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
-using SugarDecoration.Core.ViewModels.Error;
+using SugarDecoration.Core.Models.Error;
 using System.Diagnostics;
 
 namespace SugarDecoration.App.Controllers
