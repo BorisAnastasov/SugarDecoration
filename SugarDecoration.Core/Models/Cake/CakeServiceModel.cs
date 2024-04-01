@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SugarDecoration.Core.Attributes;
+using System.ComponentModel.DataAnnotations;
 using static SugarDecoration.Core.Constants.MessageConstants;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
-
-
 namespace SugarDecoration.Core.Models.Cake
 {
 	public class CakeServiceModel
@@ -16,6 +15,7 @@ namespace SugarDecoration.Core.Models.Cake
         public string Title { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
+        [MustBePositive(ErrorMessage = MustBePositiveNumberMessage)]
         public string Price { get; set; } = string.Empty;
 
         [Required(ErrorMessage =RequiredMessage)]

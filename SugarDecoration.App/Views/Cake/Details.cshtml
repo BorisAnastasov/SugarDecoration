@@ -1,19 +1,58 @@
-﻿@model CakeDetailsViewModel
+﻿@model CakeDetailsModel
 @{
 	ViewBag.Title = "Details about the cake";
 }
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm">
-			<img src="@Model.ImageUrl" class="w-50"/>
-		</div>
-		<div class="col-sm">
-			<h1>@Model.Title</h1>
-			<p>@Model.Price lv.</p>
-			<p>@Model.Form </p>
-			<p>@Model.Portions portions</p>
-			<p>@Model.Layers</p>
+		<div class="col-lg-6 offset-lg-3">
+			<div class="card mt-5">
+				<div class="row no-gutters">
+					<div class="col-md-4">
+						<img src="@Model.ImageUrl" class="card-img cake-image" alt="Cake Image">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h4 class="card-title">@Model.Title</h4>
+							<p class="card-text"><strong>Price:</strong> $@Model.Price</p>
+							<p class="card-text"><strong>Layers:</strong> @Model.Layers</p>
+							<p class="card-text"><strong>Form:</strong> @Model.Form</p>
+							<p class="card-text"><strong>Portions:</strong> @Model.Portions</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
+
+
+
+<style>
+	body {
+		font-size: 18px;
+	}
+
+	.cake-image {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.card {
+		width: 140%;
+		margin:auto;
+	}
+
+	media (max-width: 768px) {
+		body
+
+	{
+		font-size: 16px;
+	}
+
+	.card {
+		width: 90%;
+	}
+
+	}
+</style>

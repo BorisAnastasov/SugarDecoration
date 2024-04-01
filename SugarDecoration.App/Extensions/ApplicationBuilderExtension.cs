@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SugarDecoration.Infrastructure.Data.IdentityModels;
+using SugarDecoration.Infrastructure.Data.Models.Account;
 using System.Data;
 using static SugarDecoration.Infrastructure.Data.Constants.RoleConstants;
 namespace SugarDecoration.App.Extensions

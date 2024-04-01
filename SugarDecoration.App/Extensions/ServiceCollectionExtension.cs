@@ -4,13 +4,13 @@ using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Services;
 using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
-using SugarDecoration.Infrastructure.Data.IdentityModels;
+using SugarDecoration.Infrastructure.Data.Models.Account;
 using static SugarDecoration.Infrastructure.Data.Constants.RoleConstants;
 
 
 namespace SugarDecoration.Extensions
 {
-	public static class ServiceCollectionExtension
+    public static class ServiceCollectionExtension
 	{ 
 
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services)

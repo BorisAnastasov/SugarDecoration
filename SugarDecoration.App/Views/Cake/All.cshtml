@@ -5,7 +5,7 @@
 
 <div class="container py-5">
 	<h1 class="text-center">@ViewBag.Title</h1>
-	<div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+	<div class="row row-cols-1 row-cols-md-3 g-4 py-5" data-masonry='{"percentPosition": true }'>
 		@foreach (var cake in Model.Cakes)
 		{
 			<div class="col">
@@ -14,24 +14,24 @@
 					<div class="card-body">
 						<h5 class="card-title">@cake.Title</h5>
 					</div>
-					<div class="mb-5 d-flex justify-content-around">
-						<a asp-controller="Cake" asp-action="CakeDetails" asp-route-id="@cake.Id" style="width:70%;" class="btn btn-primary">Details</a>
+					<div class="mb-5 d-flex justify-content-center flex-column align-items-center">
+						<a asp-controller="Cake" asp-action="Details" asp-route-id="@cake.Id" style="width:70%;" class="btn btn-primary mb-2">Details</a>
 
+						@if (User.IsInRole("Administrator"))
+						{
+							<div class="d-flex">
+								<a class="me-3 btn btn-warning " asp-controller="Cake" asp-action="Edit" asp-route-id="@cake.Id">Edit</a>
+								<a class="btn btn-danger" asp-controller="Cake" asp-action="Delete" asp-route-id="@cake.Id">Delete</a>
+							</div>
+						}
 					</div>
-					@if (false)
-					{
-						@*
-				<div class="card-body">
-				<a asp-controller="Cake" asp-action="DeleteCake" asp-route-id="@cake.Id" class="btn btn-primary btn-delete">Delete</a>
-				<a asp-controller="Cake" asp-action="EditCake" asp-route-id="@cake.Id" class="btn btn-primary">Edit</a>
-				</div> *@
-					}
+
 				</div>
 			</div>
 		}
 	</div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" async></script>
 
 <style>
 	* {
@@ -64,10 +64,10 @@
 		width: 120px;
 	}
 
-		.btn-primary:hover {
-			background-color: black;
-			border: none;
-		}
+	.btn-primary:hover {
+		background-color: black;
+		border: none;
+	}
 
 	.btn-delete {
 		background-color: red;

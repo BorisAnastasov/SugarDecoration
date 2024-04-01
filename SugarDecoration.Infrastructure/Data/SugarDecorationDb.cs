@@ -1,12 +1,12 @@
 ﻿namespace SugarDecoration.Infrastructure.Data
 {
-	using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-	using Microsoft.EntityFrameworkCore;
-	using SugarDecoration.Infrastructure.Data.Configuration;
-	using SugarDecoration.Infrastructure.Data.IdentityModels;
-	using SugarDecoration.Infrastructure.Data.Models;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using SugarDecoration.Infrastructure.Data.Configuration;
+    using SugarDecoration.Infrastructure.Data.Models;
+    using SugarDecoration.Infrastructure.Data.Models.Account;
 
-	public class SugarDecorationDb : IdentityDbContext<ApplicationUser>
+    public class SugarDecorationDb : IdentityDbContext<ApplicationUser>
 	{
 		public SugarDecorationDb(DbContextOptions<SugarDecorationDb> options) : base(options)
 		{
@@ -46,6 +46,7 @@
 			builder.ApplyConfiguration(new BiscuitCategoryConfiguration());
 			builder.ApplyConfiguration(new CakeConfiguration());
 			builder.ApplyConfiguration(new BiscuitConfiguration());
+			builder.ApplyConfiguration(new UserConfiguration());
 
 
 			base.OnModelCreating(builder);

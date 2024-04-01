@@ -36,12 +36,11 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id) 
         {
-            var cake = await cakeService.GetCakeDetailsByIdAsync(id);
-
-            if (cake == null)
+            if (!(await cakeService.ExistsByIdAsync(id))) 
             {
-                return BadRequest();
+                return BadRequest();    
             }
+            var cake = await cakeService.GetCakeDetailsByIdAsync(id);
 
             return View(cake);
         }

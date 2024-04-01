@@ -6,6 +6,6 @@
 
         public const string LengthMessage = "The field {0} must be between {2} and {1} characters long";
 
-        public const string NotNullOrNegMessage = "The field {0} must be a positive number";
+        public const string MustBePositiveNumberMessage = "The field must be greater than or equal to zero.";
     }
 }

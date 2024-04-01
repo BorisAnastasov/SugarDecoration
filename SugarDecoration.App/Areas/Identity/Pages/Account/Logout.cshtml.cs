@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using SugarDecoration.Infrastructure.Data.IdentityModels;
+using SugarDecoration.Infrastructure.Data.Models.Account;
 
 namespace SugarDecoration.App.Areas.Identity.Pages.Account
 {

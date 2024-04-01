@@ -32,7 +32,7 @@ namespace SugarDecoration.Core.Services
 			return cakeQuery;
 		}
 		
-		public async Task<CakeDetailsViewModel> GetCakeDetailsByIdAsync(int id)
+		public async Task<CakeDetailsModel> GetCakeDetailsByIdAsync(int id)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(id);
 
@@ -40,7 +40,7 @@ namespace SugarDecoration.Core.Services
 
 			cake.Product = product;
 
-			var cakeModel = new CakeDetailsViewModel
+			var cakeModel = new CakeDetailsModel
 			{
 				Id = cake.Id,
 				Title = cake.Product.Title,
