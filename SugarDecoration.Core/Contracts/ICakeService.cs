@@ -1,4 +1,5 @@
 ﻿using SugarDecoration.Core.Models.Cake;
+using SugarDecoration.Core.Models.CakeCategory;
 
 namespace SugarDecoration.Core.Contracts
 {
@@ -7,10 +8,13 @@ namespace SugarDecoration.Core.Contracts
         Task<AllCakesQueryModel> GetAllCakesAsync();
         Task<bool> ExistsByIdAsync(int id);
         Task<CakeDetailsModel> GetCakeDetailsByIdAsync(int id);
-        Task AddCakeAsync(CakeFormModel model, int productId);
-        Task<int> EditCakeAsync(CakeFormModel model, int id);
+        Task AddCakeAsync(CakeFormModel model);
+        Task<CakeFormModel> EditCakeAsync(int cakeId);
+        Task EditCakeAsync(int id,CakeFormModel model);
         Task DeleteCakeConfirmedAsync(int id);
         Task<DeleteCakeViewModel?> DeleteCakeAsync(int id);
-        Task<int> GetProductId(int cakeId);
-    }
+        Task<IEnumerable<CakeCategoryViewModel>> GetCakeCategoriesAsync();
+        Task<bool> CakeCategoryExists(int id);
+
+	}
 }

@@ -2,27 +2,19 @@
 using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Models.Cake;
-using SugarDecoration.Core.Models.CakeCategory;
-using SugarDecoration.Infrastructure.Data.Contracts;
-using SugarDecoration.Infrastructure.Data.Models;
+using static SugarDecoration.Core.Constants.MessageConstants;
 
 namespace SugarDecoration.App.Controllers
 {
-	public class CakeController : BaseController
+    public class CakeController : BaseController
 	{
         private const string Admin = "Administrator";
 
         private readonly ICakeService cakeService;
-        private readonly IProductService productService;
-        private readonly IRepository repository;
 
-        public CakeController(ICakeService _cakeService,
-                            IProductService _productService,
-                            IRepository _repository)
+        public CakeController(ICakeService _cakeService)
         {
             cakeService = _cakeService;
-            productService = _productService;
-            repository = _repository;
         }
 
         [HttpGet]
@@ -45,75 +37,116 @@ namespace SugarDecoration.App.Controllers
             return View(cake);
         }
 
-
         [HttpGet]
         [Authorize(Roles = Admin)]
         public async Task<IActionResult> Delete(int id) 
         {
-            var model = await cakeService.DeleteCakeAsync(id);
+			if (!(await cakeService.ExistsByIdAsync(id)))
+			{
+				return BadRequest();
+			}
 
-            if (model == null) 
-            {
-                return BadRequest();
-            }
+			var model = await cakeService.DeleteCakeAsync(id);
 
-            return View(nameof(Delete), model);
+            return View( model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteConfirmed(int id) 
+		[Authorize(Roles = Admin)]
+		public async Task<IActionResult> DeleteConfirmed(int id) 
         {
+			if (!(await cakeService.ExistsByIdAsync(id)))
+			{
+				return BadRequest();
+			}
 			await cakeService.DeleteCakeConfirmedAsync(id);
 
             return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id) 
+		[Authorize(Roles = Admin)]
+		public async Task<IActionResult> Edit(int id) 
         {
-            var cake = new CakeFormModel() 
-            {
-                Categories = GetCategories()
-            };
+			if (!(await cakeService.ExistsByIdAsync(id)))
+			{
+				return BadRequest();
+			}
 
-            return View(nameof(Edit), cake);
+            var cake = await cakeService.EditCakeAsync(id);
+
+            return View(cake);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(CakeFormModel model, int id) 
+        [Authorize(Roles = Admin)]
+        public async Task<IActionResult> Edit(int id,CakeFormModel model) 
         {
-            int productId = await cakeService.EditCakeAsync(model, id);
-            await productService.EditProductAsync(model, productId);
+
+            if (!(await cakeService.ExistsByIdAsync(id))) 
+            {
+                return BadRequest();
+            }
+
+            if (!(await cakeService.CakeCategoryExists(model.CategoryId))) 
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), CategoryDoesNotExistMessage);
+
+                model.Categories = await cakeService.GetCakeCategoriesAsync();
+
+                return View(model);
+            }
+
+            if (!ModelState.IsValid) 
+            {
+                model.Categories = await cakeService.GetCakeCategoriesAsync();
+
+                return View(model);
+            }
+
+            await cakeService.EditCakeAsync(id, model);
 
             return RedirectToAction(nameof(Details), new { id });
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddCake() 
+        [Authorize(Roles = Admin)]
+        public async Task<IActionResult> Add() 
         {
-            var cake = new CakeFormModel();
+            var cake = new CakeFormModel
+            {
+                Categories = await cakeService.GetCakeCategoriesAsync(),
+            };
 
             return View(cake);
         }
 
 		[HttpPost]
-		public async Task<IActionResult> AddCake(CakeFormModel model)
+        [Authorize(Roles = Admin)]
+        public async Task<IActionResult> Add(CakeFormModel model)
 		{
-            var productId = await productService.AddProductAsync(model);
 
-            await cakeService.AddCakeAsync(model, productId);
+            if (!(await cakeService.CakeCategoryExists(model.CategoryId)))
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), CategoryDoesNotExistMessage);
+
+                model.Categories = await cakeService.GetCakeCategoriesAsync();
+
+                return View(model);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                model.Categories = await cakeService.GetCakeCategoriesAsync();
+
+                return View(model);
+            }
+
+            await cakeService.AddCakeAsync(model);
 
 			return RedirectToAction(nameof(All));
 		}
 
-
-        private IEnumerable<CakeCategoryViewModel> GetCategories()
-         => repository.AllReadOnly<CakeCategory>()
-             .Select(b => new CakeCategoryViewModel()
-             {
-                 Id = b.Id,
-                 Name = b.Name
-             });
 
     }
 }

@@ -1,5 +1,4 @@
 ﻿using SugarDecoration.Core.Models.Contracts;
-using SugarDecoration.Core.Models.Home;
 
 namespace SugarDecoration.Core.Contracts
 {

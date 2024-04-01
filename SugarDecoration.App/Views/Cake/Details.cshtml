@@ -3,21 +3,56 @@
 	ViewBag.Title = "Details about the cake";
 }
 
+
+<div class="container">
+	<div class="card-title text-center">
+	</div>
+
+	<div class="card">
+		<div class="row col-lg-8">
+			<div class="col-4">
+				<img class="img-fluid rounded-start" src = "@Model.ImageUrl" alt="Cake Image"/>
+			</div>
+			<div class="col-4">
+				<div class="card-body">
+					<h3 class="card-title">@Model.Title</h3>
+					<p class="card-text"><strong>Price:</strong> $@Model.Price</p>
+					<p class="card-text"><strong>Layers:</strong> @Model.Layers</p>
+					<p class="card-text"><strong>Form:</strong> @Model.Form</p>
+					<p class="card-text"><strong>Portions:</strong> @Model.Portions</p>
+					<a asp-controller="Cake" asp-action="All" class="btn btn-primary">Go back</a>
+					@if (User.IsInRole("Administrator"))
+					{
+						<div class="d-flex">
+							<a class="me-3 btn btn-warning " asp-controller="Cake" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+							<a class="btn btn-danger" asp-controller="Cake" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+@*
 <div class="container">
 	<div class="row">
 		<div class="col-lg-6 offset-lg-3">
 			<div class="card mt-5">
 				<div class="row no-gutters">
 					<div class="col-md-4">
-						<img src="@Model.ImageUrl" class="card-img cake-image" alt="Cake Image">
+						<img  class="card-img cake-image" alt="Cake Image">
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
-							<h4 class="card-title">@Model.Title</h4>
-							<p class="card-text"><strong>Price:</strong> $@Model.Price</p>
-							<p class="card-text"><strong>Layers:</strong> @Model.Layers</p>
-							<p class="card-text"><strong>Form:</strong> @Model.Form</p>
-							<p class="card-text"><strong>Portions:</strong> @Model.Portions</p>
+
+						</div>
+
+						<div>
+							<a onclick="scrollToLastPosition()" asp-controller="Cake" asp-action="All">Go Back</a>
 						</div>
 					</div>
 				</div>
@@ -55,4 +90,4 @@
 	}
 
 	}
-</style>
+</style> *@
