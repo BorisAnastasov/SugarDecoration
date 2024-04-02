@@ -1,15 +1,20 @@
 ﻿using SugarDecoration.Core.Models.Biscuit;
+using SugarDecoration.Core.Models.BiscuitCategory;
 using SugarDecoration.Core.ViewModels.Biscuit;
 
 namespace SugarDecoration.Core.Contracts
 {
-	public interface IBiscuitService
+    public interface IBiscuitService
 	{
-		Task<IEnumerable<AllBiscuitViewModel>> GetAllBiscuitsAsync();
-		Task<bool> ExistsByIdAsync(int id);
-		Task<int> EditBiscuitAsync(FormBiscuitViewModel model, int biscuitId);
-		Task<DetailsBiscuitViewModel> GetBiscuitDetailsByIdAsync(int id);
-		Task AddBiscuitAsync(FormBiscuitViewModel model, int productId);
-		Task DeleteBiscuitAsync(int id);
-	}
+		Task<AllBiscuitsQueryModel> GetAllBiscuitsAsync();
+		Task<BiscuitDetailsViewModel> GetBiscuitDetailsByIdAsync(int id);
+		Task AddBiscuitAsync(BiscuitFormModel model);
+		Task<DeleteBiscuitViewModel> DeleteBiscuitAsync(int id);
+		Task DeleteBiscuitConfirmedAsync(int id);
+		Task<BiscuitFormModel> EditBiscuitAsync(int id);
+		Task EditBiscuitAsync(int id,BiscuitFormModel model);
+        Task<bool> ExistsByIdAsync(int id);
+        Task<bool> BiscuitCategoryExistsByIdAsync(int id);
+		Task<IEnumerable<BiscuitCategoryViewModel>> GetBiscuitCategoriesAsync();
+    }
 }

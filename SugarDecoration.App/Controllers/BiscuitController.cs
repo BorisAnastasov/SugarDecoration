@@ -25,15 +25,14 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
         public IActionResult EditBiscuit()
         {
-            var biscuit = new FormBiscuitViewModel();
+            var biscuit = new BiscuitFormModel();
             return View(nameof(EditBiscuit), biscuit);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditBiscuit(FormBiscuitViewModel model,int id)
+        public async Task<IActionResult> EditBiscuit(BiscuitFormModel model,int id)
         {
 			int productId = await biscuitService.EditBiscuitAsync(model, id);
-			await productService.EditProductAsync(model, productId);
 
 			return RedirectToAction(nameof(BiscuitDetails), new { id });
 		}
@@ -57,17 +56,16 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
         public async Task<IActionResult> AddBiscuit() 
         {
-            var biscuit = new FormBiscuitViewModel();
+            var biscuit = new BiscuitFormModel();
 
             return View(biscuit);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBiscuit(FormBiscuitViewModel model)
+        public async Task<IActionResult> AddBiscuit(BiscuitFormModel model)
         {
-            var productId = await productService.AddProductAsync(model);
 
-            await biscuitService.AddBiscuitAsync(model, productId);
+            //await biscuitService.AddBiscuitAsync(model, productId);
 
             return View(nameof(AllBiscuits));
         }

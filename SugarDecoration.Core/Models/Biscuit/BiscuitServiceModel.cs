@@ -2,10 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using static SugarDecoration.Core.Constants.MessageConstants;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
-namespace SugarDecoration.Core.Models.Cake
+
+namespace SugarDecoration.Core.ViewModels.Biscuit
 {
-	public class CakeServiceModel
-    {
+	public class BiscuitServiceModel
+	{
         public int Id { get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]
@@ -18,10 +19,10 @@ namespace SugarDecoration.Core.Models.Cake
         [MustBePositive(ErrorMessage = InvalidDecimal)]
         public string Price { get; set; } = string.Empty;
 
-        [Required(ErrorMessage =RequiredMessage)]
+        [Required(ErrorMessage = RequiredMessage)]
         [StringLength(ImageUrlMaxLength,
-            MinimumLength =ImageUrlMinLength,
-            ErrorMessage =LengthMessage)]
+            MinimumLength = ImageUrlMinLength,
+            ErrorMessage = LengthMessage)]
         public string ImageUrl { get; set; } = string.Empty;
     }
 }

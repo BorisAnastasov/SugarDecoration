@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Models.Cake;
+using System.Globalization;
 using static SugarDecoration.Core.Constants.MessageConstants;
+using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
 
 namespace SugarDecoration.App.Controllers
 {
@@ -73,6 +75,8 @@ namespace SugarDecoration.App.Controllers
 				return BadRequest();
 			}
 
+
+
             var cake = await cakeService.EditCakeAsync(id);
 
             return View(cake);
@@ -90,12 +94,24 @@ namespace SugarDecoration.App.Controllers
 
             if (!(await cakeService.CakeCategoryExists(model.CategoryId))) 
             {
-                ModelState.AddModelError(nameof(model.CategoryId), CategoryDoesNotExistMessage);
+                ModelState.AddModelError(nameof(model.CategoryId), InvalidCategory);
 
                 model.Categories = await cakeService.GetCakeCategoriesAsync();
 
                 return View(model);
             }
+
+            DateTime date = DateTime.Now;
+
+            if (!DateTime.TryParseExact(
+                            model.CreatedOn
+                            , DateTimeFormat
+                            , CultureInfo.InvariantCulture
+                            , DateTimeStyles.None, out date))
+            {
+                ModelState.AddModelError(nameof(model.CreatedOn), $"Invalid date! Format must be: {DateTimeFormat}");
+            }
+
 
             if (!ModelState.IsValid) 
             {
@@ -128,11 +144,22 @@ namespace SugarDecoration.App.Controllers
 
             if (!(await cakeService.CakeCategoryExists(model.CategoryId)))
             {
-                ModelState.AddModelError(nameof(model.CategoryId), CategoryDoesNotExistMessage);
+                ModelState.AddModelError(nameof(model.CategoryId), InvalidCategory);
 
                 model.Categories = await cakeService.GetCakeCategoriesAsync();
 
                 return View(model);
+            }
+
+            DateTime date = DateTime.Now;
+
+            if (!DateTime.TryParseExact(
+                            model.CreatedOn
+                            , DateTimeFormat
+                            , CultureInfo.InvariantCulture
+                            , DateTimeStyles.None, out date))
+            {
+                ModelState.AddModelError(nameof(model.CreatedOn), $"Invalid date! Format must be: {DateTimeFormat}");
             }
 
             if (!ModelState.IsValid)

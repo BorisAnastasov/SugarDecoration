@@ -4,6 +4,7 @@ using SugarDecoration.Core.Models.Cake;
 using SugarDecoration.Core.Models.CakeCategory;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
+using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
 
 namespace SugarDecoration.Core.Services
 {
@@ -36,10 +37,6 @@ namespace SugarDecoration.Core.Services
 		{
 			var cake = await repository.GetByIdAsync<Cake>(id);
 
-			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
-
-			cake.Product = product;
-
 			var cakeModel = new CakeDetailsModel
 			{
 				Id = cake.Id,
@@ -60,7 +57,7 @@ namespace SugarDecoration.Core.Services
 				Title = model.Title,
 				Price = decimal.Parse(model.Price),
 				ImageUrl = model.ImageUrl,
-				CreatedOn = DateTime.Now,
+				CreatedOn = DateTime.Parse(model.CreatedOn),
 			};
 
 			var cake = new Cake
@@ -80,9 +77,6 @@ namespace SugarDecoration.Core.Services
 		public async Task<CakeFormModel> EditCakeAsync(int cakeId)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(cakeId);
-			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
-
-			cake.Product = product;
 
 			var model = new CakeFormModel
 			{
@@ -92,7 +86,7 @@ namespace SugarDecoration.Core.Services
 				CategoryId = cake.CategoryId,
 				Categories = await GetCakeCategoriesAsync(),
 				Price = cake.Product.Price.ToString(),
-				CreatedOn = cake.Product.CreatedOn,
+				CreatedOn = cake.Product.CreatedOn.ToString(DateTimeFormat),
 				Title = cake.Product.Title,
 				ImageUrl = cake.Product.ImageUrl
 			};
@@ -103,14 +97,10 @@ namespace SugarDecoration.Core.Services
 		public async Task EditCakeAsync(int cakeId, CakeFormModel model)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(cakeId);
-			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
-
-			cake.Product = product;
-
 
 			cake.Product.Title = model.Title;
 			cake.Product.ImageUrl = model.ImageUrl;
-			cake.Product.CreatedOn = model.CreatedOn;
+			cake.Product.CreatedOn = DateTime.Parse(model.CreatedOn);
 			cake.Product.Price = decimal.Parse(model.Price);
 			cake.Layers = model.Layers;
 			cake.Form = model.Form;
@@ -122,6 +112,10 @@ namespace SugarDecoration.Core.Services
 		}
 		public async Task DeleteCakeConfirmedAsync(int id)
 		{
+			var cake = await repository.GetByIdAsync<Cake>(id);
+
+
+			await repository.DeleteAsync<Product>(cake.ProductId);
 			await repository.DeleteAsync<Cake>(id);
 
 			await repository.SaveChangesAsync();
@@ -130,18 +124,12 @@ namespace SugarDecoration.Core.Services
 		public async Task<DeleteCakeViewModel?> DeleteCakeAsync(int id)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(id);
-			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
-
-			if (cake == null || product == null)
-			{
-				return null;
-			}
 
 			var model = new DeleteCakeViewModel
 			{
 				Id = id,
-				Title = product.Title,
-				CreatedOn = product.CreatedOn
+				Title = cake.Product.Title,
+				CreatedOn = cake.Product.CreatedOn.ToString()
 			};
 
 			return model;
@@ -154,7 +142,7 @@ namespace SugarDecoration.Core.Services
 			return cake != null && product != null;
 		}
 		public async Task<IEnumerable<CakeCategoryViewModel>> GetCakeCategoriesAsync()
-		 => await this.repository.AllReadOnly<CakeCategory>()
+		 => await repository.AllReadOnly<CakeCategory>()
 			 .Select(b => new CakeCategoryViewModel()
 			 {
 				 Id = b.Id,

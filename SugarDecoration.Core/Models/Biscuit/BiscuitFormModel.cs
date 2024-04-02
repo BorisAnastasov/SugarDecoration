@@ -1,9 +1,10 @@
-﻿using SugarDecoration.Core.Models.CakeCategory;
+﻿using SugarDecoration.Core.Models.BiscuitCategory;
+using SugarDecoration.Core.Models.CakeCategory;
 using SugarDecoration.Core.Models.Contracts;
 
 namespace SugarDecoration.Core.Models.Biscuit
 {
-	public class FormBiscuitViewModel:IFormProductViewModel
+	public class BiscuitFormModel:IFormProductModel
 	{
 		public int Id { get; set; }
 		public string Title { get; set; } = string.Empty;
@@ -11,8 +12,8 @@ namespace SugarDecoration.Core.Models.Biscuit
 		public int Quantity { get; set; }
 		public int CategoryId { get; set; }
 		public string ImageUrl { get; set; } = string.Empty;
-		public DateTime CreatedOn { get; set; }
-        public IEnumerable<CakeCategoryViewModel> CakeCategories { get; set; }
-					= new List<CakeCategoryViewModel>();
+		public string CreatedOn { get; set; } = string.Empty; 
+        public IEnumerable<BiscuitCategoryViewModel> Categories { get; set; }
+					= new List<BiscuitCategoryViewModel>();
     }
 }

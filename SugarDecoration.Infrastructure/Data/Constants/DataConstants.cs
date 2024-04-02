@@ -2,7 +2,7 @@
 {
 	public static class DataConstants
 	{
-		public static class Product 
+        public static class Product 
 		{
 			public const int TitleMaxLength = 100;
 			public const int TitleMinLength = 5;
@@ -12,7 +12,9 @@
 
 			public const int ImageUrlMaxLength = 1000;
 			public const int ImageUrlMinLength = 0;
-		}
+
+            public const string DateTimeFormat = "dd/MM/yyyy";
+        }
 
 		public static class Cake
 		{

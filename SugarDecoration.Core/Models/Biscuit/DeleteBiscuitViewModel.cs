@@ -1,12 +1,11 @@
-﻿namespace SugarDecoration.Core.Models.Cake
+﻿namespace SugarDecoration.Core.Models.Biscuit
 {
-    public class DeleteCakeViewModel
+    public class DeleteBiscuitViewModel
     {
         public int Id { get; set; }
 
         public string Title { get; set; } = string.Empty;
 
         public string CreatedOn { get; set; } = string.Empty;
-
     }
 }
