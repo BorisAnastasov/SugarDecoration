@@ -75,8 +75,6 @@ namespace SugarDecoration.App.Controllers
 				return BadRequest();
 			}
 
-
-
             var cake = await cakeService.EditCakeAsync(id);
 
             return View(cake);
