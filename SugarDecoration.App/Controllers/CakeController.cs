@@ -120,7 +120,7 @@ namespace SugarDecoration.App.Controllers
 
             await cakeService.EditCakeAsync(id, model);
 
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(All), new { id });
         }
 
         [HttpGet]

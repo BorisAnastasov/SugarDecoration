@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Infrastructure.Data.Models.Account;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SugarDecoration.Infrastructure.Data.Models
 {
@@ -18,9 +16,6 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public string UserId { get; set; } = null!;
         public ApplicationUser User { get; set; } = null!;
 
-        [Comment("Products total price")]
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal TotalPrice { get; set; }
 
         [Required]
         [Comment("Date of creation of cart")]

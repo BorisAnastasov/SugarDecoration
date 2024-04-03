@@ -13,7 +13,7 @@
 			public const int ImageUrlMaxLength = 1000;
 			public const int ImageUrlMinLength = 0;
 
-            public const string DateTimeFormat = "dd/MM/yyyy";
+            public const string DateTimeFormat = "dd.MM.yyyy HH:mm";
         }
 
 		public static class Cake
@@ -48,5 +48,16 @@
 			public const int CommentMaxLength = 100;
 			public const int CommentMinLength =3;
 		}
+
+		public static class CartItem 
+		{
+			public const int TextMaxLength = 300;
+			public const int TextMinLength = 5;
+
+            public const int PhoneNumberMaxLength = 50;
+            public const int PhoneNumberMinLength = 5;
+        }
+
+
 	}
 }

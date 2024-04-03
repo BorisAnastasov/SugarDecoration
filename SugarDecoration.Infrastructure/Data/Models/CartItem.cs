@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.CartItem;
 
 namespace SugarDecoration.Infrastructure.Data.Models
 {
@@ -25,11 +26,16 @@ namespace SugarDecoration.Infrastructure.Data.Models
 
         [Required]
         [Comment("Quantity of the product")]
-        public int Quantity { get; set; }
+        public int Quantity { get; set; } 
 
         [Required]
-        [Comment("Product price")]
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Price { get; set; }
+        [MaxLength(TextMaxLength)]
+        [Comment("Description of order")]
+        public string Text { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(PhoneNumberMaxLength)]
+        [Comment("Description of order")]
+        public string PhoneNumber { get; set; } = string.Empty;
     }
 }

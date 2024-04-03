@@ -1,4 +1,4 @@
-﻿@model DeleteCakeViewModel
+﻿@model DeleteBiscuitViewModel
 
 @{
     ViewBag.Title = "Delete Product";
@@ -16,16 +16,13 @@
                 <p class="text-danger mt-3">"Are you sure you want to delete this product?"</p>
             </div>
             <div class="card-footer">
-                <form asp-controller="Cake" asp-action="DeleteConfirmed" method="post">
+                <form asp-controller="Biscuit" asp-action="DeleteConfirmed" method="post">
                     <input type="hidden" asp-for="Id" />
                     <button type="submit" class="btn btn-danger">Confirm Delete</button>
-                    <a asp-controller="Cake" asp-action="All" class="btn btn-secondary">Cancel</a>
+                    <a asp-controller="Biscuit" asp-action="All" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-
-
 

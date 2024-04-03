@@ -32,10 +32,24 @@
 						<li class="nav-item">
 							<a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 						</li>
-
 						<li class="nav-item">
 							<a class="nav-link text-white" asp-area="" asp-controller="Cake" asp-action="All">Cakes</a>
 						</li>
+						@if(User.IsInRole("Administrator"))
+						{
+							<li class="nav-item">
+								<a class="nav-link text-white" asp-area="" asp-controller="Cake" asp-action="Add">Add Cake</a>
+							</li>
+						}
+						<li class="nav-item">
+							<a class="nav-link text-white" asp-area="" asp-controller="Biscuit" asp-action="All">Biscuits</a>
+						</li>
+						@if (User.IsInRole("Administrator"))
+						{
+							<li class="nav-item">
+								<a class="nav-link text-white" asp-area="" asp-controller="Biscuit" asp-action="Add">Add Biscuit</a>
+							</li>
+						}
 						<li class="nav-item">
 							<a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 						</li>
@@ -62,3 +76,25 @@
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+
+
+<script>
+	function saveScrollPosition() {
+		localStorage.setItem('scrollPosition', window.scrollY);
+	}
+
+	// Function to retrieve scroll position
+	function retrieveScrollPosition() {
+		return parseInt(localStorage.getItem('scrollPosition')) || 0;
+	}
+
+	// Event listener for scrolling
+	window.addEventListener('scroll', saveScrollPosition);
+
+	// When the window is completely loaded, set the scroll position
+	window.onload = function () {
+		window.scrollTo(0, retrieveScrollPosition());
+	};
+</script>

@@ -2,18 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Models.Biscuit;
-using SugarDecoration.Core.Models.Cake;
-using SugarDecoration.Core.Services;
 using System.Globalization;
 using static SugarDecoration.Core.Constants.MessageConstants;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
 
 namespace SugarDecoration.App.Controllers
 {
-    public class BiscuitController : BaseController
+	public class BiscuitController : BaseController
     {
         private const string Admin = "Administrator";
-
 
         private readonly IBiscuitService biscuitService;
         public BiscuitController(IBiscuitService _biscuitService)
@@ -30,7 +27,7 @@ namespace SugarDecoration.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> BiscuitDetails(int id)
+        public async Task<IActionResult> Details(int id)
         {
             if (!(await biscuitService.ExistsByIdAsync(id)))
             {
@@ -39,7 +36,7 @@ namespace SugarDecoration.App.Controllers
 
             var biscuit = await biscuitService.GetBiscuitDetailsByIdAsync(id);
 
-            return View(nameof(BiscuitDetails), biscuit);
+            return View(biscuit);
         }
 
         [HttpGet]
@@ -80,12 +77,12 @@ namespace SugarDecoration.App.Controllers
 
             var biscuit = await biscuitService.EditBiscuitAsync(id);
 
-            return View(nameof(EditBiscuit), biscuit);
+            return View(nameof(Edit), biscuit);
         }
 
         [HttpPost]
         [Authorize(Roles = Admin)]
-        public async Task<IActionResult> EditBiscuit(int id, BiscuitFormModel model)
+        public async Task<IActionResult> Edit(int id, BiscuitFormModel model)
         {
             if (!(await biscuitService.ExistsByIdAsync(id)))
             {
@@ -122,7 +119,7 @@ namespace SugarDecoration.App.Controllers
 
             await biscuitService.EditBiscuitAsync(id, model);
 
-            return RedirectToAction(nameof(BiscuitDetails), new { id });
+            return RedirectToAction(nameof(All), new { id });
         }
 
         [HttpGet]

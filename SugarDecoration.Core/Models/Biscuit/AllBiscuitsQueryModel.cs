@@ -1,9 +1,8 @@
-﻿using SugarDecoration.Core.Models.Cake;
-using SugarDecoration.Core.ViewModels.Biscuit;
+﻿using SugarDecoration.Core.ViewModels.Biscuit;
 
 namespace SugarDecoration.Core.Models.Biscuit
 {
-    public class AllBiscuitsQueryModel
+	public class AllBiscuitsQueryModel
     {
         public int TotalBiscuitCount { get; set; }
 

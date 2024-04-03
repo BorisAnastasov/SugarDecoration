@@ -1,0 +1,33 @@
+﻿@model BiscuitDetailsModel
+@{
+	ViewBag.Title = "Details about the cake";
+}
+
+
+<div class="container">
+	<div class="card-title text-center">
+	</div>
+
+	<div class="card">
+		<div class="row col-lg-8">
+			<div class="col-4">
+				<img class="img-fluid rounded-start" src="@Model.ImageUrl" alt="Cake Image" />
+			</div>
+			<div class="col-4">
+				<div class="card-body">
+					<h3 class="card-title">@Model.Title</h3>
+					<p class="card-text"><strong>Price:</strong> $@Model.Price</p>
+					<p class="card-text"><strong>Quantity:</strong> @Model.Quantity</p>
+					<a asp-controller="Biscuit" asp-action="All" class="btn btn-primary">Go back</a>
+					@if (User.IsInRole("Administrator"))
+					{
+						<div class="d-flex">
+							<a class="me-3 btn btn-warning " asp-controller="Biscuit" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+							<a class="btn btn-danger" asp-controller="Biscuit" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

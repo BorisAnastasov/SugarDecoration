@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="CustomFilters\" />
-    <Folder Include="Views\Biscuit\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

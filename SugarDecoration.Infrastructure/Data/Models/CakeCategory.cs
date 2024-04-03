@@ -15,6 +15,10 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [StringLength(NameMaxLength)]
         [Comment("Category name")]
         public string Name { get; set; } = string.Empty;
+
         
+        public IEnumerable<Cake> Cakes { get; set; }
+                    = new List<Cake>();    
+
     }
 }

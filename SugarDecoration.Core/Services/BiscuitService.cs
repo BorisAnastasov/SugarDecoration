@@ -38,17 +38,16 @@ namespace SugarDecoration.Core.Services
             return biscuitQuery;
         }
 
-        public async Task<BiscuitDetailsViewModel> GetBiscuitDetailsByIdAsync(int id)
+        public async Task<BiscuitDetailsModel> GetBiscuitDetailsByIdAsync(int id)
         {
             var biscuit = await repository.GetByIdAsync<Biscuit>(id);
 
-            var biscuitModel = new BiscuitDetailsViewModel
+            var biscuitModel = new BiscuitDetailsModel
             {
                 Id = id,
                 Title = biscuit.Product.Title,
                 Price = biscuit.Product.Price.ToString(),
                 Quantity = biscuit.Quantity,
-                Category = biscuit.Category.Name,
                 ImageUrl = biscuit.Product.ImageUrl
             };
 
@@ -81,7 +80,7 @@ namespace SugarDecoration.Core.Services
 
         public async Task<DeleteBiscuitViewModel> DeleteBiscuitAsync(int id)
         {
-            var biscuit = await repository.GetByIdAsync<Cake>(id);
+            var biscuit = await repository.GetByIdAsync<Biscuit>(id);
 
             var model = new DeleteBiscuitViewModel
             {

@@ -1,13 +1,12 @@
 ﻿using SugarDecoration.Core.Models.Biscuit;
 using SugarDecoration.Core.Models.BiscuitCategory;
-using SugarDecoration.Core.ViewModels.Biscuit;
 
 namespace SugarDecoration.Core.Contracts
 {
     public interface IBiscuitService
 	{
 		Task<AllBiscuitsQueryModel> GetAllBiscuitsAsync();
-		Task<BiscuitDetailsViewModel> GetBiscuitDetailsByIdAsync(int id);
+		Task<BiscuitDetailsModel> GetBiscuitDetailsByIdAsync(int id);
 		Task AddBiscuitAsync(BiscuitFormModel model);
 		Task<DeleteBiscuitViewModel> DeleteBiscuitAsync(int id);
 		Task DeleteBiscuitConfirmedAsync(int id);
