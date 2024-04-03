@@ -7,10 +7,8 @@ namespace SugarDecoration.Core.Models.CartItem
 {
     public class CartItemFormModel
     {
-        [Required(ErrorMessage =RequiredMessage)]
-        public string ProductTitle { get; set; } = string.Empty;
-        [Required(ErrorMessage =RequiredMessage)]
-        public string ImageUrl { get; set; } = string.Empty;
+        public string? ProductTitle { get; set; }
+        public string? ImageUrl { get; set; }
         [Required(ErrorMessage =RequiredMessage)]
         [StringLength(TextMaxLength,
                     MinimumLength =TextMinLength,
@@ -23,6 +21,13 @@ namespace SugarDecoration.Core.Models.CartItem
         public string PhoneNumber { get; set; } = string.Empty;
         [Required(ErrorMessage = RequiredMessage)]
         public int Quantity { get; set; }
+
+        public int? ProductId { get; set; }
+
+        public bool IsRefToProduct
+        {
+            get => this.ProductTitle != null && this.ImageUrl != null && this.ProductId != null;
+        }
 
     }
 }

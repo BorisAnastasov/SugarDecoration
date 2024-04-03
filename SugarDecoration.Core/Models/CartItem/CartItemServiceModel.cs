@@ -4,12 +4,16 @@
     {
         public int Id { get; set; }
 
-        public string ProductTitle { get; set; } = string.Empty;
+        public string? ProductTitle { get; set; }
 
-        public string ImageUrl { get; set; } = string.Empty;
+        public string? ImageUrl { get; set; }
 
         public int Quantity { get; set; }
 
+        public bool IsRefToProduct
+        {
+            get => this.ProductTitle != null && this.ImageUrl != null;
+        }
 
     }
 }

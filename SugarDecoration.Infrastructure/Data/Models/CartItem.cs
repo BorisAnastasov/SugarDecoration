@@ -21,8 +21,8 @@ namespace SugarDecoration.Infrastructure.Data.Models
 
         [Required]
         [Comment("Product identifier")]
-        public int ProductId { get; set; }
-        public Product Product { get; set; } = null!;
+        public int? ProductId { get; set; }
+        public Product? Product { get; set; }
 
         [Required]
         [Comment("Quantity of the product")]
@@ -37,5 +37,10 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [MaxLength(PhoneNumberMaxLength)]
         [Comment("Description of order")]
         public string PhoneNumber { get; set; } = string.Empty;
+
+        public bool IsRefToProduct
+        {
+            get => this.Product != null;
+        }
     }
 }
