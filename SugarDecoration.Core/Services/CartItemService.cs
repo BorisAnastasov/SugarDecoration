@@ -38,7 +38,7 @@ namespace SugarDecoration.Core.Services
 
         }
 
-        public async Task AddCartItemAsunc(int  cardId,CartItemFormModel model)
+        public async Task AddCartItemAsync(int  cardId,CartItemFormModel model)
         {
             var item = new CartItem
             {
@@ -98,6 +98,10 @@ namespace SugarDecoration.Core.Services
             await repository.SaveChangesAsync();
 
         }
+
+
+        public async Task<bool> ProductExistsByIdAsync(int id) 
+        =>await repository.GetByIdAsync<Product>(id).;
 
     }
 }

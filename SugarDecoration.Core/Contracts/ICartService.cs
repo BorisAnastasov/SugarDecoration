@@ -4,7 +4,7 @@ namespace SugarDecoration.Core.Contracts
 {
     public interface ICartService
     {
-        Task<AllQueryCartModel> AllAsync(int cartId);
+        Task<AllQueryCartModel> AllAsync(string userId);
 
         Task<DeleteCartViewModel> DeleteAsync(int id);
         Task DeleteConfirmedAsync(int id);
