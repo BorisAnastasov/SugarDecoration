@@ -20,11 +20,21 @@ namespace SugarDecoration.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery] AllCakesQueryModel query)
         {
-            var cakes = await cakeService.GetAllCakesAsync();
+            var model = await cakeService.GetAllCakesAsync(
+                     query.Category,
+                     query.SearchTerm,
+                     query.Sorting,
+                     query.CurrentPage,
+                     query.CakesPerPage
+            );
 
-            return View(cakes);
+            query.TotalCakeCount = model.TotalCakeCount;
+            query.Cakes = model.Cakes;
+            query.Categories = await cakeService.AllCategoriesNames();
+
+            return View(query);
         }
 
         [HttpGet]

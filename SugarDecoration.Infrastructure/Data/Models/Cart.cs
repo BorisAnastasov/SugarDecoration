@@ -28,6 +28,9 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public IEnumerable<CartItem> CartItems { get; set; } 
                 = new List<CartItem>();
 
+        [Comment("Is the cart ordered")]
+        public bool IsOrdered { get; set; }
+
 
     }
 }

@@ -16,7 +16,7 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [Comment("Category name")]
         public string Name { get; set; } = string.Empty;
 
-		public IEnumerable<Biscuit> Cakes { get; set; }
+		public IEnumerable<Biscuit> Biscuits { get; set; }
 					= new List<Biscuit>();
 	}
 }

@@ -19,14 +19,13 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public ApplicationUser User { get; set; } = null!;
 
         [Required]
-        [Comment("Sum of the prices of the products")]
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal TotalPrice { get; set; }
-
-        [Required]
         [Comment("Date of order")]
         public DateTime OrderDate { get; set; }
 
-
+        [Required]
+        [Comment("Cart identifier")]
+        public int CartId { get; set; }
+        [ForeignKey(nameof(CartId))]
+        public Cart Cart { get; set; } = null!;
     }
 }

@@ -25,7 +25,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
                 LastName = "Anastasov",
                 UserName = "Admin",
                 NormalizedUserName = "ADMIN",
-                Email = "admin@abv.bd",
+                Email = "admin@abv.bg",
                 NormalizedEmail = "ADMIN@ABV.bg",
             };
             user.PasswordHash =

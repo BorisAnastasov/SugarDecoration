@@ -9,5 +9,6 @@
         public string Form { get; set; } = string.Empty;
 		public int Portions { get; set; }
         public string ImageUrl { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SugarDecoration.App.Extensions;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Models.CartItem;
 
@@ -6,46 +7,86 @@ namespace SugarDecoration.App.Controllers
 {
 	public class CartController : BaseController
     {
-        private readonly ICartItemService cartItemService;
         private readonly ICartService cartService;
 
-
-        public CartController(ICartItemService _cartItemService, ICartService _cartService)
+        public CartController(ICartService _cartService)
         {
-            cartItemService = _cartItemService;
             cartService = _cartService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> All(int userId) 
+        public async Task<IActionResult> All(string userId) 
         {
+			if (!(await cartService.UserExistsByIdAsync(userId)) )
+			{ 
+				return BadRequest();
+			}
+
 			var query = await cartService.AllAsync(userId);
 
             return View(query);
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> DeleteCart(int cartId) 
+		{
+			if (!await cartService.CartExistsByIdAsync(cartId))
+			{
+				return BadRequest();
+			}
+
+			return View(cartId);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteConfirmedCart(int cartId) 
+		{
+			if (!await cartService.CartExistsByIdAsync(cartId))
+			{
+				return BadRequest();
+			}
+
+			await cartService.DeleteConfirmedAsync(cartId);
+
+			var userId = User.Id();
+
+			return RedirectToAction(nameof(All), new { userId });
+		}
+
         [HttpGet]
-        public async Task<IActionResult> AddToCart(int productId) 
+        public async Task<IActionResult> AddToCart(int cartId, int productId) 
         {
-            var model = new CartItemFormModel { ProductId = productId };
+			if (!await cartService.ProductExistByIdAsync(productId)) 
+			{
+				return BadRequest();
+			}
+
+			if (!await cartService.CartExistsByIdAsync(cartId))
+			{
+				return BadRequest();
+			}
+			var model = new CartItemFormModel { ProductId = productId };
 
             return View(model);
         }
 
 		[HttpGet]
-		public async Task<IActionResult> AddToCartNoProduct()
+		public async Task<IActionResult> AddToCartNoProduct(int cartId)
 		{
 			var model = new CartItemFormModel { };
 
 			return View(model);
 		}
 
-
 		[HttpPost]
 		public async Task<IActionResult> AddToCart(int cartId, CartItemFormModel model)
 		{
-            
-            await cartItemService.AddCartItemAsync(cartId, model);
+			if (!(await cartService.CartExistsByIdAsync(cartId))) 
+			{
+				return BadRequest();
+			}  
+
+            await cartService.AddCartItemAsync(cartId, model);
 
 			return View(model);
 		}
@@ -53,6 +94,10 @@ namespace SugarDecoration.App.Controllers
 		[HttpGet]
 		public async Task<IActionResult> DeleteFromCart(int id)
 		{
+			if (!await cartService.CartItemExistByIdAsync(id))
+			{
+				return BadRequest();
+			}
 
 			return View(id);
 		}
@@ -60,15 +105,26 @@ namespace SugarDecoration.App.Controllers
 		[HttpPost]
 		public async Task<IActionResult> DeleteConfirmedFromCart(int id)
 		{
-			await cartItemService.DeleteCartItemConfirmedAsync(id);
+			if (!await cartService.CartItemExistByIdAsync(id)) 
+			{
+				return BadRequest();
+			}
+			await cartService.DeleteCartItemConfirmedAsync(id);
 
-			return RedirectToAction(nameof(All));
+			var userId = User.Id();
+
+			return RedirectToAction(nameof(All), new { userId });
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> Edit(int id) 
 		{
-			var item = await cartItemService.EditCartItemAsync(id);
+			if (!await cartService.CartItemExistByIdAsync(id))
+			{
+				return BadRequest();
+			}
+
+			var item = await cartService.EditCartItemAsync(id);
 
 			return View(item);
 		}
@@ -76,9 +132,16 @@ namespace SugarDecoration.App.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit(int id, CartItemFormModel model)
 		{
-			await cartItemService.EditCartItemAsync(id, model);
+			if (!await cartService.CartItemExistByIdAsync(id))
+			{
+				return BadRequest();
+			}
 
-			return RedirectToAction(nameof(All));
+			await cartService.EditCartItemAsync(id, model);
+
+			var userId = User.Id();
+
+			return RedirectToAction(nameof(All), new { userId });
 		}
 	}
 }

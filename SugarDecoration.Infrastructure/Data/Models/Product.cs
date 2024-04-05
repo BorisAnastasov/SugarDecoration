@@ -23,10 +23,6 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [Column(TypeName ="decimal(18,2)")]
 		public decimal Price { get; set; }
 
-        //[Range(RatingMax,RatingMin)]
-        [Comment("Product rating")]
-        public double Rating { get; set; }
-
         [Required]
         [StringLength(ImageUrlMaxLength)]
         [Comment("Product image")]
@@ -36,10 +32,7 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [Comment("Date of creation of the product")]
         public DateTime CreatedOn { get; set; }
 
-        public IEnumerable<Review> Reviews { get; set; }
-                = new List<Review>();
-
-        public IEnumerable<CartItem> CartProducts { get; set; } 
+        public IEnumerable<CartItem> CartItems { get; set; } 
                 = new List<CartItem>();
     }
 }

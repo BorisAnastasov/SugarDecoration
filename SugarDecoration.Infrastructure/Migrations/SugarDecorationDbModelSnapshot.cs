@@ -159,7 +159,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SugarDecoration.Infrastructure.Data.IdentityModels.ApplicationUser", b =>
+            modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Account.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -232,6 +232,44 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1182e1d8-c799-413d-a9d3-c809966f5ed2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "437233d1-0cdf-4d68-a3c2-f1e72a100bf7",
+                            Email = "admin@abv.bg",
+                            EmailConfirmed = false,
+                            FirstName = "Boris",
+                            LastName = "Anastasov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ABV.bg",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPsmoYC+HOAs7WiyUec+EoIhWQ5JZjch9uZ2aZJTdtArIdzKX+Av84ItK3pnLf9Low==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9f8d62fc-7734-481b-a240-22e3730e9989",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "3b034442-ee41-4acb-92cb-374f72d60a59",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "00f42319-3e06-451e-b9ee-dbe1ca319f4f",
+                            Email = "g_ivanov@abv.bg",
+                            EmailConfirmed = false,
+                            FirstName = "Georgi",
+                            LastName = "Ivanov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "G_IVANOV@ABV.bg",
+                            NormalizedUserName = "GOSHE",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDgxvDCuBSGaBx/MMNgYKCX1NNJb4miA7wqbzyPdStvPpp58M4oMHn6x4Bv7sRkXhQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "399b8eab-8228-4609-bf63-4c2b5e0c89cc",
+                            TwoFactorEnabled = false,
+                            UserName = "Goshe"
+                        });
                 });
 
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Biscuit", b =>
@@ -538,13 +576,13 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Date of creation of cart");
 
+                    b.Property<bool>("IsOrdered")
+                        .HasColumnType("bit")
+                        .HasComment("Is the cart ordered");
+
                     b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2")
                         .HasComment("Last date of modification of cart");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Products total price");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -558,6 +596,16 @@ namespace SugarDecoration.Infrastructure.Migrations
                     b.ToTable("Carts");
 
                     b.HasComment("Cart table");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 692, DateTimeKind.Local).AddTicks(9052),
+                            IsOrdered = false,
+                            ModifiedOn = new DateTime(2024, 4, 5, 19, 13, 47, 692, DateTimeKind.Local).AddTicks(9071),
+                            UserId = "1182e1d8-c799-413d-a9d3-c809966f5ed2"
+                        });
                 });
 
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.CartItem", b =>
@@ -566,7 +614,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Cart identifier");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int")
                         .HasComment("Product identifier");
 
@@ -574,13 +622,21 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("CartItem identifier");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Product price");
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Description of order");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int")
                         .HasComment("Quantity of the product");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)")
+                        .HasComment("Description of order");
 
                     b.HasKey("CartId", "ProductId");
 
@@ -589,6 +645,35 @@ namespace SugarDecoration.Infrastructure.Migrations
                     b.ToTable("CartItems");
 
                     b.HasComment("Cart item");
+
+                    b.HasData(
+                        new
+                        {
+                            CartId = 1,
+                            ProductId = 1,
+                            Id = 1,
+                            PhoneNumber = "0884567234",
+                            Quantity = 1,
+                            Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10."
+                        },
+                        new
+                        {
+                            CartId = 1,
+                            ProductId = 2,
+                            Id = 2,
+                            PhoneNumber = "0884567234",
+                            Quantity = 1,
+                            Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10."
+                        },
+                        new
+                        {
+                            CartId = 1,
+                            ProductId = 3,
+                            Id = 3,
+                            PhoneNumber = "0884567234",
+                            Quantity = 1,
+                            Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10."
+                        });
                 });
 
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Order", b =>
@@ -600,13 +685,13 @@ namespace SugarDecoration.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("CartId")
+                        .HasColumnType("int")
+                        .HasComment("Cart identifier");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2")
                         .HasComment("Date of order");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Sum of the prices of the products");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -614,6 +699,9 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .HasComment("User identifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartId")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -681,10 +769,6 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasComment("Product price");
 
-                    b.Property<double>("Rating")
-                        .HasColumnType("float")
-                        .HasComment("Product rating");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -701,181 +785,123 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4524),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5823),
                             ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t1.6435-9/45418292_1900224123436935_5112515879866728448_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=eFIio2QbBlEAX9Yzjue&_nc_ht=scontent-sof1-1.xx&oh=00_AfBoQ7qqdl47HZ7hWnAk-no9njwdW7bf1dMJizkc5xCsOQ&oe=6613AA58",
                             Price = 100.00m,
-                            Rating = 0.0,
                             Title = "Съпруг и съпруга със сини и бели рози"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4561),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5854),
                             ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t31.18172-8/11950324_881502548642436_5301516909345454510_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=im4NrlMRDwoAX906LIT&_nc_ht=scontent-sof1-1.xx&oh=00_AfANMiRCdEFjBHMKqzdVQ8CfmwHERZjyswaGHkTpw3deDw&oe=66139F73",
                             Price = 120.00m,
-                            Rating = 0.0,
                             Title = "Златни рози"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4564),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5857),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/118890298_3193596277433040_3828589938106568560_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dMYD1Y2twPAAX-5TIdq&_nc_oc=AQmB6ydQvkgot9gup32CReBa78Uc9nJ0lxvLge5csyOGMtoviBAviNqd5ot6C3mvjZ4&_nc_ht=scontent-sof1-2.xx&oh=00_AfCKvMW1pK86G0-3Uvc3A4efBy5a7ZXvntK3EIguunlpsg&oe=6613AE2C",
                             Price = 150.00m,
-                            Rating = 0.0,
                             Title = "Съпруг и съпруга с червени рози и бели цветя"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4566),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5859),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t31.18172-8/11940464_881502551975769_3150965239804644226_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=lIiz0CvrQOAAX8yrHv6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDS01MUNTFuECPkpvob8zZZXmMJKbYgvCTwQahwOQCQIg&oe=6620333B",
                             Price = 120.00m,
-                            Rating = 0.0,
                             Title = "бели цветя"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4620),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5862),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/81678509_2608157715976902_8711874778027261952_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dn9ncHjKXt8AX8V4imn&_nc_oc=Adjiqz8TQNQuH0VsI2W2J8AQwDjcgr4XPGHPeTXPJ2qkeaZqY5bGxFIsMXkoAPWg4Jo&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAjqqJ0cgKuP1WozZm7dEPBE_51dVR12bcJ2UmxChzeYg&oe=66201CA0",
                             Price = 110.00m,
-                            Rating = 0.0,
                             Title = "бели цветя"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4626),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6321),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/137404609_3542798825846115_8434655239208905708_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6mljKPhHnjIAX9LqFQP&_nc_ht=scontent-sof1-2.xx&oh=00_AfBpxiR_gQOHHryQJJG74wnITMjeC-uP-D7yn1swVD6-9w&oe=6630BA9C",
                             Price = 60.00m,
-                            Rating = 0.0,
                             Title = "Ауди (Христо 20)"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4630),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6327),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/140654272_3565104620282202_1586972040598179455_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Vj0NGhYBi5UAX8K_V_D&_nc_oc=AdhlsQ819_EuGRxSBpmepYYaVVPNKFAYniEjOeksAzIo73lVtWBOfl5WxyqG1XiN4Dg&_nc_ht=scontent-sof1-2.xx&oh=00_AfC9AO_padKrBp4jE-hg43Wd9pRoGwVrfaOVaUdMvX6yLw&oe=6630D046",
                             Price = 70.00m,
-                            Rating = 0.0,
                             Title = "Тик ток (Краси 9)"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4633),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6330),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/141452606_3575133479279316_4925539086264007770_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=2fq3kZ-mCbQAX8H16po&_nc_ht=scontent-sof1-2.xx&oh=00_AfCaQLmus1wBRboVdTFOEANkgvgwaROC7cLRXmUxpxSK8g&oe=6630B930",
                             Price = 65.00m,
-                            Rating = 0.0,
                             Title = "Stranger Things (Емануела 12)"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4637),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6332),
                             ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t1.6435-9/144275472_3592112990914698_7625468473701199444_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=0U-MJHaY2wcAX-Ulp2B&_nc_ht=scontent-sof1-1.xx&oh=00_AfB9kj9vo2afu6ByV-zqG_1Xhr86byOFMxbmJoRDyE-nIg&oe=6630C891",
                             Price = 80.00m,
-                            Rating = 0.0,
                             Title = "Шоколад, портокал и уиски (Юбилей 50)"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4642),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6339),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/144577998_3598291693630161_1749300887982667483_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=-LGMg0ot0EkAX8TkT1w&_nc_ht=scontent-sof1-2.xx&oh=00_AfBxnZXhfdImfFwWDpZcFHSjWwyx0dVw9SoN_ujnIvrTWg&oe=6630C07C",
                             Price = 50.00m,
-                            Rating = 0.0,
                             Title = "Бебе Бос (Николай 1/2)"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4646),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6342),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/127996258_3428591943933471_6613145035034934063_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rPtEwbVYSpsAX8PKZXU&_nc_ht=scontent.fsof10-1.fna&oh=00_AfD393zUJS7ZhFbPMSxqEvvGouqHlkLrInYKA97sq2Hdvg&oe=6624BF3F",
                             Price = 10.00m,
-                            Rating = 0.0,
                             Title = "Коледни елхи"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4650),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6344),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.18169-9/12301697_913490672110290_3131707004579174335_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ORKDJKSWeZoAX_k70au&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCU2TCno1TEOAxjtlDR3eVOY3eJcWK_lWlPD7c2VyMphg&oe=6624A21A",
                             Price = 12.00m,
-                            Rating = 0.0,
                             Title = "Коледни фигури"
                         },
                         new
                         {
                             Id = 13,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4654),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6347),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/346885612_1175653887168525_5354008429856402980_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=hObhR06Be5kAX-tTgc6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDokQeGR3jVPFokGOf4T-2ErzAqwXyrUMnNwn7NHqgQdw&oe=66025108",
                             Price = 15.00m,
-                            Rating = 0.0,
                             Title = "Еднорог"
                         },
                         new
                         {
                             Id = 14,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4657),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6349),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/429942016_1126158058806458_357351569670082917_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=52_xuh-8AD8AX8IJkDL&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC2GOft8pteFCSZoG6CAy8Ot_y5swfu7kOtrW4GqwPhkw&oe=6602E783",
                             Price = 13.00m,
-                            Rating = 0.0,
                             Title = "Баба Марта"
                         },
                         new
                         {
                             Id = 15,
-                            CreatedOn = new DateTime(2024, 3, 31, 17, 33, 12, 855, DateTimeKind.Local).AddTicks(4661),
+                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6352),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t31.18172-8/13767216_1052053388254017_5059430311043810834_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=4rgx72Z99dsAX8T8yY9&_nc_ht=scontent-sof1-2.xx&oh=00_AfD7EXfGxSBOaVttui_hAOofFJXB-E7elqHjskgoEr5yHA&oe=6630E30F",
                             Price = 11.00m,
-                            Rating = 0.0,
                             Title = "Пролетна тема"
                         });
-                });
-
-            modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("Review identifier");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasComment("Review comment");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2")
-                        .HasComment("Date of creation of review");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int")
-                        .HasComment("Product identifier");
-
-                    b.Property<double>("Rating")
-                        .HasColumnType("float")
-                        .HasComment("Review rating");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasComment("Costumer identifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Reviews");
-
-                    b.HasComment("Review table for products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -889,7 +915,7 @@ namespace SugarDecoration.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SugarDecoration.Infrastructure.Data.IdentityModels.ApplicationUser", null)
+                    b.HasOne("SugarDecoration.Infrastructure.Data.Models.Account.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -898,7 +924,7 @@ namespace SugarDecoration.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SugarDecoration.Infrastructure.Data.IdentityModels.ApplicationUser", null)
+                    b.HasOne("SugarDecoration.Infrastructure.Data.Models.Account.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -913,7 +939,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SugarDecoration.Infrastructure.Data.IdentityModels.ApplicationUser", null)
+                    b.HasOne("SugarDecoration.Infrastructure.Data.Models.Account.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -922,7 +948,7 @@ namespace SugarDecoration.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SugarDecoration.Infrastructure.Data.IdentityModels.ApplicationUser", null)
+                    b.HasOne("SugarDecoration.Infrastructure.Data.Models.Account.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -932,7 +958,7 @@ namespace SugarDecoration.Infrastructure.Migrations
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Biscuit", b =>
                 {
                     b.HasOne("SugarDecoration.Infrastructure.Data.Models.BiscuitCategory", "Category")
-                        .WithMany()
+                        .WithMany("Biscuits")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -951,7 +977,7 @@ namespace SugarDecoration.Infrastructure.Migrations
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Cake", b =>
                 {
                     b.HasOne("SugarDecoration.Infrastructure.Data.Models.CakeCategory", "Category")
-                        .WithMany()
+                        .WithMany("Cakes")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -969,7 +995,7 @@ namespace SugarDecoration.Infrastructure.Migrations
 
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Cart", b =>
                 {
-                    b.HasOne("SugarDecoration.Infrastructure.Data.IdentityModels.ApplicationUser", "User")
+                    b.HasOne("SugarDecoration.Infrastructure.Data.Models.Account.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -987,7 +1013,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("SugarDecoration.Infrastructure.Data.Models.Product", "Product")
-                        .WithMany("CartProducts")
+                        .WithMany("CartItems")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -999,11 +1025,19 @@ namespace SugarDecoration.Infrastructure.Migrations
 
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Order", b =>
                 {
-                    b.HasOne("SugarDecoration.Infrastructure.Data.IdentityModels.ApplicationUser", "User")
+                    b.HasOne("SugarDecoration.Infrastructure.Data.Models.Cart", "Cart")
+                        .WithOne()
+                        .HasForeignKey("SugarDecoration.Infrastructure.Data.Models.Order", "CartId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("SugarDecoration.Infrastructure.Data.Models.Account.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Cart");
 
                     b.Navigation("User");
                 });
@@ -1027,23 +1061,14 @@ namespace SugarDecoration.Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Review", b =>
+            modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.BiscuitCategory", b =>
                 {
-                    b.HasOne("SugarDecoration.Infrastructure.Data.Models.Product", "Product")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Biscuits");
+                });
 
-                    b.HasOne("SugarDecoration.Infrastructure.Data.IdentityModels.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
+            modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.CakeCategory", b =>
+                {
+                    b.Navigation("Cakes");
                 });
 
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Cart", b =>
@@ -1053,9 +1078,7 @@ namespace SugarDecoration.Infrastructure.Migrations
 
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.Product", b =>
                 {
-                    b.Navigation("CartProducts");
-
-                    b.Navigation("Reviews");
+                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }

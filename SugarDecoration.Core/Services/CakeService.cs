@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.Enumerations;
 using SugarDecoration.Core.Models.Cake;
 using SugarDecoration.Core.Models.CakeCategory;
 using SugarDecoration.Infrastructure.Data.Contracts;
@@ -15,29 +16,13 @@ namespace SugarDecoration.Core.Services
 		{
 			repository = _repository;
 		}
-		public async Task<AllCakesQueryModel> GetAllCakesAsync()
-		{
-			var cakes = await repository.AllReadOnly<Cake>()
-								.Select(c => new CakeServiceModel
-								{
-									Id = c.Id,
-									Title = c.Product.Title,
-									Price = c.Product.Price.ToString(),
-									ImageUrl = c.Product.ImageUrl
-								}).ToListAsync();
-
-			var cakeQuery = new AllCakesQueryModel
-			{
-				Cakes = cakes,
-				TotalCakeCount = cakes.Count
-			};
-			return cakeQuery;
-		}
+		
 		public async Task<CakeDetailsModel> GetCakeDetailsByIdAsync(int id)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(id);
+			var category = await repository.GetByIdAsync<CakeCategory>(cake.CategoryId);
 
-			var cakeModel = new CakeDetailsModel
+            var cakeModel = new CakeDetailsModel
 			{
 				Id = cake.Id,
 				Title = cake.Product.Title,
@@ -45,7 +30,8 @@ namespace SugarDecoration.Core.Services
 				Layers = cake.Layers,
 				Form = cake.Form,
 				Portions = cake.Portions,
-				ImageUrl = cake.Product.ImageUrl
+				ImageUrl = cake.Product.ImageUrl,
+				Category = category.Name
 			};
 
 			return cakeModel;
@@ -153,5 +139,57 @@ namespace SugarDecoration.Core.Services
         public async Task<bool> CakeCategoryExists(int id)
          => await repository.AllReadOnly<CakeCategory>()
 							.AnyAsync(c=>c.Id==id);
+
+		public async Task<CakeQueryServiceModel> GetAllCakesAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currPage = 1, int productsPerPage = 15)
+		{
+			var cakesToShow = repository.AllReadOnly<Cake>();
+
+			if (category != null)
+			{
+				cakesToShow = cakesToShow
+							.Where(c => c.Category.Name == category);
+			}
+
+
+			if (searchTerm != null)
+			{
+				string normalizedSearchedTerm = searchTerm.ToLower();
+				cakesToShow = cakesToShow
+							.Where(c => (c.Product.Title.ToLower().Contains(normalizedSearchedTerm)));
+			}
+
+
+			cakesToShow = sorting switch 
+			{
+				ProductSorting.Price =>cakesToShow.OrderByDescending(c=>c.Product.Price),
+
+				_ => cakesToShow.OrderByDescending(c=>c.Id)
+			};
+
+
+			var cakes = await cakesToShow
+						.Skip((currPage-1)*productsPerPage)
+						.Take(productsPerPage)
+                       .Select(c => new CakeServiceModel
+					   {
+						   Id = c.Id,
+						   Title = c.Product.Title,
+						   Price = c.Product.Price.ToString(),
+						   ImageUrl = c.Product.ImageUrl
+					   }).ToListAsync();
+
+			var cakeQuery = new CakeQueryServiceModel
+            {
+				Cakes = cakes,
+				TotalCakeCount = cakes.Count
+			};
+			return cakeQuery;
+		}
+
+        public async Task<IEnumerable<string>> AllCategoriesNames()
+        => await repository.AllReadOnly<CakeCategory>()
+							.Select(c => c.Name)
+							.Distinct()
+							.ToListAsync();
     }
 }

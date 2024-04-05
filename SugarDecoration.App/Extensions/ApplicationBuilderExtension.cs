@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SugarDecoration.Infrastructure.Data.Models.Account;
-using System.Data;
 using static SugarDecoration.Infrastructure.Data.Constants.RoleConstants;
 namespace SugarDecoration.App.Extensions
 {
-    public static class ApplicationBuilderExtension
+	public static class ApplicationBuilderExtension
     {
         public static IApplicationBuilder SeedRoles(this IApplicationBuilder app)
         {
@@ -28,7 +27,7 @@ namespace SugarDecoration.App.Extensions
                     }
                 }
 
-                var admin = await userManager.FindByNameAsync(AdminEmail);
+                var admin = await userManager.FindByEmailAsync(AdminEmail);
 
                 await userManager.AddToRoleAsync(admin, AdminRoleName);
             })
