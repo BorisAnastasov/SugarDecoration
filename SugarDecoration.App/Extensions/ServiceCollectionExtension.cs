@@ -17,8 +17,9 @@ namespace SugarDecoration.Extensions
 		{
 			services.AddScoped<ICakeService, CakeService>();
 			services.AddScoped<IBiscuitService, BiscuitService>();
-			services.AddScoped<IHomeService, HomeService>();
+			services.AddTransient<IHomeService, HomeService>();
 			services.AddScoped<IProductService, ProductService>();
+			services.AddTransient<IApplicationUserService, ApplicationUserService>();
 
             services.AddAuthorization(options =>
             {
