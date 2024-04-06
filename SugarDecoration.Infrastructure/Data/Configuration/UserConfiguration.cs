@@ -21,11 +21,11 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             var user = new ApplicationUser()
             {
                 Id = "1182e1d8-c799-413d-a9d3-c809966f5ed2",
-                FirstName = "Boris",
-                LastName = "Anastasov",
-                UserName = "Admin",
+                FirstName = "Admin",
+                LastName = "Adminov",
                 NormalizedUserName = "ADMIN",
                 Email = "admin@abv.bg",
+                UserName = "admin@abv.bg",
                 NormalizedEmail = "ADMIN@ABV.bg",
             };
             user.PasswordHash =
@@ -38,9 +38,9 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
                 Id = "3b034442-ee41-4acb-92cb-374f72d60a59",
                 FirstName = "Georgi",
                 LastName = "Ivanov",
-                UserName = "Goshe",
                 NormalizedUserName = "GOSHE",
                 Email = "g_ivanov@abv.bg",
+                UserName = "g_ivanov@abv.bg",
                 NormalizedEmail = "G_IVANOV@ABV.bg",
             };
             user.PasswordHash =

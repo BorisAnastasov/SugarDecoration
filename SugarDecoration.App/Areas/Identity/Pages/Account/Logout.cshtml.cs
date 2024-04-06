@@ -17,6 +17,7 @@ namespace SugarDecoration.App.Areas.Identity.Pages.Account
         public LogoutModel(SignInManager<ApplicationUser> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
+            _logger = logger;
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)

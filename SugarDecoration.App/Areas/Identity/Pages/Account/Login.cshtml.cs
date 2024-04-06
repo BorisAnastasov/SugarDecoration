@@ -12,17 +12,18 @@ namespace SugarDecoration.App.Areas.Identity.Pages.Account
 	public class LoginModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userInManager;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userInManager)
         {
             _signInManager = signInManager;
+            _userInManager = userInManager;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
-
 
         [TempData]
         public string ErrorMessage { get; set; }
@@ -62,6 +63,7 @@ namespace SugarDecoration.App.Areas.Identity.Pages.Account
             {
 
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, true, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
                     return LocalRedirect(returnUrl);

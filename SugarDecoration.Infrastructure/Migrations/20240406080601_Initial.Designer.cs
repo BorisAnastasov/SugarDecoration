@@ -12,7 +12,7 @@ using SugarDecoration.Infrastructure.Data;
 namespace SugarDecoration.Infrastructure.Migrations
 {
     [DbContext(typeof(SugarDecorationDb))]
-    [Migration("20240405161347_Initial")]
+    [Migration("20240406080601_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,13 +182,13 @@ namespace SugarDecoration.Infrastructure.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -240,25 +240,25 @@ namespace SugarDecoration.Infrastructure.Migrations
                         {
                             Id = "1182e1d8-c799-413d-a9d3-c809966f5ed2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "437233d1-0cdf-4d68-a3c2-f1e72a100bf7",
+                            ConcurrencyStamp = "557d7e3a-f2e2-45b4-b373-afde8356d104",
                             Email = "admin@abv.bg",
                             EmailConfirmed = false,
-                            FirstName = "Boris",
-                            LastName = "Anastasov",
+                            FirstName = "Admin",
+                            LastName = "Adminov",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ABV.bg",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPsmoYC+HOAs7WiyUec+EoIhWQ5JZjch9uZ2aZJTdtArIdzKX+Av84ItK3pnLf9Low==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECWFBdk48sLPQ3+VoyApNLhFUrQQfx2H4Q+DpVAJPCucPAFQEuhMyoBY9gh0V+OPRQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9f8d62fc-7734-481b-a240-22e3730e9989",
+                            SecurityStamp = "f364b18d-0819-4b36-945a-ed501d166c54",
                             TwoFactorEnabled = false,
-                            UserName = "Admin"
+                            UserName = "admin@abv.bg"
                         },
                         new
                         {
                             Id = "3b034442-ee41-4acb-92cb-374f72d60a59",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "00f42319-3e06-451e-b9ee-dbe1ca319f4f",
+                            ConcurrencyStamp = "a9428fd6-2741-42e5-b646-cb8bf2f47662",
                             Email = "g_ivanov@abv.bg",
                             EmailConfirmed = false,
                             FirstName = "Georgi",
@@ -266,11 +266,11 @@ namespace SugarDecoration.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "G_IVANOV@ABV.bg",
                             NormalizedUserName = "GOSHE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDgxvDCuBSGaBx/MMNgYKCX1NNJb4miA7wqbzyPdStvPpp58M4oMHn6x4Bv7sRkXhQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOagayWVrCkVfIABV96vwydXK2JMFu6Yad8SqLjPbuw6lG3Nh0aYsKK9fNO2aaczFA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "399b8eab-8228-4609-bf63-4c2b5e0c89cc",
+                            SecurityStamp = "6c4866db-a4b6-4847-a8ae-df9d11cf54ef",
                             TwoFactorEnabled = false,
-                            UserName = "Goshe"
+                            UserName = "g_ivanov@abv.bg"
                         });
                 });
 
@@ -603,9 +603,9 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 692, DateTimeKind.Local).AddTicks(9052),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 302, DateTimeKind.Local).AddTicks(2930),
                             IsOrdered = false,
-                            ModifiedOn = new DateTime(2024, 4, 5, 19, 13, 47, 692, DateTimeKind.Local).AddTicks(9071),
+                            ModifiedOn = new DateTime(2024, 4, 6, 11, 6, 1, 302, DateTimeKind.Local).AddTicks(2941),
                             UserId = "1182e1d8-c799-413d-a9d3-c809966f5ed2"
                         });
                 });
@@ -787,7 +787,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5823),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(136),
                             ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t1.6435-9/45418292_1900224123436935_5112515879866728448_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=eFIio2QbBlEAX9Yzjue&_nc_ht=scontent-sof1-1.xx&oh=00_AfBoQ7qqdl47HZ7hWnAk-no9njwdW7bf1dMJizkc5xCsOQ&oe=6613AA58",
                             Price = 100.00m,
                             Title = "Съпруг и съпруга със сини и бели рози"
@@ -795,7 +795,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5854),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(169),
                             ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t31.18172-8/11950324_881502548642436_5301516909345454510_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=im4NrlMRDwoAX906LIT&_nc_ht=scontent-sof1-1.xx&oh=00_AfANMiRCdEFjBHMKqzdVQ8CfmwHERZjyswaGHkTpw3deDw&oe=66139F73",
                             Price = 120.00m,
                             Title = "Златни рози"
@@ -803,7 +803,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5857),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(172),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/118890298_3193596277433040_3828589938106568560_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dMYD1Y2twPAAX-5TIdq&_nc_oc=AQmB6ydQvkgot9gup32CReBa78Uc9nJ0lxvLge5csyOGMtoviBAviNqd5ot6C3mvjZ4&_nc_ht=scontent-sof1-2.xx&oh=00_AfCKvMW1pK86G0-3Uvc3A4efBy5a7ZXvntK3EIguunlpsg&oe=6613AE2C",
                             Price = 150.00m,
                             Title = "Съпруг и съпруга с червени рози и бели цветя"
@@ -811,7 +811,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5859),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(175),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t31.18172-8/11940464_881502551975769_3150965239804644226_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=lIiz0CvrQOAAX8yrHv6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDS01MUNTFuECPkpvob8zZZXmMJKbYgvCTwQahwOQCQIg&oe=6620333B",
                             Price = 120.00m,
                             Title = "бели цветя"
@@ -819,7 +819,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(5862),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(177),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/81678509_2608157715976902_8711874778027261952_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dn9ncHjKXt8AX8V4imn&_nc_oc=Adjiqz8TQNQuH0VsI2W2J8AQwDjcgr4XPGHPeTXPJ2qkeaZqY5bGxFIsMXkoAPWg4Jo&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAjqqJ0cgKuP1WozZm7dEPBE_51dVR12bcJ2UmxChzeYg&oe=66201CA0",
                             Price = 110.00m,
                             Title = "бели цветя"
@@ -827,7 +827,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6321),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(181),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/137404609_3542798825846115_8434655239208905708_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6mljKPhHnjIAX9LqFQP&_nc_ht=scontent-sof1-2.xx&oh=00_AfBpxiR_gQOHHryQJJG74wnITMjeC-uP-D7yn1swVD6-9w&oe=6630BA9C",
                             Price = 60.00m,
                             Title = "Ауди (Христо 20)"
@@ -835,7 +835,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6327),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(184),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/140654272_3565104620282202_1586972040598179455_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Vj0NGhYBi5UAX8K_V_D&_nc_oc=AdhlsQ819_EuGRxSBpmepYYaVVPNKFAYniEjOeksAzIo73lVtWBOfl5WxyqG1XiN4Dg&_nc_ht=scontent-sof1-2.xx&oh=00_AfC9AO_padKrBp4jE-hg43Wd9pRoGwVrfaOVaUdMvX6yLw&oe=6630D046",
                             Price = 70.00m,
                             Title = "Тик ток (Краси 9)"
@@ -843,7 +843,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6330),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(186),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/141452606_3575133479279316_4925539086264007770_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=2fq3kZ-mCbQAX8H16po&_nc_ht=scontent-sof1-2.xx&oh=00_AfCaQLmus1wBRboVdTFOEANkgvgwaROC7cLRXmUxpxSK8g&oe=6630B930",
                             Price = 65.00m,
                             Title = "Stranger Things (Емануела 12)"
@@ -851,7 +851,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 9,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6332),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(189),
                             ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t1.6435-9/144275472_3592112990914698_7625468473701199444_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=0U-MJHaY2wcAX-Ulp2B&_nc_ht=scontent-sof1-1.xx&oh=00_AfB9kj9vo2afu6ByV-zqG_1Xhr86byOFMxbmJoRDyE-nIg&oe=6630C891",
                             Price = 80.00m,
                             Title = "Шоколад, портокал и уиски (Юбилей 50)"
@@ -859,7 +859,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 10,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6339),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(192),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/144577998_3598291693630161_1749300887982667483_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=-LGMg0ot0EkAX8TkT1w&_nc_ht=scontent-sof1-2.xx&oh=00_AfBxnZXhfdImfFwWDpZcFHSjWwyx0dVw9SoN_ujnIvrTWg&oe=6630C07C",
                             Price = 50.00m,
                             Title = "Бебе Бос (Николай 1/2)"
@@ -867,7 +867,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 11,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6342),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(195),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/127996258_3428591943933471_6613145035034934063_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rPtEwbVYSpsAX8PKZXU&_nc_ht=scontent.fsof10-1.fna&oh=00_AfD393zUJS7ZhFbPMSxqEvvGouqHlkLrInYKA97sq2Hdvg&oe=6624BF3F",
                             Price = 10.00m,
                             Title = "Коледни елхи"
@@ -875,7 +875,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 12,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6344),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(198),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.18169-9/12301697_913490672110290_3131707004579174335_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ORKDJKSWeZoAX_k70au&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCU2TCno1TEOAxjtlDR3eVOY3eJcWK_lWlPD7c2VyMphg&oe=6624A21A",
                             Price = 12.00m,
                             Title = "Коледни фигури"
@@ -883,7 +883,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 13,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6347),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(200),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/346885612_1175653887168525_5354008429856402980_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=hObhR06Be5kAX-tTgc6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDokQeGR3jVPFokGOf4T-2ErzAqwXyrUMnNwn7NHqgQdw&oe=66025108",
                             Price = 15.00m,
                             Title = "Еднорог"
@@ -891,7 +891,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 14,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6349),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(203),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/429942016_1126158058806458_357351569670082917_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=52_xuh-8AD8AX8IJkDL&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC2GOft8pteFCSZoG6CAy8Ot_y5swfu7kOtrW4GqwPhkw&oe=6602E783",
                             Price = 13.00m,
                             Title = "Баба Марта"
@@ -899,7 +899,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 15,
-                            CreatedOn = new DateTime(2024, 4, 5, 19, 13, 47, 690, DateTimeKind.Local).AddTicks(6352),
+                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(244),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t31.18172-8/13767216_1052053388254017_5059430311043810834_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=4rgx72Z99dsAX8T8yY9&_nc_ht=scontent-sof1-2.xx&oh=00_AfD7EXfGxSBOaVttui_hAOofFJXB-E7elqHjskgoEr5yHA&oe=6630E30F",
                             Price = 11.00m,
                             Title = "Пролетна тема"
