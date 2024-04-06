@@ -4,13 +4,18 @@ namespace SugarDecoration.App.Controllers
 {
 	public class ErrorController : Controller
 	{
-		public IActionResult Index()
+		public async Task<IActionResult> Index(int statusCode)
 		{
-			return View();
-		}
+			switch (statusCode)
+			{
+				case 400:
+					ViewBag.Title = "Page Not Found";
+					break;
 
-		public IActionResult AccessDenied() 
-		{
+				default:
+					break;
+			}
+
 			return View();
 		}
 	}
