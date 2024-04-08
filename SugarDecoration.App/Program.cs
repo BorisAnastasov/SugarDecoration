@@ -31,13 +31,14 @@ namespace SugarDecoration.App
 
             if (app.Environment.IsDevelopment())
             {
-                app.UseMigrationsEndPoint();
                 app.UseExceptionHandler("/Error");
+                app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
-				app.UseExceptionHandler("/Home/Error/500");
-				app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+				app.UseExceptionHandler("/Error/500");
+				app.UseStatusCodePagesWithReExecute("/Error?statusCode={0}");
 				app.UseHsts();
             }
 

@@ -8,11 +8,11 @@ namespace SugarDecoration.App.Controllers
 
 		[AllowAnonymous]
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Index(int statusCode)
+		public IActionResult Error(int statusCode)
 		{
 			return statusCode switch
 			{
-				400 => View("Error400"),
+				404 => View("Error404"),
 				500 => View("Error500"),
 				_ => View(),
 			};

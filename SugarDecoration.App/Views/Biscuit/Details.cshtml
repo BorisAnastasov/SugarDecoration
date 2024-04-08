@@ -1,36 +1,37 @@
 ﻿@model BiscuitDetailsModel
 @{
-	ViewBag.Title = "Biscuit details";
+    ViewBag.Title = "Details about the cake";
 }
 
-<div class="container">
-	<div class="d-flex justify-content-around flex-xxl-row " style="height:30%">
-		<div class="bg-white d-inline-block p-2 me-3 rounded" style="width: fit-content; height: 70vh;">
-			<img class="rounded" src="@Model.ImageUrl" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain;" alt="Biscuit Image" />
-		</div>
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
 
-		<div class="card-body d-flex justify-content-between flex-column bg-white p-2 rounded" style="width:30%;">
-			<div class="d-flex flex-column justify-content-between">
-				<h1 class="card-title m-2">@Model.Title</h1>
-				<p class="card-text  m-2">Price: @Model.Price</p>
-				<p class="card-text  m-2">Quantity: @Model.Quantity</p>
-			</div>
-			<div>
-				<a asp-controller="Biscuit" asp-action="All" class="btn btn-primary">Go back</a>
-				@if (User.IsInRole("Administrator"))
-				{
-					<div class="d-flex">
-						<a class="me-3 btn btn-warning " asp-controller="Biscuit" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-						<a class="btn btn-danger" asp-controller="Biscuit" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-					</div>
-				}
-			</div>
-			
-		</div>
-
-	</div>
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="House Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Title</u></p>
+            <p>Located in: <b>@Model.Price</b></p>
+            <p>
+                Price Per Month:
+                <b>@String.Format("{0:f2}", Model.Price) BGN</b>
+            </p>
+            <p>Category: <b>@Model.Category</b></p>
+            <div class="form-inline">
+                @if (this.User.IsInRole("Administrator"))
+                {
+                    <a class="btn btn-warning" asp-controller="Cake" asp-action="Edit"
+                       asp-route-id="@Model.Id">Edit</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Cake" asp-action="Delete"
+                       asp-route-id="@Model.Id">Delete</a>
+                }
+            </div>
+        </div>
+    </div>
 </div>
-
 
 
 
