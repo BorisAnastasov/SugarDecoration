@@ -3,3 +3,42 @@
 	ViewBag.Title = "All Items in the Cart";
 }
 
+<h1>Shopping Cart</h1>
+
+@if (Model.ItemsCount == 0)
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>
+                        @if (item.IsRefToProduct)
+                        {
+                            <img src="@item.ImageUrl" alt="Product Image" style="max-width: 100px;" />
+                        }
+                        <span>@item.ProductTitle</span>
+                    </td>
+                    <td>@item.Quantity</td>
+                    <td>
+                        <button class="btn btn-danger">Remove</button>
+                        <!-- You can add more actions/buttons here -->
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<p>Total Items in Cart: @Model.ItemsCount</p>
