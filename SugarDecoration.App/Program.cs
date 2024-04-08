@@ -36,9 +36,9 @@ namespace SugarDecoration.App
             }
             else
             {
-                app.UseStatusCodePagesWithRedirects("Error/{0}");
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+				app.UseExceptionHandler("/Home/Error/500");
+				app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+				app.UseHsts();
             }
 
             app.UseHttpsRedirection();
