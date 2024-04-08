@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using static SugarDecoration.Core.Constants.MessageConstants;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
 
-namespace SugarDecoration.Core.ViewModels.Biscuit
+namespace SugarDecoration.Core.Models.Biscuit
 {
 	public class BiscuitServiceModel
 	{
