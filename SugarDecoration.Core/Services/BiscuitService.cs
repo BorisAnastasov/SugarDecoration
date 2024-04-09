@@ -2,7 +2,7 @@
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Models.Biscuit;
 using SugarDecoration.Core.Models.BiscuitCategory;
-using SugarDecoration.Core.ViewModels.Biscuit;
+using SugarDecoration.Core.Models.Biscuit;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;

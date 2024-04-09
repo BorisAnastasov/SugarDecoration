@@ -1,5 +1,5 @@
 ﻿using SugarDecoration.Core.Enumerations;
-using SugarDecoration.Core.ViewModels.Biscuit;
+using SugarDecoration.Core.Models.Biscuit;
 using System.ComponentModel.DataAnnotations;
 
 namespace SugarDecoration.Core.Models.Biscuit
