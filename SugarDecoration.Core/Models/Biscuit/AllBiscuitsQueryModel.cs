@@ -8,10 +8,10 @@ namespace SugarDecoration.Core.Models.Biscuit
     {
 		public int BiscuitsPerPage { get; } = 15;
 
-		public string Category { get; init; } = null!;
+		public string Category { get; init; }
 
 		[Display(Name = "Search by text")]
-		public string SearchTerm { get; init; } = null!;
+		public string SearchTerm { get; init; }
 
 		public ProductSorting Sorting { get; init; }
 

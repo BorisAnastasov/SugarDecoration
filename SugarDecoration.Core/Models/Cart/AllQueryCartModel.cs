@@ -6,7 +6,7 @@ namespace SugarDecoration.Core.Models.Cart
     {
         public int ItemsCount { get; set; }
 
-        public IEnumerable<CartItemServiceModel> CartItems { get; set; }
+        public List<CartItemServiceModel> CartItems { get; set; }
                     = new List<CartItemServiceModel>();
 
 

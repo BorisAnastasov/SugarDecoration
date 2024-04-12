@@ -1,5 +1,20 @@
-﻿
+﻿@model CartItemDetailsModel
+@{
+	ViewBag.Title = "";
 
+}
+
+<div class="cart-item">
+    <div class="product-details">
+        <h4>@Model.ProductTitle</h4>
+        <p>@Model.Text</p>
+        @if (Model.IsRefToProduct)
+        {
+            <img src="@Model.ImageUrl" alt="@Model.ProductTitle" />
+        }
+        <p>Quantity: @Model.Quantity</p>
+    </div>
+</div>
 
 
 

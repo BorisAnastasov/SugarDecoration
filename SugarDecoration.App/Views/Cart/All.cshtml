@@ -1,44 +1,64 @@
 ﻿@model AllQueryCartModel
 @{
-	ViewBag.Title = "All Items in the Cart";
+    ViewBag.Title = "All cart items";
 }
 
-<h1>Shopping Cart</h1>
+<section class="h-100" style="background-color: #eee;">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10">
 
-@if (Model.ItemsCount == 0)
-{
-    <p>Your cart is empty.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.CartItems)
-            {
-                <tr>
-                    <td>
-                        @if (item.IsRefToProduct)
-                        {
-                            <img src="@item.ImageUrl" alt="Product Image" style="max-width: 100px;" />
-                        }
-                        <span>@item.ProductTitle</span>
-                    </td>
-                    <td>@item.Quantity</td>
-                    <td>
-                        <button class="btn btn-danger">Remove</button>
-                        <!-- You can add more actions/buttons here -->
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+                </div>
+                <form asp-action="UpdateCart" asp-controller="Cart" method="post">
+                    @if (Model.CartItems is not null && Model.CartItems.Count() > 0)
+                    {
+                        <div class="productList">
+                            @for (int i = 0; i < Model.CartItems.Count(); i++)
+                            {
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div>
+                                                    <img src="@Model.CartItems[i].ImageUrl"
+                                                         class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h5>@Model.CartItems[i].ProductTitle</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div style="width: 70px;">
+                                                    <input class="inputSize" type="hidden" name="@("productAndQuantity[" + i +"].Key")" value="@Model.CartItems[i].Id" />
+                                                    <input class="inputSize" type="number" name="@("productAndQuantity[" + i +"].Value")" value="@Model.CartItems[i].Quantity" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
 
-<p>Total Items in Cart: @Model.ItemsCount</p>
+                        </div>
+
+                        <div class="buttonContainer">
+                            <button type="submit" class="btn btn-info">Update Cart</button>
+
+                            <a asp-controller="Order"
+                               asp-action="CreateOrder" button type="submit" class="btn btn-info">
+                                Go to Checkout
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>There are no products in the shopping cart yet!</p>
+                    }
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</section>

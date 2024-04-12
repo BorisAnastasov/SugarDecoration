@@ -22,7 +22,6 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				ProductId = 1,
 				Quantity = 1,
 				Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
-				PhoneNumber = "0884567234",
 			};
 
 			cartItems.Add(cartItem);
@@ -34,7 +33,6 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				ProductId = 2,
 				Quantity = 1,
 				Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
-				PhoneNumber = "0884567234",
 			};
 
 			cartItems.Add(cartItem);
@@ -46,7 +44,6 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				ProductId = 3,
 				Quantity = 1,
 				Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
-				PhoneNumber = "0884567234",
 			};
 
 			cartItems.Add(cartItem);

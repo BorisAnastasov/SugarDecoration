@@ -105,7 +105,6 @@ namespace SugarDecoration.Core.Services
 			{
 				Id = item.Id,
 				Text = item.Text,
-				PhoneNumber = item.PhoneNumber,
 				Quantity = item.Quantity,
 			};
 
@@ -124,7 +123,6 @@ namespace SugarDecoration.Core.Services
 			var item = new CartItem
 			{
 				Text = model.Text,
-				PhoneNumber = model.PhoneNumber,
 				Quantity = model.Quantity,
 				CartId = cartId
 			};
@@ -154,7 +152,6 @@ namespace SugarDecoration.Core.Services
 			var model = new CartItemFormModel
 			{
 				Text = item.Text,
-				PhoneNumber = item.PhoneNumber,
 				Quantity = item.Quantity,
 			};
 
@@ -172,7 +169,6 @@ namespace SugarDecoration.Core.Services
 		{
 			var item = await repository.GetByIdAsync<CartItem>(id);
 
-			item.PhoneNumber = model.PhoneNumber;
 			item.Text = model.Text;
 			item.Quantity = model.Quantity;
 
@@ -191,5 +187,26 @@ namespace SugarDecoration.Core.Services
 
 		public async Task<bool> ProductExistByIdAsync(int id)
 		=> await repository.GetByIdAsync<Product>(id) != null;
-	}
+
+		public async Task<bool> IsThisUserTheCartItemOwnerByIdAsync(int cartItemId, string userId)
+		{
+			var cartItem = await repository.GetByIdAsync<CartItem>(cartItemId);
+
+			return cartItem.Cart.UserId == userId;
+		}
+
+        public async Task<CartItemFormModel> GetProductInformationByIdAsync(int productId)
+        {
+            var product = await repository.GetByIdAsync<Product>(productId);
+
+			var model = new CartItemFormModel 
+			{
+				ProductId = productId,
+				ProductTitle = product.Title,
+				ImageUrl = product.ImageUrl,
+			};
+
+			return model;
+        }
+    }
 }

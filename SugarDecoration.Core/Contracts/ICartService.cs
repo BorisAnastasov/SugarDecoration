@@ -17,5 +17,8 @@ namespace SugarDecoration.Core.Contracts
 		Task<bool> UserExistsByIdAsync(string id);
 		Task<bool> CartItemExistByIdAsync(int id);
 		Task<bool> ProductExistByIdAsync(int id);
+		Task<bool> IsThisUserTheCartItemOwnerByIdAsync(int cartItemId, string userId);
+		Task<CartItemFormModel> GetProductInformationByIdAsync(int productId);
+
 	}
 }

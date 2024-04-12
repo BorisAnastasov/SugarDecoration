@@ -1,0 +1,27 @@
+﻿@model DeleteCartViewModel
+
+@{
+    ViewBag.Title = "Delete Product";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <p class="text-danger mt-3">"Are you sure you want to delete your cart?"</p>
+            </div>
+            <div class="card-footer">
+                <form asp-controller="Cart" asp-action="DeleteConfirmedCart" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                    <a asp-controller="Cart" asp-action="All" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

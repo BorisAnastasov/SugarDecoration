@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.Enumerations;
 using SugarDecoration.Core.Models.Biscuit;
 using SugarDecoration.Core.Models.BiscuitCategory;
-using SugarDecoration.Core.Models.Biscuit;
+using SugarDecoration.Core.Models.Cake;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
@@ -17,28 +18,53 @@ namespace SugarDecoration.Core.Services
 			repository = _repository;
 		}
 
-        public async Task<AllBiscuitsQueryModel> GetAllBiscuitsAsync()
-        {
-            var biscuits = await repository
-                                .AllReadOnly<Biscuit>()
-                                .Select(b => new BiscuitServiceModel
-                                {
-                                    Id = b.Id,
-                                    Title = b.Product.Title,
-                                    Price = b.Product.Price.ToString(),
-                                    ImageUrl = b.Product.ImageUrl
-                                }).ToListAsync();
+		public async Task<CakeQueryServiceModel> GetAllBiscuitsAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currPage = 1, int productsPerPage = 15)
+		{
+			var cakesToShow = repository.AllReadOnly<Cake>();
 
-            var biscuitQuery = new AllBiscuitsQueryModel
-            {
-                Biscuits = biscuits,
-                TotalBiscuitCount = biscuits.Count
-            };
+			if (category != null)
+			{
+				cakesToShow = cakesToShow
+							.Where(c => c.Category.Name == category);
+			}
 
-            return biscuitQuery;
-        }
 
-        public async Task<BiscuitDetailsModel> GetBiscuitDetailsByIdAsync(int id)
+			if (searchTerm != null)
+			{
+				string normalizedSearchedTerm = searchTerm.ToLower();
+				cakesToShow = cakesToShow
+							.Where(c => (c.Product.Title.ToLower().Contains(normalizedSearchedTerm)));
+			}
+
+
+			cakesToShow = sorting switch
+			{
+				ProductSorting.Price => cakesToShow.OrderByDescending(c => c.Product.Price),
+
+				_ => cakesToShow.OrderByDescending(c => c.Id)
+			};
+
+
+			var cakes = await cakesToShow
+						.Skip((currPage - 1) * productsPerPage)
+						.Take(productsPerPage)
+					   .Select(c => new CakeServiceModel
+					   {
+						   Id = c.Id,
+						   Title = c.Product.Title,
+						   Price = c.Product.Price.ToString(),
+						   ImageUrl = c.Product.ImageUrl
+					   }).ToListAsync();
+
+			var cakeQuery = new CakeQueryServiceModel
+			{
+				Cakes = cakes,
+				TotalCakeCount = cakes.Count
+			};
+			return cakeQuery;
+		}
+
+		public async Task<BiscuitDetailsModel> GetBiscuitDetailsByIdAsync(int id)
         {
             var biscuit = await repository.GetByIdAsync<Biscuit>(id);
 
@@ -155,5 +181,11 @@ namespace SugarDecoration.Core.Services
 
             return biscuit != null && product != null;
         }
-    }
+
+		public async Task<IEnumerable<string>> AllCategoriesNames()
+		=> await repository.AllReadOnly<BiscuitCategory>()
+							.Select(c => c.Name)
+							.Distinct()
+							.ToListAsync();
+	}
 }

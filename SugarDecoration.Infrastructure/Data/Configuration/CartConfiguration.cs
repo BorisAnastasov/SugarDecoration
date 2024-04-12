@@ -11,7 +11,6 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 			builder.HasData(SeedCarts());
 		}
 
-
 		private static IEnumerable<Cart> SeedCarts() 
 		{
 			var carts = new List<Cart>();	

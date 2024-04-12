@@ -33,11 +33,6 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [Comment("Description of order")]
         public string Text { get; set; } = string.Empty;
 
-        [Required]
-        [MaxLength(PhoneNumberMaxLength)]
-        [Comment("Description of order")]
-        public string PhoneNumber { get; set; } = string.Empty;
-
         public bool IsRefToProduct
         {
             get => this.Product != null;

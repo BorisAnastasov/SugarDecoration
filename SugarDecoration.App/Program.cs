@@ -31,10 +31,9 @@ namespace SugarDecoration.App
 
             if (app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Error");
-                app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
-            }
+				app.UseDeveloperExceptionPage();
+				app.UseMigrationsEndPoint();
+			}
             else
             {
 				app.UseExceptionHandler("/Error/500");

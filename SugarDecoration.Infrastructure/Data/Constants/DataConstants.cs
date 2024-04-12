@@ -43,15 +43,6 @@
 			public const int LastNameMinLength = 2;
         }
 
-		public static class Review 
-		{
-			public const int RatingMax = 5;
-			public const int RatingMin = 1;
-
-			public const int CommentMaxLength = 100;
-			public const int CommentMinLength =3;
-		}
-
 		public static class CartItem 
 		{
 			public const int TextMaxLength = 300;
@@ -60,7 +51,5 @@
             public const int PhoneNumberMaxLength = 50;
             public const int PhoneNumberMinLength = 5;
         }
-
-
 	}
 }

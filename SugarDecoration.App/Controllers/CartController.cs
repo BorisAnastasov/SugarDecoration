@@ -15,16 +15,34 @@ namespace SugarDecoration.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All(string userId) 
+        public async Task<IActionResult> All() 
         {
-			if (!(await cartService.UserExistsByIdAsync(userId)) )
-			{ 
+			if (!(await cartService.UserExistsByIdAsync(User.Id())))
+			{
 				return BadRequest();
 			}
 
-			var query = await cartService.AllAsync(userId);
+			var query = await cartService.AllAsync(User.Id());
 
             return View(query);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Details(int id) 
+		{
+			if (!(await cartService.UserExistsByIdAsync(User.Id())))
+			{
+				return BadRequest();
+			}
+
+			if (await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id())) 
+			{
+				return Unauthorized();
+			}
+
+			var model = await cartService.GetCartItemDetailsByIdAsync(id);
+
+			return View(model);
 		}
 
 		[HttpGet]
@@ -54,7 +72,7 @@ namespace SugarDecoration.App.Controllers
 		}
 
         [HttpGet]
-        public async Task<IActionResult> AddToCart(int cartId, int productId) 
+        public async Task<IActionResult> Add(int cartId, int productId) 
         {
 			if (!await cartService.ProductExistByIdAsync(productId)) 
 			{
@@ -65,15 +83,15 @@ namespace SugarDecoration.App.Controllers
 			{
 				return BadRequest();
 			}
-			var model = new CartItemFormModel { ProductId = productId };
+			var model = await cartService.GetCartItemDetailsByIdAsync(productId);
 
             return View(model);
         }
 
 		[HttpGet]
-		public async Task<IActionResult> AddToCartNoProduct(int cartId)
+		public async Task<IActionResult> Add(int cartId)
 		{
-			var model = new CartItemFormModel { };
+			var model = new CartItemFormModel();
 
 			return View(model);
 		}
@@ -88,10 +106,10 @@ namespace SugarDecoration.App.Controllers
 
             await cartService.AddCartItemAsync(cartId, model);
 
-			return View(model);
+			return  RedirectToAction(nameof(All));
 		}
 
-		[HttpGet]
+        [HttpGet]
 		public async Task<IActionResult> DeleteFromCart(int id)
 		{
 			if (!await cartService.CartItemExistByIdAsync(id))

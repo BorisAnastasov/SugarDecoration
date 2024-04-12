@@ -14,11 +14,7 @@ namespace SugarDecoration.Core.Models.CartItem
                     MinimumLength =TextMinLength,
                     ErrorMessage =LengthMessage)]
         public string Text { get; set; } = string.Empty;
-        [Required(ErrorMessage = RequiredMessage)]
-        [StringLength(PhoneNumberMaxLength,
-                    MinimumLength = PhoneNumberMinLength,
-                    ErrorMessage = LengthMessage)]
-        public string PhoneNumber { get; set; } = string.Empty;
+
         [Required(ErrorMessage = RequiredMessage)]
         public int Quantity { get; set; }
 
