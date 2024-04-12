@@ -20,7 +20,7 @@ namespace SugarDecoration.Core.Services
 
 		public async Task<BiscuitQueryServiceModel> GetAllBiscuitsAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currPage = 1, int productsPerPage = 15)
 		{
-			var cakesToShow = repository.AllReadOnly<Cake>();
+			var cakesToShow = repository.AllReadOnly<Biscuit>();
 
 			if (category != null)
 			{

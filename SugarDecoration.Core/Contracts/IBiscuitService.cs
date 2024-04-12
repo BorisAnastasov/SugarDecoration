@@ -1,13 +1,10 @@
 ﻿using SugarDecoration.Core.Enumerations;
 using SugarDecoration.Core.Models.Biscuit;
 using SugarDecoration.Core.Models.BiscuitCategory;
-using SugarDecoration.Core.Models.Cake;
-using SugarDecoration.Infrastructure.Data.Contracts;
-using SugarDecoration.Infrastructure.Data.Models;
 
 namespace SugarDecoration.Core.Contracts
 {
-    public interface IBiscuitService
+	public interface IBiscuitService
 	{
 		Task<BiscuitQueryServiceModel> GetAllBiscuitsAsync(
 										string? category = null,

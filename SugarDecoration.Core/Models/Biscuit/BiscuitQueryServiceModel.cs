@@ -1,6 +1,4 @@
-﻿using SugarDecoration.Core.Models.Cake;
-
-namespace SugarDecoration.Core.Models.Biscuit
+﻿namespace SugarDecoration.Core.Models.Biscuit
 {
 	public class BiscuitQueryServiceModel
 	{

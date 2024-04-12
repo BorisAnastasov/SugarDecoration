@@ -92,9 +92,9 @@
 <div class="container py-5">
 	<h1 class="text-center">@ViewBag.Title</h1>
 	<div class="row row-cols-1 row-cols-md-3 g-4 py-5" data-masonry='{"percentPosition": true }'>
-		@foreach (var house in Model.Biscuits)
+		@foreach (var biscuit in Model.Biscuits)
 		{
-			<partial name="_CakePartial" model="@house" />
+			<partial name="_BiscuitPartial" model="@biscuit" />
 		}
 	</div>
 </div>
