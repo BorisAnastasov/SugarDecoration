@@ -9,7 +9,7 @@ namespace SugarDecoration.Core.Contracts
 {
     public interface IBiscuitService
 	{
-		Task<CakeQueryServiceModel> GetAllBiscuitsAsync(
+		Task<BiscuitQueryServiceModel> GetAllBiscuitsAsync(
 										string? category = null,
 										string? searchTerm = null,
 										ProductSorting sorting = ProductSorting.Newest,

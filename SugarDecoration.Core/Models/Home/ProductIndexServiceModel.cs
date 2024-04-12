@@ -1,9 +1,11 @@
-﻿namespace SugarDecoration.Core.Models.Home
+﻿using SugarDecoration.Core.Models.Cake;
+using SugarDecoration.Core.Models.Biscuit;
+
+namespace SugarDecoration.Core.Models.Home
 {
-    public class ProductIndexServiceModel
+    public class ProductsIndexServiceModel
 	{
-        public int Id { get; set; }
-        public string Title { get; set; } =     string.Empty;
-        public string ImageUrl { get; set; } = string.Empty;
-    }
+        public IEnumerable<CakeIndexServiceModel> Cakes { get; set; } = new List<CakeIndexServiceModel>();
+        public IEnumerable<BiscuitIndexServiceModel> Biscuits { get; set; } = new List<BiscuitIndexServiceModel>();
+	}
 }

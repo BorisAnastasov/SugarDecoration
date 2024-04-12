@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.Models.Biscuit;
+using SugarDecoration.Core.Models.Cake;
 using SugarDecoration.Core.Models.Home;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
@@ -15,17 +17,33 @@ namespace SugarDecoration.Core.Services
 			repository = _repository;
 		}
 
-		public async Task<IEnumerable<ProductIndexServiceModel>> TakeFiveProducts()
+		public async Task<ProductsIndexServiceModel> GetProductsInformation()
 		{
-			var products = await repository
-									.AllReadOnly<Product>()
+			var cakes = await repository
+									.AllReadOnly<Cake>()
 									.Take(5)
-									.Select(p => new ProductIndexServiceModel
+									.Select(c => new CakeIndexServiceModel
 									{
-										Id = p.Id,
-										Title = p.Title,
-										ImageUrl = p.ImageUrl
+										Id = c.Id,
+										Title = c.Product.Title,
+										ImageUrl = c.Product.ImageUrl
 									}).ToListAsync();
+
+			var biscuits = await repository
+									.AllReadOnly<Biscuit>()
+									.Take(5)
+									.Select(b => new BiscuitIndexServiceModel
+									{
+										Id = b.Id,
+										Title = b.Product.Title,
+										ImageUrl = b.Product.ImageUrl
+									}).ToListAsync();
+
+			var products = new ProductsIndexServiceModel
+			{
+				Cakes = cakes,
+				Biscuits = biscuits
+			};
 
 			return products;
 		}

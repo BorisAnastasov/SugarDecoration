@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Models.Biscuit;
-using SugarDecoration.Core.Models.Cake;
-using SugarDecoration.Core.Services;
 using System.Globalization;
 using static SugarDecoration.Core.Constants.MessageConstants;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
@@ -21,18 +19,18 @@ namespace SugarDecoration.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All([FromQuery] AllCakesQueryModel query)
+        public async Task<IActionResult> All([FromQuery] AllBiscuitsQueryModel query)
         {
 			var model = await biscuitService.GetAllBiscuitsAsync(
 					 query.Category,
 					 query.SearchTerm,
 					 query.Sorting,
 					 query.CurrentPage,
-					 query.CakesPerPage
+					 query.BiscuitsPerPage
 			);
 
-			query.TotalCakeCount = model.TotalCakeCount;
-			query.Cakes = model.Cakes;
+			query.TotalBiscuitCount = model.TotalBiscuitCount;
+			query.Biscuits = model.Biscuits;
 			query.Categories = await biscuitService.AllCategoriesNames();
 
 			return View(query);

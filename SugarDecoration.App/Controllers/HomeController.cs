@@ -19,7 +19,7 @@ namespace SugarDecoration.App.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await homeService.TakeFiveProducts();
+            var products = await homeService.GetProductsInformation();
             return View(products);
         }
 

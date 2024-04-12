@@ -1,58 +1,172 @@
-﻿@model IEnumerable<ProductIndexServiceModel>
+﻿@model ProductsIndexServiceModel
 
 @{
-	ViewData["Title"] = "Home Page";
-	var products = Model.ToList();
+	ViewBag.Title = "Home Page";
+	var cakes = Model.Cakes.ToList();
+	var biscuits = Model.Biscuits.ToList();
 }
+<h1 class="text-center">
+	@ViewBag.Title
+</h1>
 
-@if (!products.Any())
-{
-	<div class="mt-4 p-5 bg-light">
-		<h1 class="display-4">Welcome to the best place for renting houses!</h1>
-		<p class="lead">
-			There are no houses in the system currently available
-			so why don't you just add one?
-		</p>
-		<hr class="my-4">
-		<p class="lead">
-			@if (User.Identity.IsAuthenticated)
-			{
-				<a asp-controller="House" asp-action="Add" class="btn btn-primary btn-lg"
-				   role="button">Add House</a>
-			}
-		</p>
+<hr />
+
+
+<section class="first">
+	<div class="left">
+		<div class="mt-4 p-5 bg-light">
+			<h1 class="display-4">Welcome to the place with best cakes in town!</h1>
+		</div>
 	</div>
-}
-
-<div class="mb-5"></div>
-
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-	<div class="carousel-inner">
-		@for (int i = 0; i < products.Count(); i++)
+	<div class="right">
+		@if (!cakes.Any())
 		{
-			var product = products[i];
-			<div class="carousel-item @(i == 0 ? "active" : string.Empty)">
-				<img class="d-block w-auto" style="height:500px"
-					 src="@product.ImageUrl" alt="@product.Title">
-				<div class="carousel-caption d-none d-md-block">
-					<h5>
-						<a class="btn btn-primary" asp-controller="Cake" asp-action="Details"
-						   asp-route-id="@product.Id"> @product.Title</a>
-					</h5>
+			<div class="mt-4 p-5 bg-light">
+				<h1 class="display-4">Welcome to the place with best cakes in town!</h1>
+				<p class="lead">
+					There are no cakes in the system currently available.
+				</p>
+			</div>
+		}
+		else
+		{
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-indicators">
+					@for (int i = 0; i < cakes.Count(); i++)
+					{
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="active"
+								aria-current="true" aria-label="Slide @i"></button>
+					}
 				</div>
+				<div class="carousel-inner">
+					@for (int i = 0; i < cakes.Count(); i++)
+					{
+						var cake = cakes[i];
+						<div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+							<img class="d-block w-auto" style="height:500px"
+								 src="@cake.ImageUrl" alt="@cake.Title">
+							<div class="carousel-caption d-none d-md-block">
+								<h5>
+									<a class="btn btn-primary" asp-controller="Cake" asp-action="Details"
+									   asp-route-id="@cake.Id"> @cake.Title</a>
+								</h5>
+							</div>
+						</div>
+					}
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
 			</div>
 		}
 	</div>
-	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Previous</span>
-	</button>
-	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Next</span>
-	</button>
-</div>
+</section>
+
+<section class="second">
+	<div class="left">
+		@if (!biscuits.Any())
+		{
+			<div class="mt-4 p-5 bg-light">
+				<h1 class="display-4">We have also big variety if biscuits!</h1>
+				<p class="lead">
+					There are no biscuits in the system currently available.
+				</p>
+			</div>
+		}
+		else
+		{
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-indicators">
+					@for (int i = 0; i < biscuits.Count(); i++)
+					{
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="active"
+								aria-current="true" aria-label="Slide @i"></button>
+					}
+				</div>
+				<div class="carousel-inner">
+					@for (int i = 0; i < biscuits.Count(); i++)
+					{
+						var biscuit = biscuits[i];
+						<div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+							<img class="d-block w-auto" style="height:500px"
+								 src="@biscuit.ImageUrl" alt="@biscuit.Title">
+							<div class="carousel-caption d-none d-md-block">
+								<h5>
+									<a class="btn btn-primary" asp-controller="Biscuit" asp-action="Details"
+									   asp-route-id="@biscuit.Id"> @biscuit.Title</a>
+								</h5>
+							</div>
+						</div>
+					}
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		}
+	</div>
+	<div class="right">
+		<div class="mt-4 p-5 bg-light">
+			<h1 class="display-4">Welcome to the place with best cakes in town!</h1>
+		</div>
+	</div>
+</section>
+
+<section class="third">
+	<h1>What we can assure you:</h1>
+	<ul>
+		<li>
+			<img />
+			<p>Quality</p>
+		</li>
+		<li>
+			<img />
+			<p>Big variety</p>
+		</li>
+		<li>
+			<img />
+			<p>Wonderful taste</p>
+		</li>
+	</ul>
+</section>
+
+
+
 
 <style>
-	
+	div>h1{
+		background-color:transparent;
+	}
+
+	.left,
+	.right {
+		flex-basis: 50%;
+	}
+
+	ul {
+		text-decoration: none;
+		list-style-type: none;
+		line-height: 2rem;
+	}
+
+	section {
+		display: flex;
+		flex-direction: row;
+		align-items: stretch;
+		min-height: 400px;
+	}
 </style>

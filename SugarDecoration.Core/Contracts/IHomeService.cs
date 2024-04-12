@@ -4,6 +4,6 @@ namespace SugarDecoration.Core.Contracts
 {
 	public interface IHomeService
 	{
-		Task<IEnumerable<ProductIndexServiceModel>> TakeFiveProducts();
+		Task<ProductsIndexServiceModel> GetProductsInformation();
 	}
 }
