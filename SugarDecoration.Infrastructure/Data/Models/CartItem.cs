@@ -35,7 +35,7 @@ namespace SugarDecoration.Infrastructure.Data.Models
 
         public bool IsRefToProduct
         {
-            get => this.Product != null;
+            get => this.ProductId != null;
         }
     }
 }

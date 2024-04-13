@@ -23,7 +23,7 @@ namespace SugarDecoration.App.Controllers
             return View(products);
         }
 
-        public async Task<IActionResult> Privacy()
+        public async Task<IActionResult> AboutUs()
         {
             return View();
         }

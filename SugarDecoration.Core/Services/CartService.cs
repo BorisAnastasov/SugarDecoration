@@ -9,204 +9,207 @@ using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product
 
 namespace SugarDecoration.Core.Services
 {
-	public class CartService : ICartService
-	{
+    public class CartService : ICartService
+    {
+        private readonly IRepository repository;
 
-		private readonly IRepository repository;
+        public CartService(IRepository _repository)
+        {
+            repository = _repository;
+        }
 
+        private async Task<Cart> GetOrCreateAndGetCart(string userId)
+        {
+            var cart = await repository.AllReadOnly<Cart>().FirstOrDefaultAsync(c => c.UserId == userId);
 
-		public CartService(IRepository _repository)
-		{
-			repository = _repository;
-		}
+            if (cart == null)
+            {
+                cart = new Cart
+                {
+                    UserId = userId,
+                    CreatedOn = DateTime.Now,
+                    ModifiedOn = DateTime.Now,
+                    CartItems = new List<CartItem>()
+                };
 
-		private async Task<Cart> GetOrCreateAndGetCart(string userId)
-		{
-			var cart = await repository.AllReadOnly<Cart>().FirstOrDefaultAsync(c => c.UserId == userId);
+                await repository.AddAsync(cart);
+                await repository.SaveChangesAsync();
+            }
+            else
+            {
+                var items = await repository.AllReadOnly<CartItem>().Where(i => i.CartId == cart.Id).ToListAsync();
+                cart.CartItems = items;
+            }
 
-			if (cart == null) 
-			{
-				cart = new Cart
-				{
-					UserId = userId,
-					CreatedOn = DateTime.Now,
-					ModifiedOn = DateTime.Now,
-					CartItems = new List<CartItem>()
-				};
+            return cart;
+        }
 
-				await repository.AddAsync(cart);
-				await repository.SaveChangesAsync();
-			}
-			return cart;
+        public async Task<AllQueryCartModel> AllAsync(string userId)
+        {
+            var cart = await GetOrCreateAndGetCart(userId);
 
-		}
+            var items = new List<CartItemServiceModel>();
 
-		public async Task<AllQueryCartModel> AllAsync(string userId)
-		{
-			var cart = await GetOrCreateAndGetCart(userId);
+            foreach (var item in cart.CartItems)
+            {
+                var model = new CartItemServiceModel
+                {
+                    Id = item.Id,
+                    Quantity = item.Quantity,
+                };
 
-			var items = new List<CartItemServiceModel>();
+                if (item.IsRefToProduct)
+                {
+                    item.Product = await repository.GetByIdAsync<Product>(item.ProductId);
+                    model.ProductTitle = item.Product.Title;
+                    model.ImageUrl = item.Product.ImageUrl;
+                }
 
-			foreach (var item in cart.CartItems)
-			{
-				var model = new CartItemServiceModel
-				{
-					Id = item.Id,
-					Quantity = item.Quantity,
-				};
+                items.Add(model);
+            }
 
-				if (item.IsRefToProduct)
-				{
-					model.ProductTitle = item.Product.Title;
-					model.ImageUrl = item.Product.ImageUrl;
-				}
+            var query = new AllQueryCartModel
+            {
+                CartItems = items,
+                ItemsCount = items.Count
+            };
 
-				items.Add(model);
-			}
+            return query;
+        }
 
-			var query = new AllQueryCartModel
-			{
-				CartItems = items,
-				ItemsCount = items.Count
-			};
+        public async Task<DeleteCartViewModel> DeleteAsync(int id)
+        {
+            var cart = await repository.GetByIdAsync<Cart>(id);
 
-			return query;
-		}
+            var model = new DeleteCartViewModel
+            {
+                Id = cart.Id,
+                TotalItemCount = cart.CartItems.Count(),
+                CreatedOn = cart.CreatedOn.ToString(DateTimeFormat),
+            };
 
-		public async Task<DeleteCartViewModel> DeleteAsync(int id)
-		{
-			var cart = await repository.GetByIdAsync<Cart>(id);
+            return model;
+        }
 
-			var model = new DeleteCartViewModel
-			{
-				Id = cart.Id,
-				TotalItemCount = cart.CartItems.Count(),
-				CreatedOn = cart.CreatedOn.ToString(DateTimeFormat),
-			};
+        public async Task DeleteConfirmedAsync(int id)
+        {
+            var cart = await repository.GetByIdAsync<Cart>(id);
 
-			return model;
-		}
+            cart.CartItems = new List<CartItem>();
+            cart.ModifiedOn = DateTime.Now;
 
-		public async Task DeleteConfirmedAsync(int id)
-		{
-			var cart = await repository.GetByIdAsync<Cart>(id);
+            await repository.SaveChangesAsync();
+        }
 
-			cart.CartItems = new List<CartItem>();
-			cart.ModifiedOn = DateTime.Now;
+        public async Task<CartItemDetailsModel> GetCartItemDetailsByIdAsync(int id)
+        {
+            var item = await repository.GetByIdAsync<CartItem>(id);
 
-			await repository.SaveChangesAsync();
-		}
+            var model = new CartItemDetailsModel
+            {
+                Id = item.Id,
+                Text = item.Text,
+                Quantity = item.Quantity,
+            };
 
-		public async Task<CartItemDetailsModel> GetCartItemDetailsByIdAsync(int id)
-		{
-			var item = await repository.GetByIdAsync<CartItem>(id);
+            if (item.IsRefToProduct)
+            {
+                model.ProductTitle = item.Product.Title;
+                model.ImageUrl = item.Product.ImageUrl;
+            }
 
-			var model = new CartItemDetailsModel
-			{
-				Id = item.Id,
-				Text = item.Text,
-				Quantity = item.Quantity,
-			};
+            return model;
 
-			if (item.IsRefToProduct)
-			{
-				model.ProductTitle = item.Product.Title;
-				model.ImageUrl = item.Product.ImageUrl;
-			}
+        }
 
-			return model;
+        public async Task AddCartItemAsync(string userId, CartItemFormModel model)
+        {
+            var cart = await GetOrCreateAndGetCart(userId);
 
-		}
+            var item = new CartItem
+            {
+                Text = model.Text,
+                Quantity = model.Quantity,
+                CartId = cart.Id
+            };
 
-		public async Task AddCartItemAsync(int cartId, CartItemFormModel model)
-		{
-			var item = new CartItem
-			{
-				Text = model.Text,
-				Quantity = model.Quantity,
-				CartId = cartId
-			};
+            if (model.IsRefToProduct)
+            {
+                item.ProductId = model.ProductId;
+            }
 
-			if (model.IsRefToProduct)
-			{
-				item.ProductId = model.ProductId;
-			}
+            await repository.AddAsync(item);
 
-			await repository.AddAsync(item);
+            await repository.SaveChangesAsync();
 
-			await repository.SaveChangesAsync();
+        }
 
-		}
+        public async Task DeleteCartItemConfirmedAsync(int id)
+        {
+            await repository.DeleteAsync<CartItem>(id);
 
-		public async Task DeleteCartItemConfirmedAsync(int id)
-		{
-			await repository.DeleteAsync<CartItem>(id);
+            await repository.SaveChangesAsync();
+        }
 
-			await repository.SaveChangesAsync();
-		}
+        public async Task<CartItemFormModel> EditCartItemAsync(int id)
+        {
+            var item = await repository.GetByIdAsync<CartItem>(id);
 
-		public async Task<CartItemFormModel> EditCartItemAsync(int id)
-		{
-			var item = await repository.GetByIdAsync<CartItem>(id);
+            var model = new CartItemFormModel
+            {
+                Text = item.Text,
+                Quantity = item.Quantity,
+            };
 
-			var model = new CartItemFormModel
-			{
-				Text = item.Text,
-				Quantity = item.Quantity,
-			};
+            if (item.IsRefToProduct)
+            {
+                model.ProductId = item.ProductId;
+                model.ProductTitle = item.Product.Title;
+                model.ImageUrl = item.Product.ImageUrl;
+            }
 
-			if (item.IsRefToProduct)
-			{
-				model.ProductId = item.ProductId;
-				model.ProductTitle = item.Product.Title;
-				model.ImageUrl = item.Product.ImageUrl;
-			}
+            return model;
+        }
 
-			return model;
-		}
+        public async Task EditCartItemAsync(int id, CartItemFormModel model)
+        {
+            var item = await repository.GetByIdAsync<CartItem>(id);
 
-		public async Task EditCartItemAsync(int id, CartItemFormModel model)
-		{
-			var item = await repository.GetByIdAsync<CartItem>(id);
+            item.Text = model.Text;
+            item.Quantity = model.Quantity;
 
-			item.Text = model.Text;
-			item.Quantity = model.Quantity;
+            await repository.SaveChangesAsync();
 
-			await repository.SaveChangesAsync();
+        }
 
-		}
+        public async Task<bool> UserExistsByIdAsync(string id)
+            => await repository.GetByIdAsync<ApplicationUser>(id) != null;
 
-		public async Task<bool> CartExistsByIdAsync(int id)
-			=> await repository.GetByIdAsync<Cart>(id) != null;
+        public async Task<bool> CartItemExistByIdAsync(int id)
+        => await repository.GetByIdAsync<CartItem>(id) != null;
 
-		public async Task<bool> UserExistsByIdAsync(string id)
-			=> await repository.GetByIdAsync<ApplicationUser>(id) != null;
+        public async Task<bool> ProductExistByIdAsync(int id)
+        => await repository.GetByIdAsync<Product>(id) != null;
 
-		public async Task<bool> CartItemExistByIdAsync(int id)
-		=> await repository.GetByIdAsync<CartItem>(id) != null;
+        public async Task<bool> IsThisUserTheCartItemOwnerByIdAsync(int cartItemId, string userId)
+        {
+            var cartItem = await repository.GetByIdAsync<CartItem>(cartItemId);
 
-		public async Task<bool> ProductExistByIdAsync(int id)
-		=> await repository.GetByIdAsync<Product>(id) != null;
-
-		public async Task<bool> IsThisUserTheCartItemOwnerByIdAsync(int cartItemId, string userId)
-		{
-			var cartItem = await repository.GetByIdAsync<CartItem>(cartItemId);
-
-			return cartItem.Cart.UserId == userId;
-		}
+            return cartItem.Cart.UserId == userId;
+        }
 
         public async Task<CartItemFormModel> GetProductInformationByIdAsync(int productId)
         {
             var product = await repository.GetByIdAsync<Product>(productId);
 
-			var model = new CartItemFormModel 
-			{
-				ProductId = productId,
-				ProductTitle = product.Title,
-				ImageUrl = product.ImageUrl,
-			};
+            var model = new CartItemFormModel
+            {
+                ProductId = productId,
+                ProductTitle = product.Title,
+                ImageUrl = product.ImageUrl,
+            };
 
-			return model;
+            return model;
         }
     }
 }

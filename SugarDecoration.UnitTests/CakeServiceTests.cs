@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using SugarDecoration.Core.Services;
 using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
+
 namespace SugarDecoration.UnitTests
 {
 	public class CakeServiceTests
@@ -22,8 +23,12 @@ namespace SugarDecoration.UnitTests
 			context.Database.EnsureDeletedAsync();
 			context.Database.EnsureCreatedAsync();
 		}
-
-
+		[Test]
+		public async Task TestGetAllCakes() 
+		{
+			
+		
+		}
 
 
 
