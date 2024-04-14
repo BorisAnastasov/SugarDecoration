@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Models.Cake;
 using SugarDecoration.Core.Services;
@@ -13,8 +12,6 @@ namespace SugarDecoration.UnitTests
 	[TestFixture]
 	public class CakeServiceTests
 	{
-		private IRepository repository;
-		private ILogger<CakeService> logger;
 		private ICakeService cakeService;
 		private SugarDecorationDb context;
 
@@ -28,7 +25,6 @@ namespace SugarDecoration.UnitTests
 			context.Database.EnsureDeleted();
 			context.Database.EnsureCreated();
 		}
-
 
 		[Test]
 		public async Task TestGetAllCakes()
@@ -135,31 +131,34 @@ namespace SugarDecoration.UnitTests
 
 			cakeService = new CakeService(repo);
 
-			// Arrange
-			var model = new CakeFormModel
+			var cake = new Cake
 			{
-				Title = "Test Cake",
-				Price = "10.99",
-				ImageUrl = "test-image.jpg",
-				CreatedOn = DateTime.Now.ToString(DateTimeFormat),
+				Product = new Product
+				{
+					Title = "Test Cake",
+					Price = 10.99m,
+					ImageUrl = "test-image.jpg",
+					CreatedOn = DateTime.Now
+				},
 				Layers = 3,
 				Form = "Round",
 				Portions = 10,
-				CategoryId = 1
+				CategoryId = 1,
 			};
 
-			await cakeService.AddCakeAsync(model);
+			await repo.AddAsync(cake);
+			await repo.SaveChangesAsync();
 
 			var result = await cakeService.EditCakeAsync(1);
 
 			Assert.IsNotNull(result);
-			Assert.AreEqual(model.Title, result.Title);
-			Assert.AreEqual(model.Price, result.Price);
-			Assert.AreEqual(model.Layers, result.Layers);
-			Assert.AreEqual(model.Form, result.Form);
-			Assert.AreEqual(model.Portions, result.Portions);
-			Assert.AreEqual(model.ImageUrl, result.ImageUrl);
-			Assert.AreEqual(model.CreatedOn, result.CreatedOn);
+			Assert.AreEqual(cake.Product.Title, result.Title);
+			Assert.AreEqual(cake.Product.Price.ToString(), result.Price);
+			Assert.AreEqual(cake.Layers, result.Layers);
+			Assert.AreEqual(cake.Form, result.Form);
+			Assert.AreEqual(cake.Portions, result.Portions);
+			Assert.AreEqual(cake.Product.ImageUrl, result.ImageUrl);
+			Assert.AreEqual(cake.Product.CreatedOn.ToString(DateTimeFormat), result.CreatedOn);
 		}
 
 		[Test]
@@ -169,20 +168,23 @@ namespace SugarDecoration.UnitTests
 
 			cakeService = new CakeService(repo);
 
-			// Arrange
-			var model = new CakeFormModel
+			var cake = new Cake
 			{
-				Title = "Test Cake",
-				Price = "10.99",
-				ImageUrl = "test-image.jpg",
-				CreatedOn = DateTime.Now.ToString(DateTimeFormat),
+				Product = new Product
+				{
+					Title = "Test Cake",
+					Price = 10.99m,
+					ImageUrl = "test-image.jpg",
+					CreatedOn = DateTime.Now
+				},
 				Layers = 3,
 				Form = "Round",
 				Portions = 10,
-				CategoryId = 1
+				CategoryId = 1,
 			};
 
-			await cakeService.AddCakeAsync(model);
+			await repo.AddAsync(cake);
+			await repo.SaveChangesAsync();
 
 			var currModel = await cakeService.EditCakeAsync(1);
 
@@ -202,20 +204,23 @@ namespace SugarDecoration.UnitTests
 
 			cakeService = new CakeService(repo);
 
-			// Arrange
-			var model = new CakeFormModel
+			var cake = new Cake
 			{
-				Title = "Test Cake",
-				Price = "10.99",
-				ImageUrl = "test-image.jpg",
-				CreatedOn = DateTime.Now.ToString(DateTimeFormat),
+				Product = new Product
+				{
+					Title = "Test Cake",
+					Price = 10.99m,
+					ImageUrl = "test-image.jpg",
+					CreatedOn = DateTime.Now
+				},
 				Layers = 3,
 				Form = "Round",
 				Portions = 10,
-				CategoryId = 1
+				CategoryId = 1,
 			};
 
-			await cakeService.AddCakeAsync(model);
+			await repo.AddAsync(cake);
+			await repo.SaveChangesAsync();
 
 			await cakeService.DeleteCakeConfirmedAsync(1);
 
@@ -230,22 +235,161 @@ namespace SugarDecoration.UnitTests
 
 			cakeService = new CakeService(repo);
 
-			var model = new CakeFormModel
-			{
-				Title = "Test Cake",
-				Price = "10.99",
-				ImageUrl = "test-image.jpg",
-				CreatedOn = DateTime.Now.ToString(DateTimeFormat),
+			var cake = new Cake
+			{	
+				Product = new Product 
+				{
+					Title = "Test Cake",
+					Price = 10.99m,
+					ImageUrl = "test-image.jpg",
+					CreatedOn = DateTime.Now
+				},
 				Layers = 3,
 				Form = "Round",
 				Portions = 10,
 				CategoryId = 1,
 			};
 
-			await cakeService.AddCakeAsync(model);
+			await repo.AddAsync(cake);
+			await repo.SaveChangesAsync();
 
 			var deleteModel = await cakeService.DeleteCakeAsync(1);
 
+			Assert.IsNotNull(deleteModel);
+			Assert.AreEqual(cake.Id, deleteModel.Id);
+			Assert.AreEqual(cake.Product.Title, deleteModel.Title);
+			Assert.AreEqual(cake.Product.CreatedOn.ToString(DateTimeFormat), deleteModel.CreatedOn);
+		}
+
+		[Test]
+		public async Task TestExistById() 
+		{
+			var repo = new Repository(context);
+
+			cakeService = new CakeService(repo);
+
+			var cake = new Cake
+			{
+				Product = new Product
+				{
+					Title = "Test Cake",
+					Price = 10.99m,
+					ImageUrl = "test-image.jpg",
+					CreatedOn = DateTime.Now
+				},
+				Layers = 3,
+				Form = "Round",
+				Portions = 10,
+				CategoryId = 1,
+			};
+
+			await repo.AddAsync(cake);
+			await repo.SaveChangesAsync();
+
+			var result = await cakeService.ExistsByIdAsync(cake.Id);
+
+			Assert.That(result, Is.True);
+		}
+
+		[Test]
+		public async Task TestGetAllCakeCategories() 
+		{
+			var repo = new Repository(context);
+
+			cakeService = new CakeService(repo);
+
+			var categories = new List<CakeCategory>
+			{
+				new CakeCategory
+				{
+					Id = 1,
+					Name = "For kids"
+				},
+				new CakeCategory
+				{
+					Id = 2,
+					Name = "For adults"
+				},
+				new CakeCategory
+				{
+					Id = 3,
+					Name = "For special events"
+				},
+			};
+
+			await repo.AddRangeAsync(categories);
+			await repo.SaveChangesAsync();
+
+
+			Assert.AreEqual(3, cakeService.GetCakeCategoriesAsync().Result.Count());
+		}
+
+		[Test]
+		public async Task TestCakeCategoryExists() 
+		{
+			var repo = new Repository(context);
+
+			cakeService = new CakeService(repo);
+
+			var categories = new List<CakeCategory>
+			{
+				new CakeCategory
+				{
+					Id = 1,
+					Name = "For kids"
+				},
+				new CakeCategory
+				{
+					Id = 2,
+					Name = "For adults"
+				},
+				new CakeCategory
+				{
+					Id = 3,
+					Name = "For special events"
+				},
+			};
+
+			await repo.AddRangeAsync(categories);
+			await repo.SaveChangesAsync();
+
+			var result = await cakeService.CakeCategoryExists(2);
+
+			Assert.That(result, Is.True);
+		}
+
+		[Test]
+		public async Task TestGetAllCategoriesNames() 
+		{
+			var repo = new Repository(context);
+
+			cakeService = new CakeService(repo);
+
+			var categories = new List<CakeCategory>
+			{
+				new CakeCategory
+				{
+					Id = 1,
+					Name = "For kids"
+				},
+				new CakeCategory
+				{
+					Id = 2,
+					Name = "For adults"
+				},
+				new CakeCategory
+				{
+					Id = 3,
+					Name = "For special events"
+				},
+			};
+
+			await repo.AddRangeAsync(categories);
+			await repo.SaveChangesAsync();
+
+			var result = await cakeService.AllCategoriesNames();
+
+			Assert.AreEqual(3, result.Count());
 		}
 
 		[TearDown]

@@ -161,7 +161,7 @@ namespace SugarDecoration.Core.Services
 			await repository.SaveChangesAsync();
 
 		}
-		public async Task<DeleteCakeViewModel?> DeleteCakeAsync(int id)
+		public async Task<DeleteCakeViewModel> DeleteCakeAsync(int id)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(id);
 			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
@@ -170,7 +170,7 @@ namespace SugarDecoration.Core.Services
 			{
 				Id = id,
 				Title = product.Title,
-				CreatedOn = product.CreatedOn.ToString()
+				CreatedOn = product.CreatedOn.ToString(DateTimeFormat)
 			};
 
 			return model;
