@@ -33,9 +33,9 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [Comment("Description of order")]
         public string Text { get; set; } = string.Empty;
 
-        public bool IsRefToProduct
-        {
-            get => this.ProductId != null;
-        }
+
+        public bool IsRefToProduct()
+		=> this.ProductId != null;
+
     }
 }

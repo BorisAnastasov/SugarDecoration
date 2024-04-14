@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="AddToCart" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @if (Model.IsRefToProduct)
+            @if (Model.IsRefToProduct())
             {
                 <div class="form-group">
                     <label asp-for="ProductTitle" class="control-label"></label>

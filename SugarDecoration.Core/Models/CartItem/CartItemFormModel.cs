@@ -5,25 +5,24 @@ using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.CartIte
 
 namespace SugarDecoration.Core.Models.CartItem
 {
-    public class CartItemFormModel
-    {
-        public string? ProductTitle { get; set; }
-        public string? ImageUrl { get; set; }
-        [Required(ErrorMessage =RequiredMessage)]
-        [StringLength(TextMaxLength,
-                    MinimumLength =TextMinLength,
-                    ErrorMessage =LengthMessage)]
-        public string Text { get; set; } = string.Empty;
+	public class CartItemFormModel
+	{
+		public string? ProductTitle { get; set; }
+		public string? ImageUrl { get; set; }
+		[Required(ErrorMessage = RequiredMessage)]
+		[StringLength(TextMaxLength,
+					MinimumLength = TextMinLength,
+					ErrorMessage = LengthMessage)]
+		public string Text { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = RequiredMessage)]
-        public int Quantity { get; set; }
+		[Required(ErrorMessage = RequiredMessage)]
+		public int Quantity { get; set; }
 
-        public int? ProductId { get; set; }
+		public int? ProductId { get; set; }
 
-        public bool IsRefToProduct
-        {
-            get => this.ProductTitle != null && this.ImageUrl != null && this.ProductId != null;
-        }
+		public bool IsRefToProduct()
+		   => this.ProductTitle != null && this.ImageUrl != null && this.ProductId != null;
 
-    }
+
+	}
 }

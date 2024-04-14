@@ -9,6 +9,7 @@ using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product
 
 namespace SugarDecoration.UnitTests
 {
+	[TestFixture]
 	public class BiscuitServiceTests
 	{
 		private IBiscuitService biscuitService;

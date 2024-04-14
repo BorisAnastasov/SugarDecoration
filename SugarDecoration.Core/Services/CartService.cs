@@ -18,7 +18,7 @@ namespace SugarDecoration.Core.Services
             repository = _repository;
         }
 
-        private async Task<Cart> GetOrCreateAndGetCart(string userId)
+        public async Task<Cart> GetOrCreateAndGetCart(string userId)
         {
             var cart = await repository.AllReadOnly<Cart>().FirstOrDefaultAsync(c => c.UserId == userId);
 
@@ -58,7 +58,7 @@ namespace SugarDecoration.Core.Services
                     Quantity = item.Quantity,
                 };
 
-                if (item.IsRefToProduct)
+                if (item.IsRefToProduct())
                 {
                     item.Product = await repository.GetByIdAsync<Product>(item.ProductId);
                     model.ProductTitle = item.Product.Title;
@@ -109,12 +109,12 @@ namespace SugarDecoration.Core.Services
             {
                 Id = item.Id,
                 Text = item.Text,
-                Quantity = item.Quantity,
+                Quantity = item.Quantity
             };
 
-            if (item.IsRefToProduct)
+            if (item.IsRefToProduct())
             {
-                model.ProductTitle = item.Product.Title;
+				model.ProductTitle = item.Product.Title;
                 model.ImageUrl = item.Product.ImageUrl;
             }
 
@@ -133,7 +133,7 @@ namespace SugarDecoration.Core.Services
                 CartId = cart.Id
             };
 
-            if (model.IsRefToProduct)
+            if (model.IsRefToProduct())
             {
                 item.ProductId = model.ProductId;
             }
@@ -161,7 +161,7 @@ namespace SugarDecoration.Core.Services
                 Quantity = item.Quantity,
             };
 
-            if (item.IsRefToProduct)
+            if (item.IsRefToProduct())
             {
                 model.ProductId = item.ProductId;
                 model.ProductTitle = item.Product.Title;
@@ -191,11 +191,11 @@ namespace SugarDecoration.Core.Services
         public async Task<bool> ProductExistByIdAsync(int id)
         => await repository.GetByIdAsync<Product>(id) != null;
 
-        public async Task<bool> IsThisUserTheCartItemOwnerByIdAsync(int cartItemId, string userId)
+        public async Task<bool> IsThisUserTheCartOwnerByIdAsync(int cartId, string userId)
         {
-            var cartItem = await repository.GetByIdAsync<CartItem>(cartItemId);
+            var cart = await repository.GetByIdAsync<Cart>(cartId);
 
-            return cartItem.Cart.UserId == userId;
+            return cart.UserId == userId;
         }
 
         public async Task<CartItemFormModel> GetProductInformationByIdAsync(int productId)

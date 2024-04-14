@@ -23,8 +23,8 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<CartItem>()
-            .HasKey(cp => new { cp.CartId, cp.ProductId });
+            //builder.Entity<CartItem>()
+            //.HasKey(cp => new { cp.CartId, cp.ProductId });
 
             builder.Entity<Cake>()
                             .HasOne(c => c.Product)

@@ -35,11 +35,6 @@ namespace SugarDecoration.App.Controllers
 				return BadRequest();
 			}
 
-			if (await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id())) 
-			{
-				return Unauthorized();
-			}
-
 			var model = await cartService.GetCartItemDetailsByIdAsync(id);
 
 			return View(model);
