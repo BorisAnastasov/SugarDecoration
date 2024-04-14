@@ -74,7 +74,8 @@ namespace SugarDecoration.Core.Services
                 Title = biscuit.Product.Title,
                 Price = biscuit.Product.Price.ToString(),
                 Quantity = biscuit.Quantity,
-                ImageUrl = biscuit.Product.ImageUrl
+                ImageUrl = biscuit.Product.ImageUrl,
+                Category = biscuit.Category.Name
             };
 
             return biscuitModel;
@@ -112,7 +113,7 @@ namespace SugarDecoration.Core.Services
             {
                 Id = id,
                 Title = biscuit.Product.Title,
-                CreatedOn = biscuit.Product.CreatedOn.ToString()
+                CreatedOn = biscuit.Product.CreatedOn.ToString(DateTimeFormat)
             };
 
             return model;

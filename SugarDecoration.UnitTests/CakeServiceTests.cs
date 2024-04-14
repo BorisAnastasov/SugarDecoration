@@ -22,8 +22,8 @@ namespace SugarDecoration.UnitTests
 
 			context = new SugarDecorationDb(contextOptions);
 
-			context.Database.EnsureDeleted();
-			context.Database.EnsureCreated();
+			context.Database.EnsureDeletedAsync();
+			context.Database.EnsureCreatedAsync();
 		}
 
 		[Test]
