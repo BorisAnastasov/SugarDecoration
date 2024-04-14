@@ -57,14 +57,14 @@
 
 
 
-            builder.ApplyConfiguration(new ProductConfiguration());
-            builder.ApplyConfiguration(new CakeCategoryConfiguration());
-            builder.ApplyConfiguration(new BiscuitCategoryConfiguration());
-            builder.ApplyConfiguration(new CakeConfiguration());
-            builder.ApplyConfiguration(new BiscuitConfiguration());
-            builder.ApplyConfiguration(new UserConfiguration());
-            builder.ApplyConfiguration(new CartConfiguration());
-            builder.ApplyConfiguration(new CartItemConfiguration());
+            //builder.ApplyConfiguration(new ProductConfiguration());
+            //builder.ApplyConfiguration(new CakeCategoryConfiguration());
+            //builder.ApplyConfiguration(new BiscuitCategoryConfiguration());
+            //builder.ApplyConfiguration(new CakeConfiguration());
+            //builder.ApplyConfiguration(new BiscuitConfiguration());
+            //builder.ApplyConfiguration(new UserConfiguration());
+            //builder.ApplyConfiguration(new CartConfiguration());
+            //builder.ApplyConfiguration(new CartItemConfiguration());
 
 
             base.OnModelCreating(builder);

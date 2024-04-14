@@ -5,6 +5,7 @@ using SugarDecoration.Core.Models.Cake;
 using SugarDecoration.Core.Models.CakeCategory;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
+using System.Globalization;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
 
 namespace SugarDecoration.Core.Services
@@ -16,7 +17,55 @@ namespace SugarDecoration.Core.Services
 		{
 			repository = _repository;
 		}
-		
+
+
+		public async Task<CakeQueryServiceModel> GetAllCakesAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currPage = 1, int productsPerPage = 15)
+		{
+			var cakesToShow = repository.AllReadOnly<Cake>();
+
+			if (category != null)
+			{
+				cakesToShow = cakesToShow
+							.Where(c => c.Category.Name == category);
+			}
+
+
+			if (searchTerm != null)
+			{
+				string normalizedSearchedTerm = searchTerm.ToLower();
+				cakesToShow = cakesToShow
+							.Where(c => (c.Product.Title.ToLower().Contains(normalizedSearchedTerm)));
+			}
+
+
+			cakesToShow = sorting switch
+			{
+				ProductSorting.Price => cakesToShow.OrderByDescending(c => c.Product.Price),
+
+				_ => cakesToShow.OrderByDescending(c => c.Id)
+			};
+
+
+			var cakes = await cakesToShow
+						.Skip((currPage - 1) * productsPerPage)
+						.Take(productsPerPage)
+					   .Select(c => new CakeServiceModel
+					   {
+						   Id = c.Id,
+						   Title = c.Product.Title,
+						   Price = c.Product.Price.ToString(),
+						   ImageUrl = c.Product.ImageUrl
+					   }).ToListAsync();
+
+			var cakeQuery = new CakeQueryServiceModel
+			{
+				Cakes = cakes,
+				TotalCakeCount = cakes.Count
+			};
+			return cakeQuery;
+		}
+
+
 		public async Task<CakeDetailsModel> GetCakeDetailsByIdAsync(int id)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(id);
@@ -36,6 +85,7 @@ namespace SugarDecoration.Core.Services
 
 			return cakeModel;
 		}
+
 		public async Task AddCakeAsync(CakeFormModel model)
 		{
 			var product = new Product
@@ -45,6 +95,8 @@ namespace SugarDecoration.Core.Services
 				ImageUrl = model.ImageUrl,
 				CreatedOn = DateTime.Parse(model.CreatedOn),
 			};
+			await repository.AddAsync(product);
+
 
 			var cake = new Cake
 			{
@@ -55,7 +107,7 @@ namespace SugarDecoration.Core.Services
 				ProductId = product.Id
 			};
 
-            await repository.AddAsync(product);
+           
             await repository.AddAsync(cake);
 
 			await repository.SaveChangesAsync();
@@ -63,6 +115,7 @@ namespace SugarDecoration.Core.Services
 		public async Task<CakeFormModel> EditCakeAsync(int cakeId)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(cakeId);
+			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
 
 			var model = new CakeFormModel
 			{
@@ -71,10 +124,10 @@ namespace SugarDecoration.Core.Services
 				Portions = cake.Portions,
 				CategoryId = cake.CategoryId,
 				Categories = await GetCakeCategoriesAsync(),
-				Price = cake.Product.Price.ToString(),
-				CreatedOn = cake.Product.CreatedOn.ToString(DateTimeFormat),
-				Title = cake.Product.Title,
-				ImageUrl = cake.Product.ImageUrl
+				Price = product.Price.ToString(),
+				CreatedOn = product.CreatedOn.ToString(DateTimeFormat),
+				Title = product.Title,
+				ImageUrl = product.ImageUrl
 			};
 
 			return model;
@@ -83,11 +136,12 @@ namespace SugarDecoration.Core.Services
 		public async Task EditCakeAsync(int cakeId, CakeFormModel model)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(cakeId);
+			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
 
-			cake.Product.Title = model.Title;
-			cake.Product.ImageUrl = model.ImageUrl;
-			cake.Product.CreatedOn = DateTime.Parse(model.CreatedOn);
-			cake.Product.Price = decimal.Parse(model.Price);
+			product.Title = model.Title;
+			product.ImageUrl = model.ImageUrl;
+			product.CreatedOn = DateTime.Parse(model.CreatedOn);
+			product.Price = decimal.Parse(model.Price);
 			cake.Layers = model.Layers;
 			cake.Form = model.Form;
 			cake.Portions = model.Portions;
@@ -110,12 +164,13 @@ namespace SugarDecoration.Core.Services
 		public async Task<DeleteCakeViewModel?> DeleteCakeAsync(int id)
 		{
 			var cake = await repository.GetByIdAsync<Cake>(id);
+			var product = await repository.GetByIdAsync<Product>(cake.ProductId);
 
 			var model = new DeleteCakeViewModel
 			{
 				Id = id,
-				Title = cake.Product.Title,
-				CreatedOn = cake.Product.CreatedOn.ToString()
+				Title = product.Title,
+				CreatedOn = product.CreatedOn.ToString()
 			};
 
 			return model;
@@ -139,53 +194,6 @@ namespace SugarDecoration.Core.Services
         public async Task<bool> CakeCategoryExists(int id)
          => await repository.AllReadOnly<CakeCategory>()
 							.AnyAsync(c=>c.Id==id);
-
-		public async Task<CakeQueryServiceModel> GetAllCakesAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currPage = 1, int productsPerPage = 15)
-		{
-			var cakesToShow = repository.AllReadOnly<Cake>();
-
-			if (category != null)
-			{
-				cakesToShow = cakesToShow
-							.Where(c => c.Category.Name == category);
-			}
-
-
-			if (searchTerm != null)
-			{
-				string normalizedSearchedTerm = searchTerm.ToLower();
-				cakesToShow = cakesToShow
-							.Where(c => (c.Product.Title.ToLower().Contains(normalizedSearchedTerm)));
-			}
-
-
-			cakesToShow = sorting switch 
-			{
-				ProductSorting.Price =>cakesToShow.OrderByDescending(c=>c.Product.Price),
-
-				_ => cakesToShow.OrderByDescending(c=>c.Id)
-			};
-
-
-			var cakes = await cakesToShow
-						.Skip((currPage-1)*productsPerPage)
-						.Take(productsPerPage)
-                       .Select(c => new CakeServiceModel
-					   {
-						   Id = c.Id,
-						   Title = c.Product.Title,
-						   Price = c.Product.Price.ToString(),
-						   ImageUrl = c.Product.ImageUrl
-					   }).ToListAsync();
-
-			var cakeQuery = new CakeQueryServiceModel
-            {
-				Cakes = cakes,
-				TotalCakeCount = cakes.Count
-			};
-			return cakeQuery;
-		}
-
         public async Task<IEnumerable<string>> AllCategoriesNames()
         => await repository.AllReadOnly<CakeCategory>()
 							.Select(c => c.Name)
