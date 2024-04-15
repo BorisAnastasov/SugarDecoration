@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Models.Biscuit;
-using System.Globalization;
-using static SugarDecoration.Core.Constants.MessageConstants;
-using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
 
 namespace SugarDecoration.App.Controllers
 {

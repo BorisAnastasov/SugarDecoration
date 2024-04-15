@@ -52,10 +52,11 @@ namespace SugarDecoration.App
 
 			app.UseEndpoints(endpoints =>
 			{
+
 				endpoints.MapControllerRoute(
 					name: "default",
-					pattern: "/Home/Index/{id}/",
-					defaults: new { Controller = "House", Action = "Details" }
+					pattern: "/Home/Index/{id?}/",
+					defaults: new { Controller = "Home", Action = "Index" }
 				);
 
 				endpoints.MapControllerRoute(

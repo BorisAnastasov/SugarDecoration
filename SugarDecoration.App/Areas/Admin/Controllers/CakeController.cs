@@ -96,7 +96,7 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Add()
+		public async Task<IActionResult> Add()
         {
             var cake = new CakeFormModel
             {

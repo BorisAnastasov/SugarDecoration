@@ -7,7 +7,7 @@ using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product
 
 namespace SugarDecoration.App.Areas.Admin.Controllers
 {
-    public class BiscuitController : Controller
+    public class BiscuitController : AdminBaseController
     {
 
         private readonly IAdminBiscuitService biscuitService;

@@ -1,1 +1,49 @@
-﻿
+﻿@model AllOrdersQueryModel
+@{
+    ViewBag.Title = "All Orders";
+}
+
+<div class="container">
+    <h2>Orders</h2>
+    <ul class="list-group">
+        @if (Model.Orders.Any())
+        {
+            @foreach (var order in Model.Orders)
+            {
+                <li class="list-group-item">
+                    <div class="cart-item">
+                        <div>
+                            <p>OrderDate: @order.OrderDate</p>
+                            <p>TotalCount: @order.TotalItemCount</p>
+                        </div>
+                        <a class="btn btn-primary" asp-area="Admin" asp-controller="Order" asp-action="Delete">Delete</a>
+                        <a class="btn btn-primary" asp-area="Admin" asp-controller="Order" asp-action="Details">Details</a>
+                    </div>
+                </li>
+            }
+        }
+        else
+        {
+
+            <p>
+                There are no orders.
+            </p>
+        }
+
+    </ul>
+</div>
+
+
+<style>
+    .cart-item {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #dee2e6;
+        padding: 10px;
+    }
+
+        .cart-item img {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+</style>

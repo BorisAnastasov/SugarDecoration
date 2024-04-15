@@ -9,8 +9,7 @@ using System.Diagnostics;
 
 namespace SugarDecoration.App.Controllers
 {
-	[Authorize]
-	public class UserController : Controller
+	public class UserController : BaseController
 	{
 		private readonly UserManager<ApplicationUser> userManager;
 
