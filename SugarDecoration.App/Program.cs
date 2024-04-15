@@ -6,50 +6,48 @@ using SugarDecoration.Extensions;
 namespace SugarDecoration.App
 {
 	public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-            
+	{
+		public static void Main(string[] args)
+		{
+			var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddApplicationDbContext(builder.Configuration);
 
-            builder.Services.AddApplicationIdentity(builder.Configuration);
+			// Add services to the container.
+			builder.Services.AddApplicationDbContext(builder.Configuration);
 
-            builder.Services.AddApplicationServices();
+			builder.Services.AddApplicationIdentity(builder.Configuration);
+
+			builder.Services.AddApplicationServices();
 
 			builder.Services.AddControllersWithViews(options =>
 			{
 				options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+				options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 			});
 
 			builder.Services.AddRazorPages();
 
 			var app = builder.Build();
 
-            if (app.Environment.IsDevelopment())
-            {
+			if (app.Environment.IsDevelopment())
+			{
 				app.UseDeveloperExceptionPage();
 				app.UseMigrationsEndPoint();
 			}
-            else
-            {
-				app.UseExceptionHandler("/Error/500");
-				app.UseStatusCodePagesWithReExecute("/Error?statusCode={0}");
+			else
+			{
+				app.UseExceptionHandler("/Home/Error/500");
+				app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
 				app.UseHsts();
+			}
 
+			app.UseHttpsRedirection();
+			app.UseStaticFiles();
 
-            }
+			app.UseRouting();
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
+			app.UseAuthentication();
+			app.UseAuthorization();
 
 
 			app.UseEndpoints(endpoints =>
@@ -60,13 +58,18 @@ namespace SugarDecoration.App
 					defaults: new { Controller = "House", Action = "Details" }
 				);
 
+				endpoints.MapControllerRoute(
+					name: "areas",
+					pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+				);
+
 				endpoints.MapDefaultControllerRoute();
 				endpoints.MapRazorPages();
 			});
 
-            app.SeedRoles();
+			app.SeedRoles();
 
-            app.Run();
-        }
-    }
+			app.Run();
+		}
+	}
 }

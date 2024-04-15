@@ -8,7 +8,7 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
 {
 	[Area(AreaName)]
 	[Authorize(Roles =AdminRoleName)]
-	public class AdminController : Controller
+	public class AdminBaseController : Controller
 	{
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SugarDecoration.Core.Contracts
+namespace SugarDecoration.Core.Contracts.Admin
 {
-	public interface IReviewService
-	{
-		Task AddReviewAsync();
-	}
+    internal interface IAdminOrderService
+    {
+    }
 }

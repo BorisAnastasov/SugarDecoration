@@ -27,5 +27,7 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public int CartId { get; set; }
         [ForeignKey(nameof(CartId))]
         public Cart Cart { get; set; } = null!;
+
+        public bool IsActive { get; set; } = true;
     }
 }

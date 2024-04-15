@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.Contracts.Admin;
 using SugarDecoration.Core.Services;
+using SugarDecoration.Core.Services.Admin;
 using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models.Account;
@@ -16,7 +18,9 @@ namespace SugarDecoration.Extensions
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services)
 		{
 			services.AddScoped<ICakeService, CakeService>();
+			services.AddScoped<IAdminCakeService, AdminCakeService>();
 			services.AddScoped<IBiscuitService, BiscuitService>();
+			services.AddScoped<IAdminBiscuitService, AdminBiscuitService>();
 			services.AddTransient<IHomeService, HomeService>();
 			services.AddTransient<ICartService, CartService>();
 			services.AddScoped<IProductService, ProductService>();

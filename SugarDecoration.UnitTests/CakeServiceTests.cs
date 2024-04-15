@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.Contracts.Admin;
 using SugarDecoration.Core.Models.Cake;
 using SugarDecoration.Core.Services;
+using SugarDecoration.Core.Services.Admin;
 using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
@@ -13,6 +15,7 @@ namespace SugarDecoration.UnitTests
 	public class CakeServiceTests
 	{
 		private ICakeService cakeService;
+		private IAdminCakeService cakeServiceAdmin;
 		private SugarDecorationDb context;
 
 		[SetUp]
@@ -101,10 +104,10 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			cakeService = new CakeService(repo);
+            cakeServiceAdmin = new AdminCakeService(repo);
 
-			// Arrange
-			var model = new CakeFormModel
+            // Arrange
+            var model = new CakeFormModel
 			{
 				Title = "Test Cake",
 				Price = "10.99",
@@ -116,7 +119,7 @@ namespace SugarDecoration.UnitTests
 				CategoryId = 1,
 			};
 
-			await cakeService.AddCakeAsync(model);
+			await cakeServiceAdmin.AddCakeAsync(model);
 
 			Assert.That(1, Is.EqualTo(repo.AllReadOnly<Cake>().Count()));
 			Assert.That(1, Is.EqualTo(repo.AllReadOnly<Product>().Count()));
@@ -129,7 +132,7 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			cakeService = new CakeService(repo);
+			cakeServiceAdmin = new AdminCakeService(repo);
 
 			var cake = new Cake
 			{
@@ -149,7 +152,7 @@ namespace SugarDecoration.UnitTests
 			await repo.AddAsync(cake);
 			await repo.SaveChangesAsync();
 
-			var result = await cakeService.EditCakeAsync(1);
+			var result = await cakeServiceAdmin.EditCakeAsync(1);
 
 			Assert.IsNotNull(result);
 			Assert.AreEqual(cake.Product.Title, result.Title);
@@ -166,9 +169,9 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			cakeService = new CakeService(repo);
+            cakeServiceAdmin = new AdminCakeService(repo);
 
-			var cake = new Cake
+            var cake = new Cake
 			{
 				Product = new Product
 				{
@@ -186,11 +189,11 @@ namespace SugarDecoration.UnitTests
 			await repo.AddAsync(cake);
 			await repo.SaveChangesAsync();
 
-			var currModel = await cakeService.EditCakeAsync(1);
+			var currModel = await cakeServiceAdmin.EditCakeAsync(1);
 
 			currModel.Title = "new";
 
-			await cakeService.EditCakeAsync(1, currModel);
+			await cakeServiceAdmin.EditCakeAsync(1, currModel);
 
 
 			Assert.AreEqual(1, repo.AllReadOnly<Product>().Count());
@@ -202,9 +205,9 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			cakeService = new CakeService(repo);
+            cakeServiceAdmin = new AdminCakeService(repo);
 
-			var cake = new Cake
+            var cake = new Cake
 			{
 				Product = new Product
 				{
@@ -222,7 +225,7 @@ namespace SugarDecoration.UnitTests
 			await repo.AddAsync(cake);
 			await repo.SaveChangesAsync();
 
-			await cakeService.DeleteCakeConfirmedAsync(1);
+			await cakeServiceAdmin.DeleteCakeConfirmedAsync(1);
 
 			Assert.IsEmpty(repo.AllReadOnly<Cake>());
 			Assert.IsEmpty(repo.AllReadOnly<Product>());
@@ -233,9 +236,9 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			cakeService = new CakeService(repo);
+            cakeServiceAdmin = new AdminCakeService(repo);
 
-			var cake = new Cake
+            var cake = new Cake
 			{	
 				Product = new Product 
 				{
@@ -253,7 +256,7 @@ namespace SugarDecoration.UnitTests
 			await repo.AddAsync(cake);
 			await repo.SaveChangesAsync();
 
-			var deleteModel = await cakeService.DeleteCakeAsync(1);
+			var deleteModel = await cakeServiceAdmin.DeleteCakeAsync(1);
 
 			Assert.IsNotNull(deleteModel);
 			Assert.AreEqual(cake.Id, deleteModel.Id);
@@ -296,7 +299,7 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			cakeService = new CakeService(repo);
+			cakeServiceAdmin = new AdminCakeService(repo);
 
 			var categories = new List<CakeCategory>
 			{
@@ -321,7 +324,7 @@ namespace SugarDecoration.UnitTests
 			await repo.SaveChangesAsync();
 
 
-			Assert.AreEqual(3, cakeService.GetCakeCategoriesAsync().Result.Count());
+			Assert.AreEqual(3, cakeServiceAdmin.GetCakeCategoriesAsync().Result.Count());
 		}
 
 		[Test]
@@ -329,9 +332,9 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			cakeService = new CakeService(repo);
+            cakeServiceAdmin = new AdminCakeService(repo);
 
-			var categories = new List<CakeCategory>
+            var categories = new List<CakeCategory>
 			{
 				new CakeCategory
 				{
@@ -353,7 +356,7 @@ namespace SugarDecoration.UnitTests
 			await repo.AddRangeAsync(categories);
 			await repo.SaveChangesAsync();
 
-			var result = await cakeService.CakeCategoryExists(2);
+			var result = await cakeServiceAdmin.CakeCategoryExists(2);
 
 			Assert.That(result, Is.True);
 		}

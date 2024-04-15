@@ -26,10 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\" />
-    <Folder Include="CustomFilters\" />
+    <Folder Include="Areas\Admin\Views\Home\" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 
 namespace SugarDecoration.App.Areas.Admin.Controllers
 {
-	public class HomeController : AdminController
+	public class HomeController : AdminBaseController
 	{
 		public IActionResult Index()
 		{

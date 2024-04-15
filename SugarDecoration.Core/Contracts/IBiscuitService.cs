@@ -13,14 +13,7 @@ namespace SugarDecoration.Core.Contracts
 										int currPage = 1,
 										int productsPerPage = 15);
 		Task<BiscuitDetailsModel> GetBiscuitDetailsByIdAsync(int id);
-		Task AddBiscuitAsync(BiscuitFormModel model);
-		Task<DeleteBiscuitViewModel> DeleteBiscuitAsync(int id);
-		Task DeleteBiscuitConfirmedAsync(int id);
-		Task<BiscuitFormModel> EditBiscuitAsync(int id);
-		Task EditBiscuitAsync(int id,BiscuitFormModel model);
         Task<bool> ExistsByIdAsync(int id);
-        Task<bool> BiscuitCategoryExistsByIdAsync(int id);
-		Task<IEnumerable<BiscuitCategoryViewModel>> GetBiscuitCategoriesAsync();
-		Task<IEnumerable<string>> AllCategoriesNames();
-	}
+        Task<IEnumerable<string>> AllCategoriesNames();
+    }
 }

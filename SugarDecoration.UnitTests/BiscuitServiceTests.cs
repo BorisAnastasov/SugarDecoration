@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.Contracts.Admin;
 using SugarDecoration.Core.Models.Biscuit;
 using SugarDecoration.Core.Services;
+using SugarDecoration.Core.Services.Admin;
 using SugarDecoration.Infrastructure.Data;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
@@ -13,6 +15,8 @@ namespace SugarDecoration.UnitTests
 	public class BiscuitServiceTests
 	{
 		private IBiscuitService biscuitService;
+		private IAdminBiscuitService biscuitServiceAdmin;
+
 		private SugarDecorationDb context;
 
 		[SetUp]
@@ -97,7 +101,7 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			biscuitService = new BiscuitService(repo);
+			biscuitServiceAdmin = new AdminBiscuitService(repo);
 
 			// Arrange
 			var model = new BiscuitFormModel
@@ -110,7 +114,7 @@ namespace SugarDecoration.UnitTests
 				CategoryId = 1,
 			};
 
-			await biscuitService.AddBiscuitAsync(model);
+			await biscuitServiceAdmin.AddBiscuitAsync(model);
 
 			Assert.That(1, Is.EqualTo(repo.AllReadOnly<Biscuit>().Count()));
 			Assert.That(1, Is.EqualTo(repo.AllReadOnly<Product>().Count()));
@@ -123,7 +127,7 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			biscuitService = new BiscuitService(repo);
+			biscuitServiceAdmin = new AdminBiscuitService(repo);
 
 			var biscuit = new Biscuit
 			{
@@ -141,7 +145,7 @@ namespace SugarDecoration.UnitTests
 			await repo.AddAsync(biscuit);
 			await repo.SaveChangesAsync();
 
-			var result = await biscuitService.EditBiscuitAsync(1);
+			var result = await biscuitServiceAdmin.EditBiscuitAsync(1);
 
 			Assert.IsNotNull(result);
 			Assert.AreEqual(biscuit.Product.Title, result.Title);
@@ -156,9 +160,9 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			biscuitService = new BiscuitService(repo);
+            biscuitServiceAdmin = new AdminBiscuitService(repo);
 
-			var biscuit = new Biscuit
+            var biscuit = new Biscuit
 			{
 				Product = new Product
 				{
@@ -174,11 +178,11 @@ namespace SugarDecoration.UnitTests
 			await repo.AddAsync(biscuit);
 			await repo.SaveChangesAsync();
 
-			var currModel = await biscuitService.EditBiscuitAsync(1);
+			var currModel = await biscuitServiceAdmin.EditBiscuitAsync(1);
 
 			currModel.Title = "new";
 
-			await biscuitService.EditBiscuitAsync(1, currModel);
+			await biscuitServiceAdmin.EditBiscuitAsync(1, currModel);
 
 
 			Assert.AreEqual(1, repo.AllReadOnly<Product>().Count());
@@ -190,9 +194,9 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			biscuitService = new BiscuitService(repo);
+            biscuitServiceAdmin = new AdminBiscuitService(repo);
 
-			var biscuit = new Biscuit
+            var biscuit = new Biscuit
 			{
 				Product = new Product
 				{
@@ -208,7 +212,7 @@ namespace SugarDecoration.UnitTests
 			await repo.AddAsync(biscuit);
 			await repo.SaveChangesAsync();
 
-			await biscuitService.DeleteBiscuitConfirmedAsync(1);
+			await biscuitServiceAdmin.DeleteBiscuitConfirmedAsync(1);
 
 			Assert.IsEmpty(repo.AllReadOnly<Biscuit>());
 			Assert.IsEmpty(repo.AllReadOnly<Product>());
@@ -219,9 +223,9 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			biscuitService = new BiscuitService(repo);
+            biscuitServiceAdmin = new AdminBiscuitService(repo);
 
-			var biscuit = new Biscuit
+            var biscuit = new Biscuit
 			{
 				Product = new Product
 				{
@@ -237,7 +241,7 @@ namespace SugarDecoration.UnitTests
 			await repo.AddAsync(biscuit);
 			await repo.SaveChangesAsync();
 
-			var deleteModel = await biscuitService.DeleteBiscuitAsync(1);
+			var deleteModel = await biscuitServiceAdmin.DeleteBiscuitAsync(1);
 
 			Assert.IsNotNull(deleteModel);
 			Assert.AreEqual(biscuit.Id, deleteModel.Id);
@@ -278,9 +282,9 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			biscuitService = new BiscuitService(repo);
+            biscuitServiceAdmin = new AdminBiscuitService(repo);
 
-			var categories = new List<BiscuitCategory>
+            var categories = new List<BiscuitCategory>
 			{
 				new BiscuitCategory
 				{
@@ -303,7 +307,7 @@ namespace SugarDecoration.UnitTests
 			await repo.SaveChangesAsync();
 
 
-			Assert.AreEqual(3, biscuitService.GetBiscuitCategoriesAsync().Result.Count());
+			Assert.AreEqual(3, biscuitServiceAdmin.GetBiscuitCategoriesAsync().Result.Count());
 		}
 
 		[Test]
@@ -311,9 +315,9 @@ namespace SugarDecoration.UnitTests
 		{
 			var repo = new Repository(context);
 
-			biscuitService = new BiscuitService(repo);
+            biscuitServiceAdmin = new AdminBiscuitService(repo);
 
-			var categories = new List<BiscuitCategory>
+            var categories = new List<BiscuitCategory>
 			{
 				new BiscuitCategory
 				{
@@ -335,7 +339,7 @@ namespace SugarDecoration.UnitTests
 			await repo.AddRangeAsync(categories);
 			await repo.SaveChangesAsync();
 
-			var result = await biscuitService.BiscuitCategoryExistsByIdAsync(2);
+			var result = await biscuitServiceAdmin.BiscuitCategoryExistsByIdAsync(2);
 
 			Assert.That(result, Is.True);
 		}
