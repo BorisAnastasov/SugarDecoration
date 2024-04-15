@@ -13,8 +13,8 @@
 			@if (User.IsInRole("Administrator"))
 			{
 				<div class="d-flex">
-					<a class="me-3 btn btn-warning " asp-controller="Cake" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-					<a class="btn btn-danger" asp-controller="Cake" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+					<a class="me-3 btn btn-warning " asp-area="Admin" asp-controller="Cake" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+					<a class="btn btn-danger" asp-area="Admin" asp-controller="Cake" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
 				</div>
 			}
 		</div>

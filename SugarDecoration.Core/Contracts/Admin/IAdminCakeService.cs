@@ -1,5 +1,4 @@
-﻿using SugarDecoration.Core.Enumerations;
-using SugarDecoration.Core.Models.Cake;
+﻿using SugarDecoration.Core.Models.Cake;
 using SugarDecoration.Core.Models.CakeCategory;
 
 namespace SugarDecoration.Core.Contracts.Admin

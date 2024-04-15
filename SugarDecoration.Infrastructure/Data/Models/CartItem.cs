@@ -33,7 +33,6 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [Comment("Description of order")]
         public string Text { get; set; } = string.Empty;
 
-
         public bool IsRefToProduct()
 		=> this.ProductId != null;
 

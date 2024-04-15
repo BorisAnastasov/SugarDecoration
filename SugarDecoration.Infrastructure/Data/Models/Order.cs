@@ -27,7 +27,7 @@ namespace SugarDecoration.Infrastructure.Data.Models
         public int CartId { get; set; }
         [ForeignKey(nameof(CartId))]
         public Cart Cart { get; set; } = null!;
-
+        [Comment("Soft delete property")]
         public bool IsActive { get; set; } = true;
     }
 }

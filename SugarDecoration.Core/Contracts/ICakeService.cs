@@ -15,6 +15,5 @@ namespace SugarDecoration.Core.Contracts
         Task<CakeDetailsModel> GetCakeDetailsByIdAsync(int id);
         Task<bool> ExistsByIdAsync(int id);
         Task<IEnumerable<string>> AllCategoriesNames();
-
     }
 }

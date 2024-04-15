@@ -2,7 +2,7 @@
 @model LogInViewModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Влизане в профил";
 }
 
 <section>
@@ -16,16 +16,16 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-floating m-3">
                             <input asp-for="Email" class="form-control my-4 py-2" autocomplete="username" aria-required="true" />
-                            <label asp-for="Email" class="form-label align-bottom"></label>
+                            <label asp-for="Email" class="form-label align-bottom">Имейл</label>
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                         <div class="form-floating m-3">
                             <input asp-for="Password" class="form-control my-4 py-2" autocomplete="current-password" aria-required="true" />
-                            <label asp-for="Password" class="form-label"></label>
+                            <label asp-for="Password" class="form-label">Парола</label>
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <div class="text-center mt-2">
-                            <button  type="submit" class="btn btn-lg btn-primary ">Log in</button>
+                            <button  type="submit" class="btn btn-lg btn-primary ">Влез в профил</button>
                         </div>
                     </form>
                 </div>

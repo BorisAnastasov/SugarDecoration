@@ -96,6 +96,5 @@ namespace SugarDecoration.Core.Services
                             .Select(c => c.Name)
                             .Distinct()
                             .ToListAsync();
-
     }
 }

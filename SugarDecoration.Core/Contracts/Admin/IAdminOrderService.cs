@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SugarDecoration.Core.Models.Order;
 
 namespace SugarDecoration.Core.Contracts.Admin
 {
-    internal interface IAdminOrderService
+    public interface IAdminOrderService
     {
+        Task<AllOrdersQueryModel> GetAllOrdersAsync();
+
+        Task<DeleteOrderViewModel> DeleteOrder(int orderId);
+
+        Task DeleteOrderConfirmed(int orderId);
+
+        Task<OrderDetailsModel> GetOrderDetails(int orderId);
     }
 }
