@@ -6,14 +6,12 @@ using System.Diagnostics;
 
 namespace SugarDecoration.App.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> logger;
         private readonly IHomeService homeService;
 
-        public HomeController(ILogger<HomeController> _logger, IHomeService _homeService)
+        public HomeController(IHomeService _homeService)
         {
-            logger = _logger;
             homeService = _homeService;
         }
 

@@ -36,7 +36,7 @@ namespace SugarDecoration.App
 			}
 			else
 			{
-				app.UseExceptionHandler("/Home/Error/500");
+				app.UseExceptionHandler("/Home/Error/");
 				app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
 				app.UseHsts();
 			}
@@ -54,15 +54,10 @@ namespace SugarDecoration.App
 			{
 
 				endpoints.MapControllerRoute(
-					name: "default",
-					pattern: "/Home/Index/{id?}/",
-					defaults: new { Controller = "Home", Action = "Index" }
-				);
-
-				endpoints.MapControllerRoute(
 					name: "areas",
 					pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
 				);
+
 
 				endpoints.MapDefaultControllerRoute();
 				endpoints.MapRazorPages();

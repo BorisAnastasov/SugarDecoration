@@ -34,6 +34,8 @@ namespace SugarDecoration.Extensions
                 options.AddPolicy("User", policy => policy.RequireRole(UserRoleName));
             });
 
+            
+
             return services;
 		}
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)

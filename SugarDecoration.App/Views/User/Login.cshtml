@@ -1,27 +1,24 @@
 ﻿@page
 @model LogInViewModel
 
-@{
-    ViewData["Title"] = "Влизане в профил";
-}
 
 <section>
     <div class="container mt-5 pt-5 ">
         <div class="col-12 col-sm-7 col-md-6 m-auto">
             <div class="card border-0 shadow">
                 <div class="card-body flex-basis-10%">
-                    <h1 class="text-center">@ViewData["Title"]</h1>
+                    <h1 class="text-center"></h1>
                     <form asp-controller="User" asp-action="Login" method="post">
                         <hr />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-floating m-3">
-                            <input asp-for="Email" class="form-control my-4 py-2" autocomplete="username" aria-required="true" />
-                            <label asp-for="Email" class="form-label align-bottom">Имейл</label>
+                            <input asp-for="Email" class="form-control my-4 py-2" autocomplete="on" aria-required="true" />
+                            <label asp-for="Email" class="form-label align-bottom"></label>
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                         <div class="form-floating m-3">
-                            <input asp-for="Password" class="form-control my-4 py-2" autocomplete="current-password" aria-required="true" />
-                            <label asp-for="Password" class="form-label">Парола</label>
+                            <input asp-for="Password" class="form-control my-4 py-2" autocomplete="on" aria-required="true" />
+                            <label asp-for="Password" class="form-label"></label>
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <div class="text-center mt-2">

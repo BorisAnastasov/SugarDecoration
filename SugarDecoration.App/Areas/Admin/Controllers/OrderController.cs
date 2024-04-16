@@ -6,10 +6,12 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
     public class OrderController : AdminBaseController
     {
         private readonly IAdminOrderService orderService;
+		
 
-        public OrderController(IAdminOrderService _orderService)
+		public OrderController(IAdminOrderService _orderService)
         {
             orderService = _orderService;
+            
         }
 
         [HttpGet]
@@ -22,6 +24,8 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
+            
+
             var model = await orderService.GetOrderDetails(id);
 
             return View(model);

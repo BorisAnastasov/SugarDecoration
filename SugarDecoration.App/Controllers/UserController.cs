@@ -9,7 +9,8 @@ using System.Diagnostics;
 
 namespace SugarDecoration.App.Controllers
 {
-	public class UserController : BaseController
+	[AllowAnonymous]
+	public class UserController : Controller
 	{
 		private readonly UserManager<ApplicationUser> userManager;
 
@@ -85,7 +86,8 @@ namespace SugarDecoration.App.Controllers
 
 			var model = new LogInViewModel();
 
-			return View(model);
+
+            return View(model);
 		}
 
 		[HttpPost]

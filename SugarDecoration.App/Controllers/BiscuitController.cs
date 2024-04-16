@@ -6,7 +6,6 @@ namespace SugarDecoration.App.Controllers
 {
     public class BiscuitController : BaseController
     {
-        private const string Admin = "Administrator";
 
         private readonly IBiscuitService biscuitService;
         public BiscuitController(IBiscuitService _biscuitService)

@@ -6,8 +6,6 @@ namespace SugarDecoration.App.Controllers
 {
     public class CakeController : BaseController
 	{
-        private const string Admin = "Administrator";
-
         private readonly ICakeService cakeService;
 
         public CakeController(ICakeService _cakeService)

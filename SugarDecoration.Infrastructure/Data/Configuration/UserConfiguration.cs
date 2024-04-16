@@ -33,7 +33,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 
             users.Add(user);
 
-             user = new ApplicationUser()
+            user = new ApplicationUser()
             {
                 Id = "3b034442-ee41-4acb-92cb-374f72d60a59",
                 FirstName = "Georgi",

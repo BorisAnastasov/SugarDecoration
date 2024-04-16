@@ -43,24 +43,34 @@ namespace SugarDecoration.App.Controllers
 		[HttpGet]
 		public async Task<IActionResult> DeleteCart(int cartId) 
 		{
-
+			if (!(await cartService.UserExistsByIdAsync(User.Id())))
+			{
+				return BadRequest();
+			}
 			return View(cartId);
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> DeleteConfirmedCart(int cartId) 
 		{
+
+			if (!(await cartService.UserExistsByIdAsync(User.Id())))
+			{
+				return BadRequest();
+			}
 			await cartService.DeleteConfirmedAsync(cartId);
-
-			var userId = User.Id();
-
-			return RedirectToAction(nameof(All), new { userId });
+			
+			return RedirectToAction(nameof(All));
 		}
 
         [HttpGet]
         public async Task<IActionResult> Add(int cartId, int productId) 
         {
 			if (!await cartService.ProductExistByIdAsync(productId)) 
+			{
+				return BadRequest();
+			}
+			if (!(await cartService.UserExistsByIdAsync(User.Id())))
 			{
 				return BadRequest();
 			}
@@ -73,6 +83,11 @@ namespace SugarDecoration.App.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Add(int cartId)
 		{
+			if (!(await cartService.UserExistsByIdAsync(User.Id())))
+			{
+				return BadRequest();
+			}
+
 			var model = new CartItemFormModel();
 
 			return View(model);
