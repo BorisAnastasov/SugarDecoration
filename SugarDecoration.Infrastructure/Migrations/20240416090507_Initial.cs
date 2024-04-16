@@ -286,16 +286,16 @@ namespace SugarDecoration.Infrastructure.Migrations
                 name: "CartItems",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false, comment: "CartItem identifier")
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CartId = table.Column<int>(type: "int", nullable: false, comment: "Cart identifier"),
-                    ProductId = table.Column<int>(type: "int", nullable: false, comment: "Product identifier"),
-                    Id = table.Column<int>(type: "int", nullable: false, comment: "CartItem identifier"),
+                    ProductId = table.Column<int>(type: "int", nullable: true, comment: "AProduct identifier"),
                     Quantity = table.Column<int>(type: "int", nullable: false, comment: "Quantity of the product"),
-                    Text = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "Description of order"),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Description of order")
+                    Text = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "Description of order")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartItems", x => new { x.CartId, x.ProductId });
+                    table.PrimaryKey("PK_CartItems", x => x.Id);
                     table.ForeignKey(
                         name: "FK_CartItems_Carts_CartId",
                         column: x => x.CartId,
@@ -306,8 +306,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         name: "FK_CartItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 },
                 comment: "Cart item");
 
@@ -319,7 +318,8 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false, comment: "User identifier"),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Date of order"),
-                    CartId = table.Column<int>(type: "int", nullable: false, comment: "Cart identifier")
+                    CartId = table.Column<int>(type: "int", nullable: false, comment: "Cart identifier"),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, comment: "Soft delete property")
                 },
                 constraints: table =>
                 {
@@ -372,8 +372,8 @@ namespace SugarDecoration.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1182e1d8-c799-413d-a9d3-c809966f5ed2", 0, "557d7e3a-f2e2-45b4-b373-afde8356d104", "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.bg", "ADMIN", "AQAAAAEAACcQAAAAECWFBdk48sLPQ3+VoyApNLhFUrQQfx2H4Q+DpVAJPCucPAFQEuhMyoBY9gh0V+OPRQ==", null, false, "f364b18d-0819-4b36-945a-ed501d166c54", false, "admin@abv.bg" },
-                    { "3b034442-ee41-4acb-92cb-374f72d60a59", 0, "a9428fd6-2741-42e5-b646-cb8bf2f47662", "g_ivanov@abv.bg", false, "Georgi", "Ivanov", false, null, "G_IVANOV@ABV.bg", "GOSHE", "AQAAAAEAACcQAAAAEOagayWVrCkVfIABV96vwydXK2JMFu6Yad8SqLjPbuw6lG3Nh0aYsKK9fNO2aaczFA==", null, false, "6c4866db-a4b6-4847-a8ae-df9d11cf54ef", false, "g_ivanov@abv.bg" }
+                    { "1182e1d8-c799-413d-a9d3-c809966f5ed2", 0, "4dd324c9-7208-4fcc-a5f4-28a72e093519", "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.bg", "ADMIN", "AQAAAAEAACcQAAAAEPzL+vWEed3GPdzSVRKhV8ainKtV5UIc1Z06ocbGyduyzXz5M3mh9ZfklGc8ecs43g==", null, false, "5a11336f-38b6-4882-925c-decee2f1289b", false, "admin@abv.bg" },
+                    { "3b034442-ee41-4acb-92cb-374f72d60a59", 0, "140a65d8-6c95-4ef3-9a65-4f400f0f1b85", "g_ivanov@abv.bg", false, "Georgi", "Ivanov", false, null, "G_IVANOV@ABV.bg", "GOSHE", "AQAAAAEAACcQAAAAEFrSS5R8rBFSvZo+x9ciOrgG7dD6jPANpggP7J5LUNd85b7J35jqMdenxD6gIo37uw==", null, false, "ab68a75e-535c-4663-9954-9527c7c30626", false, "g_ivanov@abv.bg" }
                 });
 
             migrationBuilder.InsertData(
@@ -403,21 +403,53 @@ namespace SugarDecoration.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedOn", "ImageUrl", "Price", "Title" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(136), "https://scontent-sof1-1.xx.fbcdn.net/v/t1.6435-9/45418292_1900224123436935_5112515879866728448_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=eFIio2QbBlEAX9Yzjue&_nc_ht=scontent-sof1-1.xx&oh=00_AfBoQ7qqdl47HZ7hWnAk-no9njwdW7bf1dMJizkc5xCsOQ&oe=6613AA58", 100.00m, "Съпруг и съпруга със сини и бели рози" },
-                    { 2, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(169), "https://scontent-sof1-1.xx.fbcdn.net/v/t31.18172-8/11950324_881502548642436_5301516909345454510_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=im4NrlMRDwoAX906LIT&_nc_ht=scontent-sof1-1.xx&oh=00_AfANMiRCdEFjBHMKqzdVQ8CfmwHERZjyswaGHkTpw3deDw&oe=66139F73", 120.00m, "Златни рози" },
-                    { 3, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(172), "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/118890298_3193596277433040_3828589938106568560_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dMYD1Y2twPAAX-5TIdq&_nc_oc=AQmB6ydQvkgot9gup32CReBa78Uc9nJ0lxvLge5csyOGMtoviBAviNqd5ot6C3mvjZ4&_nc_ht=scontent-sof1-2.xx&oh=00_AfCKvMW1pK86G0-3Uvc3A4efBy5a7ZXvntK3EIguunlpsg&oe=6613AE2C", 150.00m, "Съпруг и съпруга с червени рози и бели цветя" },
-                    { 4, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(175), "https://scontent.fsof10-1.fna.fbcdn.net/v/t31.18172-8/11940464_881502551975769_3150965239804644226_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=lIiz0CvrQOAAX8yrHv6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDS01MUNTFuECPkpvob8zZZXmMJKbYgvCTwQahwOQCQIg&oe=6620333B", 120.00m, "бели цветя" },
-                    { 5, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(177), "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/81678509_2608157715976902_8711874778027261952_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dn9ncHjKXt8AX8V4imn&_nc_oc=Adjiqz8TQNQuH0VsI2W2J8AQwDjcgr4XPGHPeTXPJ2qkeaZqY5bGxFIsMXkoAPWg4Jo&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAjqqJ0cgKuP1WozZm7dEPBE_51dVR12bcJ2UmxChzeYg&oe=66201CA0", 110.00m, "бели цветя" },
-                    { 6, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(181), "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/137404609_3542798825846115_8434655239208905708_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6mljKPhHnjIAX9LqFQP&_nc_ht=scontent-sof1-2.xx&oh=00_AfBpxiR_gQOHHryQJJG74wnITMjeC-uP-D7yn1swVD6-9w&oe=6630BA9C", 60.00m, "Ауди (Христо 20)" },
-                    { 7, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(184), "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/140654272_3565104620282202_1586972040598179455_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Vj0NGhYBi5UAX8K_V_D&_nc_oc=AdhlsQ819_EuGRxSBpmepYYaVVPNKFAYniEjOeksAzIo73lVtWBOfl5WxyqG1XiN4Dg&_nc_ht=scontent-sof1-2.xx&oh=00_AfC9AO_padKrBp4jE-hg43Wd9pRoGwVrfaOVaUdMvX6yLw&oe=6630D046", 70.00m, "Тик ток (Краси 9)" },
-                    { 8, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(186), "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/141452606_3575133479279316_4925539086264007770_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=2fq3kZ-mCbQAX8H16po&_nc_ht=scontent-sof1-2.xx&oh=00_AfCaQLmus1wBRboVdTFOEANkgvgwaROC7cLRXmUxpxSK8g&oe=6630B930", 65.00m, "Stranger Things (Емануела 12)" },
-                    { 9, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(189), "https://scontent-sof1-1.xx.fbcdn.net/v/t1.6435-9/144275472_3592112990914698_7625468473701199444_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=0U-MJHaY2wcAX-Ulp2B&_nc_ht=scontent-sof1-1.xx&oh=00_AfB9kj9vo2afu6ByV-zqG_1Xhr86byOFMxbmJoRDyE-nIg&oe=6630C891", 80.00m, "Шоколад, портокал и уиски (Юбилей 50)" },
-                    { 10, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(192), "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/144577998_3598291693630161_1749300887982667483_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=-LGMg0ot0EkAX8TkT1w&_nc_ht=scontent-sof1-2.xx&oh=00_AfBxnZXhfdImfFwWDpZcFHSjWwyx0dVw9SoN_ujnIvrTWg&oe=6630C07C", 50.00m, "Бебе Бос (Николай 1/2)" },
-                    { 11, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(195), "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/127996258_3428591943933471_6613145035034934063_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rPtEwbVYSpsAX8PKZXU&_nc_ht=scontent.fsof10-1.fna&oh=00_AfD393zUJS7ZhFbPMSxqEvvGouqHlkLrInYKA97sq2Hdvg&oe=6624BF3F", 10.00m, "Коледни елхи" },
-                    { 12, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(198), "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.18169-9/12301697_913490672110290_3131707004579174335_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ORKDJKSWeZoAX_k70au&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCU2TCno1TEOAxjtlDR3eVOY3eJcWK_lWlPD7c2VyMphg&oe=6624A21A", 12.00m, "Коледни фигури" },
-                    { 13, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(200), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/346885612_1175653887168525_5354008429856402980_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=hObhR06Be5kAX-tTgc6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDokQeGR3jVPFokGOf4T-2ErzAqwXyrUMnNwn7NHqgQdw&oe=66025108", 15.00m, "Еднорог" },
-                    { 14, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(203), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/429942016_1126158058806458_357351569670082917_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=52_xuh-8AD8AX8IJkDL&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC2GOft8pteFCSZoG6CAy8Ot_y5swfu7kOtrW4GqwPhkw&oe=6602E783", 13.00m, "Баба Марта" },
-                    { 15, new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(244), "https://scontent-sof1-2.xx.fbcdn.net/v/t31.18172-8/13767216_1052053388254017_5059430311043810834_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=4rgx72Z99dsAX8T8yY9&_nc_ht=scontent-sof1-2.xx&oh=00_AfD7EXfGxSBOaVttui_hAOofFJXB-E7elqHjskgoEr5yHA&oe=6630E30F", 11.00m, "Пролетна тема" }
+                    { 1, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4804), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/418972033_1093443198744611_18295542256863659_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=oyt_fYQxpqQAb5wlkX3&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAq--jLQ5hLqOijtXT5wzON89KBi5WPe4zaYN49JBTEXA&oe=66234802", 100.00m, "Пирати(Адриана 7)" },
+                    { 2, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4837), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/419883159_1096690305086567_9154400905867001135_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=gqYPb7qhPtsAb4iSrqn&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCk3kEV0NX_qoP0VkVRiebWy7Im1H9MGdvlERnwPmVPaw&oe=66233F51", 120.00m, "Розово сладко(Иванина 8)" },
+                    { 3, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4840), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/419814170_1096690445086553_5920770385650976907_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=yL0QHtExJ9MAb6_q7wH&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDrTCMRxqDTpIfk4tXAoMzxO8lgSfCgpztL3btPJas8jQ&oe=662362CF", 150.00m, "Симба(Кирил 1)" },
+                    { 4, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4843), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/419895981_1096690478419883_5265202540193795239_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=s-BHu3ex-q8Ab6uHFDB&_nc_ht=scontent.fsof10-1.fna&oh=00_AfA-XudfSZAwJ5b_WxbFMTgwWf4RyaHMgN0OE0zCtWs_EQ&oe=66235113", 120.00m, "Why, god, why?" },
+                    { 5, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4845), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/420271104_1099055744850023_5401028707936950121_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ilC9jJPAWI4Ab6rAiX5&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBRVrXVCUcnYE0x6zvThlbpjyw2w0ehTrkhMGOhq4KTPA&oe=66234BBF", 110.00m, "Погачата на Георги" },
+                    { 6, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4849), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421273451_1100972814658316_2601163674327323390_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=IP9MBVAOblAAb6EO1G1&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCmPwO7mWsQCMbO7Odnel69USm1kH9spgWawU6Sldn5gQ&oe=662353D7", 60.00m, "Препятствия по пътя" },
+                    { 7, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4852), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421003139_1100973004658297_8756545305937455944_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=BcWMOIWll9cAb5Ih1TL&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC250frGZak90Hv-gTE7N3SNU3SQ1ZXrXjskefrhxSn9A&oe=66234690", 70.00m, "Карате(Веско 10)" },
+                    { 8, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4854), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421307138_1100973057991625_4347484741087024842_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=S0oVgoVPVMIAb4Hucnw&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDSI_2CwdWu5xmcwmmZ7bu0N7y8_i3keoPXegTZ-1hCoA&oe=66236B33", 65.00m, "Барби(Мариела 7)" },
+                    { 9, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4857), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421305166_1100973174658280_3232378763777122331_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=R4NYSjlEX9AAb6WnTxC&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDcbMLGgbShkm0ol086Q2EkcLN23V2fJ9YSGrJQpuqPXA&oe=662348EF", 80.00m, "Мечо Пух(Никола 1)" },
+                    { 10, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4860), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422453926_1103927064362891_1200521909121655771_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ZIy3sO497vcAb68LxRu&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBukpcRHGQ5RYzy24loiAyuH18GZznNHA_jIi5e3zyk2w&oe=66235C34", 50.00m, "Сини Пеперуди(Никол 7)" },
+                    { 11, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4862), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422917578_1103927104362887_2140454483848022782_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=eOvOV-fhrVEAb634ibP&_nc_ht=scontent.fsof10-1.fna&oh=00_AfB9cekCjuO5MZZ33zx8q_JghkOZmrPogD_x7wGp1YIbow&oe=6623411C", 80.00m, "Мини Маус(Теодора 2)" },
+                    { 12, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4865), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422283046_1103927131029551_320020852122884371_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=PhEHWe1_m-QAb75WnYN&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDKi9xqOjHabPgjJoGBMzx3cc5DqzIFHsgOtr8-JE0SrA&oe=66233FD9", 100.00m, "Кристиано Роналдо(Методи 8)" },
+                    { 13, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4868), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421992174_1103927164362881_2666073469233497469_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=GX25z23w5rcAb4KrcKH&_nc_ht=scontent.fsof10-1.fna&oh=00_AfByo6aJlE_Ba8y1okKX6-W5kJO7NB_fRYG4vx6byH96vA&oe=66234021", 150.00m, "Розова принцеса(Мариета 10)" },
+                    { 14, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4870), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422395532_1103927251029539_8137194788006343813_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=LO9gVorGTSwAb47oA1-&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAYzQlhoRH2fxmdGB5mWLk4HjdxQS5Q7r-4NoVf0nJZFg&oe=6623556B", 120.00m, "Състезание с коли(Кристиян 3)" },
+                    { 15, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4873), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422434325_1103927354362862_6819850698041677940_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ukNWu9a7loMAb7ZcZw-&_nc_ht=scontent.fsof10-1.fna&oh=00_AfD2dTbQWL1XwH5fNRhDIB6lN3yPrHWUUkyVO05H3ysOqg&oe=662374B7", 110.00m, "Хлапетата/Пирин(Денис 5)" },
+                    { 16, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4875), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422903500_1103933321028932_6325247546336233728_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=EZVht7CFsBAAb74jNz7&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC4YIei0A5QDbwhJfNazjXgjmfw3HAHYw355iCKfaQh4w&oe=662355C3", 60.00m, "Розови цветя(Бориса 4)" },
+                    { 17, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4878), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422123188_1103933404362257_1707931504307280465_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=woNTec0Hgy0Ab4fHTmr&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAf_kINoy3ZLN9sFSkoUD9plIOeZyoVwp-9p35ADQvKQA&oe=66234D99", 70.00m, "Розова гимнастика(Антония 13)" },
+                    { 18, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4909), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422337680_1103933437695587_2768842852153729910_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=n6kzvpKHKYMAb6zpLwr&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBHtcU1DObFEYGgH-rsdv3w7fH7n-zcWRFnT5T34Yk5sg&oe=66234479", 65.00m, "Аржентина/Меси(Илиян)" },
+                    { 19, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4912), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422945261_1104870920935172_7448345022192442547_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=jJ0e0YC9QSsAb65AEiE&_nc_ht=scontent.fsof10-1.fna&oh=00_AfADr8k4touilXWuDeGR0c_vO1UdvnZPEZQuxqZ7xoJg7g&oe=662356BB", 80.00m, "Лего(Адриан 3)" },
+                    { 20, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4915), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422954610_1104870957601835_5166553921804153623_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=03q5H16CEqIAb6Bx76T&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCKtxi9DJ37h8NyQMt929wOjM4PNwLpcRU7Y04YYRxywQ&oe=6623553B", 50.00m, "Джунгла/животни(Марти 2)" },
+                    { 21, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4917), "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/127996258_3428591943933471_6613145035034934063_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rPtEwbVYSpsAX8PKZXU&_nc_ht=scontent.fsof10-1.fna&oh=00_AfD393zUJS7ZhFbPMSxqEvvGouqHlkLrInYKA97sq2Hdvg&oe=6624BF3F", 10.00m, "Коледни елхи" },
+                    { 22, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4920), "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.18169-9/12301697_913490672110290_3131707004579174335_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ORKDJKSWeZoAX_k70au&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCU2TCno1TEOAxjtlDR3eVOY3eJcWK_lWlPD7c2VyMphg&oe=6624A21A", 12.00m, "Коледни фигури" },
+                    { 23, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4922), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/414659694_1083679999720931_4686156170598756137_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=as37wfBwQK8Ab5Mug42&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCGK-reC7PqEOLEWwwzko1sROVZ_8CWj8q-W3YZtNi-0A&oe=66240241", 15.00m, "Зимни сладки" },
+                    { 24, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4924), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/346885612_1175653887168525_5354008429856402980_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=J8pQ0qQs7kAAb4s2bc_&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDJ68lAKqg0E20ah8YVoP4tpvzw3Zxktb1IyES2U4Vwmw&oe=6623EF48", 13.00m, "Декоративни еднорози" },
+                    { 25, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4927), "https://scontent-sof1-2.xx.fbcdn.net/v/t31.18172-8/13767216_1052053388254017_5059430311043810834_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=4rgx72Z99dsAX8T8yY9&_nc_ht=scontent-sof1-2.xx&oh=00_AfD7EXfGxSBOaVttui_hAOofFJXB-E7elqHjskgoEr5yHA&oe=6630E30F", 11.00m, "Пролетна тема" },
+                    { 26, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4930), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/347598820_1462268427940551_3378899760043768216_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ssELXekml1UAb74Lw3p&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC0Ewx8gIUxsz0I7sadvlZYWCtWMOpEAsoaBtjIrAyw8A&oe=66240EBF", 10.00m, "Декоративни котета" },
+                    { 27, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4932), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/408289112_1069083081180623_6103859634370956242_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=mv2MUmF-QO8Ab7EfHv7&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAMXi1gUAJXuSVoXopY7PIiihmWD1lAth0tzDis9JXyuw&oe=66240F1D", 12.00m, "Коледни сладки" },
+                    { 28, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4934), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/338166827_548900843899794_5385569313968380087_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=PSCgPeCXrgcAb6j9QsW&_nc_ht=scontent.fsof10-1.fna&oh=00_AfATy6VoG94Cjh2NstybjuKj7sEvlXYDGyHO0ZFwaTaQEQ&oe=66242223", 15.00m, "Бонбони пеперуди на клечка" },
+                    { 29, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4937), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/338166827_548900843899794_5385569313968380087_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=PSCgPeCXrgcAb6j9QsW&_nc_ht=scontent.fsof10-1.fna&oh=00_AfATy6VoG94Cjh2NstybjuKj7sEvlXYDGyHO0ZFwaTaQEQ&oe=66242223", 13.00m, "Бонбони мечки на клечка" },
+                    { 30, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4939), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/340453821_634241451866643_5453280737476644845_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=87i6kF4Ax98Ab4awAYD&_nc_ht=scontent.fsof10-1.fna&oh=00_AfA3MikW3e7agHZSVd4jqjP-v4rTxNW0EUzjduG4CbmMDg&oe=66241D17", 11.00m, "Мини маус" },
+                    { 31, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4942), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/370618359_1006912454064353_122421549472800615_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=y_c-d4EXHPkAb6e8OeC&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDJ1pkGVuhbluUh4dSsyzTegN9yH9N5MqzKQjcHC_oGJg&oe=662406BD", 10.00m, "Бебешки сладки" },
+                    { 32, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4944), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/395350593_1045984213490510_5049859778982539766_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=-uaRfcy596cAb6O7E27&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAewl4G0thADHLGKiM4rMrSJPJewbKZQ7KAETgMxt5Urw&oe=66240481", 12.00m, "Мини маус" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CreatedOn", "ImageUrl", "Price", "Title" },
+                values: new object[,]
+                {
+                    { 33, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4947), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/412367668_1078476133574651_2014438863321533166_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=mK10dhm9R6IAb7eU1ZD&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDSYSsBkrpfhDSTcIhp5UvVFMv9HMJ5zp6r-Fsz5N0K5w&oe=6624123D", 15.00m, "Vet time" },
+                    { 34, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4950), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/412421912_1079066630182268_8849429455852772027_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=b7_xw_AY00YAb4G4USq&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBxwx2uLEDjZtvETiTF_PJtjEfpJAwarVUuIUHib9qNZg&oe=6624254C", 13.00m, "Форма мини маус" },
+                    { 35, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4953), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/273151658_4726256077500378_6856753579275926019_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=yfjlzEaBXswAb7NuBhi&_nc_ht=scontent.fsof10-1.fna&oh=00_AfASCVabXp4kXs0HV1oeLfu7xOkOQz8CC5fYXuFsgC8o0A&oe=66240545", 11.00m, "Кехчета еднорог" },
+                    { 36, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4955), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/273049030_4737053996420586_5343548874095564690_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=iG5P5AF1HXkAb6Vt5n3&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBunWEQPHjrel3Lq1DrsmVGbCPp768asWGQdmA-spF19A&oe=6623FAF4", 10.00m, "Кехчета мики маус" },
+                    { 37, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4958), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/275972733_4852334931559158_4876683130673051345_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=kRjcinr4qo0Ab4CZZ8U&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAaSiY_pT9eZ7bGGXmwHemkUSg-OeZHxn_h9y-exNDTJg&oe=66240D76", 12.00m, "Кехчета с мечета" },
+                    { 38, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4960), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/275888286_4854907834635201_5576219607842184040_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=kIBlo0Frm8cAb5nTa0I&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBVIdHdb4B3_nh2m6JVLQDlDsoPF093SXrHdgBGTNkYSg&oe=6623F44E", 15.00m, "Бисквити във формата на единица" },
+                    { 39, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4963), "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/278182286_4910435082415809_8231988911027352607_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=zj0DGN2EyjMAb6g6E5n&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBvUrNy0HtVFYqLWzY6C-t5_H2refxaZvBFfTEbZY0ZFw&oe=6623F7F8", 13.00m, "Меченца" },
+                    { 40, new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4965), "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/82200699_2623632034429470_7680587017826074624_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6G_BPMiyr-MAb7F2cJX&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAmCjYKJf4atPcvS1AKyw1Yiq4pfMxJpAgzXizkdoYPHA&oe=66459706", 11.00m, "Четирилистна детелина" }
                 });
 
             migrationBuilder.InsertData(
@@ -425,11 +457,26 @@ namespace SugarDecoration.Infrastructure.Migrations
                 columns: new[] { "Id", "CategoryId", "ProductId", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, 1, 11, 10 },
-                    { 2, 1, 12, 8 },
-                    { 3, 3, 13, 10 },
-                    { 4, 3, 14, 12 },
-                    { 5, 3, 15, 20 }
+                    { 1, 1, 21, 10 },
+                    { 2, 1, 22, 8 },
+                    { 3, 1, 23, 7 },
+                    { 4, 1, 24, 6 },
+                    { 5, 1, 25, 9 },
+                    { 6, 1, 26, 8 },
+                    { 7, 1, 27, 5 },
+                    { 8, 1, 28, 4 },
+                    { 9, 1, 29, 6 },
+                    { 10, 1, 30, 8 },
+                    { 11, 3, 31, 10 },
+                    { 12, 3, 32, 7 },
+                    { 13, 3, 33, 9 },
+                    { 14, 3, 34, 6 },
+                    { 15, 3, 35, 8 },
+                    { 16, 3, 36, 5 },
+                    { 17, 3, 37, 4 },
+                    { 18, 3, 38, 2 },
+                    { 19, 3, 39, 2 },
+                    { 20, 3, 40, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -442,32 +489,45 @@ namespace SugarDecoration.Infrastructure.Migrations
                     { 3, 1, "кръгла", 2, 30, 3 },
                     { 4, 2, "кръгла", 1, 20, 4 },
                     { 5, 1, "кръгла", 2, 30, 5 },
-                    { 6, 5, "кръгла", 1, 20, 6 },
+                    { 6, 2, "кръгла", 1, 20, 6 },
                     { 7, 2, "кръгла", 2, 25, 7 },
                     { 8, 2, "кръгла", 1, 30, 8 },
-                    { 9, 5, "кръгла", 1, 35, 9 },
-                    { 10, 2, "полукръгла", 1, 10, 10 }
+                    { 9, 3, "кръгла", 1, 35, 9 },
+                    { 10, 2, "полукръгла", 1, 10, 10 },
+                    { 11, 1, "кръгла", 3, 35, 11 },
+                    { 12, 1, "кръгла", 2, 30, 12 },
+                    { 13, 1, "кръгла", 2, 30, 13 },
+                    { 14, 2, "кръгла", 1, 20, 14 },
+                    { 15, 1, "кръгла", 2, 30, 15 },
+                    { 16, 2, "кръгла", 1, 20, 16 },
+                    { 17, 2, "кръгла", 2, 25, 17 },
+                    { 18, 2, "кръгла", 1, 30, 18 },
+                    { 19, 5, "кръгла", 1, 35, 19 },
+                    { 20, 2, "полукръгла", 1, 10, 20 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Carts",
                 columns: new[] { "Id", "CreatedOn", "IsOrdered", "ModifiedOn", "UserId" },
-                values: new object[] { 1, new DateTime(2024, 4, 6, 11, 6, 1, 302, DateTimeKind.Local).AddTicks(2930), false, new DateTime(2024, 4, 6, 11, 6, 1, 302, DateTimeKind.Local).AddTicks(2941), "1182e1d8-c799-413d-a9d3-c809966f5ed2" });
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 4, 16, 12, 5, 6, 732, DateTimeKind.Local).AddTicks(7297), false, new DateTime(2024, 4, 16, 12, 5, 6, 732, DateTimeKind.Local).AddTicks(7302), "1182e1d8-c799-413d-a9d3-c809966f5ed2" },
+                    { 2, new DateTime(2024, 4, 16, 12, 5, 6, 732, DateTimeKind.Local).AddTicks(7307), false, new DateTime(2024, 4, 16, 12, 5, 6, 732, DateTimeKind.Local).AddTicks(7309), "3b034442-ee41-4acb-92cb-374f72d60a59" }
+                });
 
             migrationBuilder.InsertData(
                 table: "CartItems",
-                columns: new[] { "CartId", "ProductId", "Id", "PhoneNumber", "Quantity", "Text" },
-                values: new object[] { 1, 1, 1, "0884567234", 1, "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10." });
-
-            migrationBuilder.InsertData(
-                table: "CartItems",
-                columns: new[] { "CartId", "ProductId", "Id", "PhoneNumber", "Quantity", "Text" },
-                values: new object[] { 1, 2, 2, "0884567234", 1, "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10." });
-
-            migrationBuilder.InsertData(
-                table: "CartItems",
-                columns: new[] { "CartId", "ProductId", "Id", "PhoneNumber", "Quantity", "Text" },
-                values: new object[] { 1, 3, 3, "0884567234", 1, "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10." });
+                columns: new[] { "Id", "CartId", "ProductId", "Quantity", "Text" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, 1, "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10." },
+                    { 2, 1, 2, 1, "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10." },
+                    { 4, 1, null, 1, "Бих искал торта с леги нинджаго ако може да е за 30 парчета за Иван на 10." },
+                    { 5, 2, 8, 1, "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10." },
+                    { 6, 2, 2, 1, "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10." },
+                    { 7, 2, 10, 1, "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10." },
+                    { 8, 2, null, 1, "Бих искал обикновена синя торта само ако може да е за 20 парчета без име." }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -527,6 +587,11 @@ namespace SugarDecoration.Infrastructure.Migrations
                 name: "IX_Cakes_ProductId",
                 table: "Cakes",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_CartId",
+                table: "CartItems",
+                column: "CartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItems_ProductId",

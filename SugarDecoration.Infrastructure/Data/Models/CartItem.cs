@@ -19,8 +19,7 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [ForeignKey(nameof(CartId))]
         public Cart Cart { get; set; } = null!;
 
-        [Required]
-        [Comment("Product identifier")]
+        [Comment("AProduct identifier")]
         public int? ProductId { get; set; }
         public Product? Product { get; set; }
 

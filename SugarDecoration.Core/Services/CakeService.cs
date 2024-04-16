@@ -54,11 +54,13 @@ namespace SugarDecoration.Core.Services
 						   ImageUrl = c.Product.ImageUrl
 					   }).ToListAsync();
 
+			int totalCakes = await cakesToShow.CountAsync();	
+
 			var cakeQuery = new CakeQueryServiceModel
 			{
 				Cakes = cakes,
-				TotalCakeCount = cakes.Count
-			};
+				TotalCakeCount = totalCakes
+            };
 			return cakeQuery;
 		}
 

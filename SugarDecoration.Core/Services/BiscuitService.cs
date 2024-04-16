@@ -17,11 +17,11 @@ namespace SugarDecoration.Core.Services
 
 		public async Task<BiscuitQueryServiceModel> GetAllBiscuitsAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currPage = 1, int productsPerPage = 15)
 		{
-			var cakesToShow = repository.AllReadOnly<Biscuit>();
+			var biscuitsToShow = repository.AllReadOnly<Biscuit>();
 
 			if (category != null)
 			{
-				cakesToShow = cakesToShow
+				biscuitsToShow = biscuitsToShow
 							.Where(c => c.Category.Name == category);
 			}
 
@@ -29,20 +29,20 @@ namespace SugarDecoration.Core.Services
 			if (searchTerm != null)
 			{
 				string normalizedSearchedTerm = searchTerm.ToLower();
-				cakesToShow = cakesToShow
+				biscuitsToShow = biscuitsToShow
 							.Where(c => (c.Product.Title.ToLower().Contains(normalizedSearchedTerm)));
 			}
 
 
-			cakesToShow = sorting switch
+			biscuitsToShow = sorting switch
 			{
-				ProductSorting.Price => cakesToShow.OrderByDescending(c => c.Product.Price),
+				ProductSorting.Price => biscuitsToShow.OrderByDescending(c => c.Product.Price),
 
-				_ => cakesToShow.OrderByDescending(c => c.Id)
+				_ => biscuitsToShow.OrderByDescending(c => c.Id)
 			};
 
 
-			var biscuits = await cakesToShow
+			var biscuits = await biscuitsToShow
 						.Skip((currPage - 1) * productsPerPage)
 						.Take(productsPerPage)
 					   .Select(c => new BiscuitServiceModel
@@ -53,11 +53,14 @@ namespace SugarDecoration.Core.Services
 						   ImageUrl = c.Product.ImageUrl
 					   }).ToListAsync();
 
-			var biscuitQuery = new BiscuitQueryServiceModel
+			int totalBiscuits = await biscuitsToShow.CountAsync();
+
+
+            var biscuitQuery = new BiscuitQueryServiceModel
 			{
 				Biscuits = biscuits,
-				TotalBiscuitCount = biscuits.Count
-			};
+				TotalBiscuitCount = totalBiscuits
+            };
 			return biscuitQuery;
 		}
 

@@ -238,7 +238,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         {
                             Id = "1182e1d8-c799-413d-a9d3-c809966f5ed2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "557d7e3a-f2e2-45b4-b373-afde8356d104",
+                            ConcurrencyStamp = "4dd324c9-7208-4fcc-a5f4-28a72e093519",
                             Email = "admin@abv.bg",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +246,9 @@ namespace SugarDecoration.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ABV.bg",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECWFBdk48sLPQ3+VoyApNLhFUrQQfx2H4Q+DpVAJPCucPAFQEuhMyoBY9gh0V+OPRQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPzL+vWEed3GPdzSVRKhV8ainKtV5UIc1Z06ocbGyduyzXz5M3mh9ZfklGc8ecs43g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f364b18d-0819-4b36-945a-ed501d166c54",
+                            SecurityStamp = "5a11336f-38b6-4882-925c-decee2f1289b",
                             TwoFactorEnabled = false,
                             UserName = "admin@abv.bg"
                         },
@@ -256,7 +256,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         {
                             Id = "3b034442-ee41-4acb-92cb-374f72d60a59",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a9428fd6-2741-42e5-b646-cb8bf2f47662",
+                            ConcurrencyStamp = "140a65d8-6c95-4ef3-9a65-4f400f0f1b85",
                             Email = "g_ivanov@abv.bg",
                             EmailConfirmed = false,
                             FirstName = "Georgi",
@@ -264,9 +264,9 @@ namespace SugarDecoration.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "G_IVANOV@ABV.bg",
                             NormalizedUserName = "GOSHE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOagayWVrCkVfIABV96vwydXK2JMFu6Yad8SqLjPbuw6lG3Nh0aYsKK9fNO2aaczFA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFrSS5R8rBFSvZo+x9ciOrgG7dD6jPANpggP7J5LUNd85b7J35jqMdenxD6gIo37uw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6c4866db-a4b6-4847-a8ae-df9d11cf54ef",
+                            SecurityStamp = "ab68a75e-535c-4663-9954-9527c7c30626",
                             TwoFactorEnabled = false,
                             UserName = "g_ivanov@abv.bg"
                         });
@@ -308,36 +308,141 @@ namespace SugarDecoration.Infrastructure.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            ProductId = 11,
+                            ProductId = 21,
                             Quantity = 10
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
-                            ProductId = 12,
+                            ProductId = 22,
                             Quantity = 8
                         },
                         new
                         {
                             Id = 3,
-                            CategoryId = 3,
-                            ProductId = 13,
-                            Quantity = 10
+                            CategoryId = 1,
+                            ProductId = 23,
+                            Quantity = 7
                         },
                         new
                         {
                             Id = 4,
-                            CategoryId = 3,
-                            ProductId = 14,
-                            Quantity = 12
+                            CategoryId = 1,
+                            ProductId = 24,
+                            Quantity = 6
                         },
                         new
                         {
                             Id = 5,
+                            CategoryId = 1,
+                            ProductId = 25,
+                            Quantity = 9
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 1,
+                            ProductId = 26,
+                            Quantity = 8
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 1,
+                            ProductId = 27,
+                            Quantity = 5
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 1,
+                            ProductId = 28,
+                            Quantity = 4
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 1,
+                            ProductId = 29,
+                            Quantity = 6
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 1,
+                            ProductId = 30,
+                            Quantity = 8
+                        },
+                        new
+                        {
+                            Id = 11,
                             CategoryId = 3,
-                            ProductId = 15,
-                            Quantity = 20
+                            ProductId = 31,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryId = 3,
+                            ProductId = 32,
+                            Quantity = 7
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CategoryId = 3,
+                            ProductId = 33,
+                            Quantity = 9
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CategoryId = 3,
+                            ProductId = 34,
+                            Quantity = 6
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CategoryId = 3,
+                            ProductId = 35,
+                            Quantity = 8
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CategoryId = 3,
+                            ProductId = 36,
+                            Quantity = 5
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CategoryId = 3,
+                            ProductId = 37,
+                            Quantity = 4
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CategoryId = 3,
+                            ProductId = 38,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CategoryId = 3,
+                            ProductId = 39,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CategoryId = 3,
+                            ProductId = 40,
+                            Quantity = 2
                         });
                 });
 
@@ -470,7 +575,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            CategoryId = 5,
+                            CategoryId = 2,
                             Form = "кръгла",
                             Layers = 1,
                             Portions = 20,
@@ -497,7 +602,7 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 9,
-                            CategoryId = 5,
+                            CategoryId = 3,
                             Form = "кръгла",
                             Layers = 1,
                             Portions = 35,
@@ -511,6 +616,96 @@ namespace SugarDecoration.Infrastructure.Migrations
                             Layers = 1,
                             Portions = 10,
                             ProductId = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 1,
+                            Form = "кръгла",
+                            Layers = 3,
+                            Portions = 35,
+                            ProductId = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryId = 1,
+                            Form = "кръгла",
+                            Layers = 2,
+                            Portions = 30,
+                            ProductId = 12
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CategoryId = 1,
+                            Form = "кръгла",
+                            Layers = 2,
+                            Portions = 30,
+                            ProductId = 13
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CategoryId = 2,
+                            Form = "кръгла",
+                            Layers = 1,
+                            Portions = 20,
+                            ProductId = 14
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CategoryId = 1,
+                            Form = "кръгла",
+                            Layers = 2,
+                            Portions = 30,
+                            ProductId = 15
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CategoryId = 2,
+                            Form = "кръгла",
+                            Layers = 1,
+                            Portions = 20,
+                            ProductId = 16
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CategoryId = 2,
+                            Form = "кръгла",
+                            Layers = 2,
+                            Portions = 25,
+                            ProductId = 17
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CategoryId = 2,
+                            Form = "кръгла",
+                            Layers = 1,
+                            Portions = 30,
+                            ProductId = 18
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CategoryId = 5,
+                            Form = "кръгла",
+                            Layers = 1,
+                            Portions = 35,
+                            ProductId = 19
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CategoryId = 2,
+                            Form = "полукръгла",
+                            Layers = 1,
+                            Portions = 10,
+                            ProductId = 20
                         });
                 });
 
@@ -601,32 +796,37 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 302, DateTimeKind.Local).AddTicks(2930),
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 732, DateTimeKind.Local).AddTicks(7297),
                             IsOrdered = false,
-                            ModifiedOn = new DateTime(2024, 4, 6, 11, 6, 1, 302, DateTimeKind.Local).AddTicks(2941),
+                            ModifiedOn = new DateTime(2024, 4, 16, 12, 5, 6, 732, DateTimeKind.Local).AddTicks(7302),
                             UserId = "1182e1d8-c799-413d-a9d3-c809966f5ed2"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 732, DateTimeKind.Local).AddTicks(7307),
+                            IsOrdered = false,
+                            ModifiedOn = new DateTime(2024, 4, 16, 12, 5, 6, 732, DateTimeKind.Local).AddTicks(7309),
+                            UserId = "3b034442-ee41-4acb-92cb-374f72d60a59"
                         });
                 });
 
             modelBuilder.Entity("SugarDecoration.Infrastructure.Data.Models.CartItem", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasComment("CartItem identifier");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
                     b.Property<int>("CartId")
                         .HasColumnType("int")
                         .HasComment("Cart identifier");
 
                     b.Property<int?>("ProductId")
                         .HasColumnType("int")
-                        .HasComment("Product identifier");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int")
-                        .HasComment("CartItem identifier");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasComment("Description of order");
+                        .HasComment("AProduct identifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int")
@@ -638,7 +838,9 @@ namespace SugarDecoration.Infrastructure.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasComment("Description of order");
 
-                    b.HasKey("CartId", "ProductId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
 
                     b.HasIndex("ProductId");
 
@@ -649,30 +851,57 @@ namespace SugarDecoration.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
+                            Id = 1,
                             CartId = 1,
                             ProductId = 1,
-                            Id = 1,
-                            PhoneNumber = "0884567234",
                             Quantity = 1,
                             Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10."
                         },
                         new
                         {
+                            Id = 2,
                             CartId = 1,
                             ProductId = 2,
-                            Id = 2,
-                            PhoneNumber = "0884567234",
                             Quantity = 1,
                             Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10."
                         },
                         new
                         {
+                            Id = 4,
                             CartId = 1,
-                            ProductId = 3,
-                            Id = 3,
-                            PhoneNumber = "0884567234",
+                            Quantity = 1,
+                            Text = "Бих искал торта с леги нинджаго ако може да е за 30 парчета за Иван на 10."
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CartId = 2,
+                            ProductId = 8,
                             Quantity = 1,
                             Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10."
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CartId = 2,
+                            ProductId = 2,
+                            Quantity = 1,
+                            Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10."
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CartId = 2,
+                            ProductId = 10,
+                            Quantity = 1,
+                            Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10."
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CartId = 2,
+                            Quantity = 1,
+                            Text = "Бих искал обикновена синя торта само ако може да е за 20 парчета без име."
                         });
                 });
 
@@ -688,6 +917,10 @@ namespace SugarDecoration.Infrastructure.Migrations
                     b.Property<int>("CartId")
                         .HasColumnType("int")
                         .HasComment("Cart identifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasComment("Soft delete property");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2")
@@ -785,122 +1018,322 @@ namespace SugarDecoration.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(136),
-                            ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t1.6435-9/45418292_1900224123436935_5112515879866728448_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=eFIio2QbBlEAX9Yzjue&_nc_ht=scontent-sof1-1.xx&oh=00_AfBoQ7qqdl47HZ7hWnAk-no9njwdW7bf1dMJizkc5xCsOQ&oe=6613AA58",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4804),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/418972033_1093443198744611_18295542256863659_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=oyt_fYQxpqQAb5wlkX3&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAq--jLQ5hLqOijtXT5wzON89KBi5WPe4zaYN49JBTEXA&oe=66234802",
                             Price = 100.00m,
-                            Title = "Съпруг и съпруга със сини и бели рози"
+                            Title = "Пирати(Адриана 7)"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(169),
-                            ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t31.18172-8/11950324_881502548642436_5301516909345454510_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=im4NrlMRDwoAX906LIT&_nc_ht=scontent-sof1-1.xx&oh=00_AfANMiRCdEFjBHMKqzdVQ8CfmwHERZjyswaGHkTpw3deDw&oe=66139F73",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4837),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/419883159_1096690305086567_9154400905867001135_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=gqYPb7qhPtsAb4iSrqn&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCk3kEV0NX_qoP0VkVRiebWy7Im1H9MGdvlERnwPmVPaw&oe=66233F51",
                             Price = 120.00m,
-                            Title = "Златни рози"
+                            Title = "Розово сладко(Иванина 8)"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(172),
-                            ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/118890298_3193596277433040_3828589938106568560_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dMYD1Y2twPAAX-5TIdq&_nc_oc=AQmB6ydQvkgot9gup32CReBa78Uc9nJ0lxvLge5csyOGMtoviBAviNqd5ot6C3mvjZ4&_nc_ht=scontent-sof1-2.xx&oh=00_AfCKvMW1pK86G0-3Uvc3A4efBy5a7ZXvntK3EIguunlpsg&oe=6613AE2C",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4840),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/419814170_1096690445086553_5920770385650976907_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=yL0QHtExJ9MAb6_q7wH&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDrTCMRxqDTpIfk4tXAoMzxO8lgSfCgpztL3btPJas8jQ&oe=662362CF",
                             Price = 150.00m,
-                            Title = "Съпруг и съпруга с червени рози и бели цветя"
+                            Title = "Симба(Кирил 1)"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(175),
-                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t31.18172-8/11940464_881502551975769_3150965239804644226_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=lIiz0CvrQOAAX8yrHv6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDS01MUNTFuECPkpvob8zZZXmMJKbYgvCTwQahwOQCQIg&oe=6620333B",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4843),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/419895981_1096690478419883_5265202540193795239_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=s-BHu3ex-q8Ab6uHFDB&_nc_ht=scontent.fsof10-1.fna&oh=00_AfA-XudfSZAwJ5b_WxbFMTgwWf4RyaHMgN0OE0zCtWs_EQ&oe=66235113",
                             Price = 120.00m,
-                            Title = "бели цветя"
+                            Title = "Why, god, why?"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(177),
-                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/81678509_2608157715976902_8711874778027261952_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dn9ncHjKXt8AX8V4imn&_nc_oc=Adjiqz8TQNQuH0VsI2W2J8AQwDjcgr4XPGHPeTXPJ2qkeaZqY5bGxFIsMXkoAPWg4Jo&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAjqqJ0cgKuP1WozZm7dEPBE_51dVR12bcJ2UmxChzeYg&oe=66201CA0",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4845),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/420271104_1099055744850023_5401028707936950121_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ilC9jJPAWI4Ab6rAiX5&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBRVrXVCUcnYE0x6zvThlbpjyw2w0ehTrkhMGOhq4KTPA&oe=66234BBF",
                             Price = 110.00m,
-                            Title = "бели цветя"
+                            Title = "Погачата на Георги"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(181),
-                            ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/137404609_3542798825846115_8434655239208905708_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6mljKPhHnjIAX9LqFQP&_nc_ht=scontent-sof1-2.xx&oh=00_AfBpxiR_gQOHHryQJJG74wnITMjeC-uP-D7yn1swVD6-9w&oe=6630BA9C",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4849),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421273451_1100972814658316_2601163674327323390_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=IP9MBVAOblAAb6EO1G1&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCmPwO7mWsQCMbO7Odnel69USm1kH9spgWawU6Sldn5gQ&oe=662353D7",
                             Price = 60.00m,
-                            Title = "Ауди (Христо 20)"
+                            Title = "Препятствия по пътя"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(184),
-                            ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/140654272_3565104620282202_1586972040598179455_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Vj0NGhYBi5UAX8K_V_D&_nc_oc=AdhlsQ819_EuGRxSBpmepYYaVVPNKFAYniEjOeksAzIo73lVtWBOfl5WxyqG1XiN4Dg&_nc_ht=scontent-sof1-2.xx&oh=00_AfC9AO_padKrBp4jE-hg43Wd9pRoGwVrfaOVaUdMvX6yLw&oe=6630D046",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4852),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421003139_1100973004658297_8756545305937455944_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=BcWMOIWll9cAb5Ih1TL&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC250frGZak90Hv-gTE7N3SNU3SQ1ZXrXjskefrhxSn9A&oe=66234690",
                             Price = 70.00m,
-                            Title = "Тик ток (Краси 9)"
+                            Title = "Карате(Веско 10)"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(186),
-                            ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/141452606_3575133479279316_4925539086264007770_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=2fq3kZ-mCbQAX8H16po&_nc_ht=scontent-sof1-2.xx&oh=00_AfCaQLmus1wBRboVdTFOEANkgvgwaROC7cLRXmUxpxSK8g&oe=6630B930",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4854),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421307138_1100973057991625_4347484741087024842_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=S0oVgoVPVMIAb4Hucnw&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDSI_2CwdWu5xmcwmmZ7bu0N7y8_i3keoPXegTZ-1hCoA&oe=66236B33",
                             Price = 65.00m,
-                            Title = "Stranger Things (Емануела 12)"
+                            Title = "Барби(Мариела 7)"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(189),
-                            ImageUrl = "https://scontent-sof1-1.xx.fbcdn.net/v/t1.6435-9/144275472_3592112990914698_7625468473701199444_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=0U-MJHaY2wcAX-Ulp2B&_nc_ht=scontent-sof1-1.xx&oh=00_AfB9kj9vo2afu6ByV-zqG_1Xhr86byOFMxbmJoRDyE-nIg&oe=6630C891",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4857),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421305166_1100973174658280_3232378763777122331_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=R4NYSjlEX9AAb6WnTxC&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDcbMLGgbShkm0ol086Q2EkcLN23V2fJ9YSGrJQpuqPXA&oe=662348EF",
                             Price = 80.00m,
-                            Title = "Шоколад, портокал и уиски (Юбилей 50)"
+                            Title = "Мечо Пух(Никола 1)"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(192),
-                            ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t1.6435-9/144577998_3598291693630161_1749300887982667483_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=-LGMg0ot0EkAX8TkT1w&_nc_ht=scontent-sof1-2.xx&oh=00_AfBxnZXhfdImfFwWDpZcFHSjWwyx0dVw9SoN_ujnIvrTWg&oe=6630C07C",
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4860),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422453926_1103927064362891_1200521909121655771_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ZIy3sO497vcAb68LxRu&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBukpcRHGQ5RYzy24loiAyuH18GZznNHA_jIi5e3zyk2w&oe=66235C34",
                             Price = 50.00m,
-                            Title = "Бебе Бос (Николай 1/2)"
+                            Title = "Сини Пеперуди(Никол 7)"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(195),
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4862),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422917578_1103927104362887_2140454483848022782_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=eOvOV-fhrVEAb634ibP&_nc_ht=scontent.fsof10-1.fna&oh=00_AfB9cekCjuO5MZZ33zx8q_JghkOZmrPogD_x7wGp1YIbow&oe=6623411C",
+                            Price = 80.00m,
+                            Title = "Мини Маус(Теодора 2)"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4865),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422283046_1103927131029551_320020852122884371_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=PhEHWe1_m-QAb75WnYN&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDKi9xqOjHabPgjJoGBMzx3cc5DqzIFHsgOtr8-JE0SrA&oe=66233FD9",
+                            Price = 100.00m,
+                            Title = "Кристиано Роналдо(Методи 8)"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4868),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/421992174_1103927164362881_2666073469233497469_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=GX25z23w5rcAb4KrcKH&_nc_ht=scontent.fsof10-1.fna&oh=00_AfByo6aJlE_Ba8y1okKX6-W5kJO7NB_fRYG4vx6byH96vA&oe=66234021",
+                            Price = 150.00m,
+                            Title = "Розова принцеса(Мариета 10)"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4870),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422395532_1103927251029539_8137194788006343813_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=LO9gVorGTSwAb47oA1-&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAYzQlhoRH2fxmdGB5mWLk4HjdxQS5Q7r-4NoVf0nJZFg&oe=6623556B",
+                            Price = 120.00m,
+                            Title = "Състезание с коли(Кристиян 3)"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4873),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422434325_1103927354362862_6819850698041677940_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ukNWu9a7loMAb7ZcZw-&_nc_ht=scontent.fsof10-1.fna&oh=00_AfD2dTbQWL1XwH5fNRhDIB6lN3yPrHWUUkyVO05H3ysOqg&oe=662374B7",
+                            Price = 110.00m,
+                            Title = "Хлапетата/Пирин(Денис 5)"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4875),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422903500_1103933321028932_6325247546336233728_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=EZVht7CFsBAAb74jNz7&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC4YIei0A5QDbwhJfNazjXgjmfw3HAHYw355iCKfaQh4w&oe=662355C3",
+                            Price = 60.00m,
+                            Title = "Розови цветя(Бориса 4)"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4878),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422123188_1103933404362257_1707931504307280465_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=woNTec0Hgy0Ab4fHTmr&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAf_kINoy3ZLN9sFSkoUD9plIOeZyoVwp-9p35ADQvKQA&oe=66234D99",
+                            Price = 70.00m,
+                            Title = "Розова гимнастика(Антония 13)"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4909),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422337680_1103933437695587_2768842852153729910_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=n6kzvpKHKYMAb6zpLwr&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBHtcU1DObFEYGgH-rsdv3w7fH7n-zcWRFnT5T34Yk5sg&oe=66234479",
+                            Price = 65.00m,
+                            Title = "Аржентина/Меси(Илиян)"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4912),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422945261_1104870920935172_7448345022192442547_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=jJ0e0YC9QSsAb65AEiE&_nc_ht=scontent.fsof10-1.fna&oh=00_AfADr8k4touilXWuDeGR0c_vO1UdvnZPEZQuxqZ7xoJg7g&oe=662356BB",
+                            Price = 80.00m,
+                            Title = "Лего(Адриан 3)"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4915),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/422954610_1104870957601835_5166553921804153623_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=03q5H16CEqIAb6Bx76T&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCKtxi9DJ37h8NyQMt929wOjM4PNwLpcRU7Y04YYRxywQ&oe=6623553B",
+                            Price = 50.00m,
+                            Title = "Джунгла/животни(Марти 2)"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4917),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/127996258_3428591943933471_6613145035034934063_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rPtEwbVYSpsAX8PKZXU&_nc_ht=scontent.fsof10-1.fna&oh=00_AfD393zUJS7ZhFbPMSxqEvvGouqHlkLrInYKA97sq2Hdvg&oe=6624BF3F",
                             Price = 10.00m,
                             Title = "Коледни елхи"
                         },
                         new
                         {
-                            Id = 12,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(198),
+                            Id = 22,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4920),
                             ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.18169-9/12301697_913490672110290_3131707004579174335_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ORKDJKSWeZoAX_k70au&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCU2TCno1TEOAxjtlDR3eVOY3eJcWK_lWlPD7c2VyMphg&oe=6624A21A",
                             Price = 12.00m,
                             Title = "Коледни фигури"
                         },
                         new
                         {
-                            Id = 13,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(200),
-                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/346885612_1175653887168525_5354008429856402980_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=hObhR06Be5kAX-tTgc6&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDokQeGR3jVPFokGOf4T-2ErzAqwXyrUMnNwn7NHqgQdw&oe=66025108",
+                            Id = 23,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4922),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/414659694_1083679999720931_4686156170598756137_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=as37wfBwQK8Ab5Mug42&_nc_ht=scontent.fsof10-1.fna&oh=00_AfCGK-reC7PqEOLEWwwzko1sROVZ_8CWj8q-W3YZtNi-0A&oe=66240241",
                             Price = 15.00m,
-                            Title = "Еднорог"
+                            Title = "Зимни сладки"
                         },
                         new
                         {
-                            Id = 14,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(203),
-                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/429942016_1126158058806458_357351569670082917_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=52_xuh-8AD8AX8IJkDL&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC2GOft8pteFCSZoG6CAy8Ot_y5swfu7kOtrW4GqwPhkw&oe=6602E783",
+                            Id = 24,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4924),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/346885612_1175653887168525_5354008429856402980_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=J8pQ0qQs7kAAb4s2bc_&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDJ68lAKqg0E20ah8YVoP4tpvzw3Zxktb1IyES2U4Vwmw&oe=6623EF48",
                             Price = 13.00m,
-                            Title = "Баба Марта"
+                            Title = "Декоративни еднорози"
                         },
                         new
                         {
-                            Id = 15,
-                            CreatedOn = new DateTime(2024, 4, 6, 11, 6, 1, 300, DateTimeKind.Local).AddTicks(244),
+                            Id = 25,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4927),
                             ImageUrl = "https://scontent-sof1-2.xx.fbcdn.net/v/t31.18172-8/13767216_1052053388254017_5059430311043810834_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=4rgx72Z99dsAX8T8yY9&_nc_ht=scontent-sof1-2.xx&oh=00_AfD7EXfGxSBOaVttui_hAOofFJXB-E7elqHjskgoEr5yHA&oe=6630E30F",
                             Price = 11.00m,
                             Title = "Пролетна тема"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4930),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/347598820_1462268427940551_3378899760043768216_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ssELXekml1UAb74Lw3p&_nc_ht=scontent.fsof10-1.fna&oh=00_AfC0Ewx8gIUxsz0I7sadvlZYWCtWMOpEAsoaBtjIrAyw8A&oe=66240EBF",
+                            Price = 10.00m,
+                            Title = "Декоративни котета"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4932),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/408289112_1069083081180623_6103859634370956242_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=mv2MUmF-QO8Ab7EfHv7&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAMXi1gUAJXuSVoXopY7PIiihmWD1lAth0tzDis9JXyuw&oe=66240F1D",
+                            Price = 12.00m,
+                            Title = "Коледни сладки"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4934),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/338166827_548900843899794_5385569313968380087_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=PSCgPeCXrgcAb6j9QsW&_nc_ht=scontent.fsof10-1.fna&oh=00_AfATy6VoG94Cjh2NstybjuKj7sEvlXYDGyHO0ZFwaTaQEQ&oe=66242223",
+                            Price = 15.00m,
+                            Title = "Бонбони пеперуди на клечка"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4937),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/338166827_548900843899794_5385569313968380087_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=PSCgPeCXrgcAb6j9QsW&_nc_ht=scontent.fsof10-1.fna&oh=00_AfATy6VoG94Cjh2NstybjuKj7sEvlXYDGyHO0ZFwaTaQEQ&oe=66242223",
+                            Price = 13.00m,
+                            Title = "Бонбони мечки на клечка"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4939),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/340453821_634241451866643_5453280737476644845_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=87i6kF4Ax98Ab4awAYD&_nc_ht=scontent.fsof10-1.fna&oh=00_AfA3MikW3e7agHZSVd4jqjP-v4rTxNW0EUzjduG4CbmMDg&oe=66241D17",
+                            Price = 11.00m,
+                            Title = "Мини маус"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4942),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/370618359_1006912454064353_122421549472800615_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=y_c-d4EXHPkAb6e8OeC&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDJ1pkGVuhbluUh4dSsyzTegN9yH9N5MqzKQjcHC_oGJg&oe=662406BD",
+                            Price = 10.00m,
+                            Title = "Бебешки сладки"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4944),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/395350593_1045984213490510_5049859778982539766_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=-uaRfcy596cAb6O7E27&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAewl4G0thADHLGKiM4rMrSJPJewbKZQ7KAETgMxt5Urw&oe=66240481",
+                            Price = 12.00m,
+                            Title = "Мини маус"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4947),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/412367668_1078476133574651_2014438863321533166_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=mK10dhm9R6IAb7eU1ZD&_nc_ht=scontent.fsof10-1.fna&oh=00_AfDSYSsBkrpfhDSTcIhp5UvVFMv9HMJ5zp6r-Fsz5N0K5w&oe=6624123D",
+                            Price = 15.00m,
+                            Title = "Vet time"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4950),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/412421912_1079066630182268_8849429455852772027_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=b7_xw_AY00YAb4G4USq&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBxwx2uLEDjZtvETiTF_PJtjEfpJAwarVUuIUHib9qNZg&oe=6624254C",
+                            Price = 13.00m,
+                            Title = "Форма мини маус"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4953),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/273151658_4726256077500378_6856753579275926019_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=yfjlzEaBXswAb7NuBhi&_nc_ht=scontent.fsof10-1.fna&oh=00_AfASCVabXp4kXs0HV1oeLfu7xOkOQz8CC5fYXuFsgC8o0A&oe=66240545",
+                            Price = 11.00m,
+                            Title = "Кехчета еднорог"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4955),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/273049030_4737053996420586_5343548874095564690_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=iG5P5AF1HXkAb6Vt5n3&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBunWEQPHjrel3Lq1DrsmVGbCPp768asWGQdmA-spF19A&oe=6623FAF4",
+                            Price = 10.00m,
+                            Title = "Кехчета мики маус"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4958),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/275972733_4852334931559158_4876683130673051345_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=kRjcinr4qo0Ab4CZZ8U&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAaSiY_pT9eZ7bGGXmwHemkUSg-OeZHxn_h9y-exNDTJg&oe=66240D76",
+                            Price = 12.00m,
+                            Title = "Кехчета с мечета"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4960),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/275888286_4854907834635201_5576219607842184040_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=kIBlo0Frm8cAb5nTa0I&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBVIdHdb4B3_nh2m6JVLQDlDsoPF093SXrHdgBGTNkYSg&oe=6623F44E",
+                            Price = 15.00m,
+                            Title = "Бисквити във формата на единица"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4963),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/278182286_4910435082415809_8231988911027352607_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=zj0DGN2EyjMAb6g6E5n&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBvUrNy0HtVFYqLWzY6C-t5_H2refxaZvBFfTEbZY0ZFw&oe=6623F7F8",
+                            Price = 13.00m,
+                            Title = "Меченца"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            CreatedOn = new DateTime(2024, 4, 16, 12, 5, 6, 730, DateTimeKind.Local).AddTicks(4965),
+                            ImageUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/82200699_2623632034429470_7680587017826074624_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6G_BPMiyr-MAb7F2cJX&_nc_ht=scontent.fsof10-1.fna&oh=00_AfAmCjYKJf4atPcvS1AKyw1Yiq4pfMxJpAgzXizkdoYPHA&oe=66459706",
+                            Price = 11.00m,
+                            Title = "Четирилистна детелина"
                         });
                 });
 
@@ -1014,9 +1447,7 @@ namespace SugarDecoration.Infrastructure.Migrations
 
                     b.HasOne("SugarDecoration.Infrastructure.Data.Models.Product", "Product")
                         .WithMany("CartItems")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Cart");
 

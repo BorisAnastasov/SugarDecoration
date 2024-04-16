@@ -46,9 +46,60 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
 			};
 
-			cartItems.Add(cartItem);
+            cartItem = new CartItem
+            {
+                Id = 4,
+                CartId = 1,
+                Quantity = 1,
+                Text = "Бих искал торта с леги нинджаго ако може да е за 30 парчета за Иван на 10.",
+            };
 
-			return cartItems;
+            cartItems.Add(cartItem);
+
+            cartItem = new CartItem
+            {
+                Id = 5,
+                CartId = 2,
+                ProductId = 8,
+                Quantity = 1,
+                Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
+            };
+
+            cartItems.Add(cartItem);
+
+            cartItem = new CartItem
+            {
+                Id = 6,
+                CartId = 2,
+                ProductId = 2,
+                Quantity = 1,
+                Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
+            };
+
+            cartItems.Add(cartItem);
+
+            cartItem = new CartItem
+            {
+                Id = 7,
+                CartId = 2,
+                ProductId = 10,
+                Quantity = 1,
+                Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
+            };
+
+            cartItems.Add(cartItem);
+
+            cartItem = new CartItem
+            {
+                Id = 8,
+                CartId = 2,
+                Quantity = 1,
+                Text = "Бих искал обикновена синя торта само ако може да е за 20 парчета без име.",
+            };
+
+            cartItems.Add(cartItem);
+
+            return cartItems;
 
 		}
 	}

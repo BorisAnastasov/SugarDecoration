@@ -25,6 +25,17 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 			};
 
 			carts.Add(cart);
+			
+			cart = new Cart 
+			{
+				Id = 2,
+				UserId = "3b034442-ee41-4acb-92cb-374f72d60a59",
+				CreatedOn = DateTime.Now,
+				ModifiedOn = DateTime.Now,
+				CartItems = new List<CartItem>()
+			};
+
+			carts.Add(cart);
 
 			return carts;
 		}
