@@ -18,8 +18,8 @@
                         <h5>@(item.IsRefToProduct ? @item.ProductTitle : "Custom item")</h5>
                         <p>Бройка: @item.Quantity</p>
                         <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="Details">Детайли</a>
-                        <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="Edit">Промени</a>
-                        <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="DeleteFromCart">Изтрий</a>
+                        <a class="btn btn-primary btn-warning" asp-area="" asp-controller="Cart" asp-action="Edit">Промени</a>
+                        <a class="btn btn-primary btn-danger" asp-area="" asp-controller="Cart" asp-action="DeleteFromCart">Изтрий</a>
                     </div>
                 </div>
                 
@@ -29,8 +29,8 @@
     <div class="mt-4">
         Обща бройка: @Model.ItemsCount
     </div>
-    <a asp-action="Create" asp-controller="Order" class="btn btn-primary">Поръчай</a>
-    <a asp-route-cartId="@Model.CartId" asp-action="DeleteCart" asp-controller="Cart" class="btn btn-primary">Изтрий всичко</a>
+    <a asp-action="Create" asp-controller="Order" class="btn btn-primary btn-warning">Поръчай</a>
+    <a asp-route-cartId="@Model.CartId" asp-action="DeleteCart" asp-controller="Cart" class="btn btn-primary btn-danger">Изтрий всичко</a>
 </div>
 
 
