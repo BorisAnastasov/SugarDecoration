@@ -33,13 +33,12 @@ namespace SugarDecoration.App.Controllers
 			{
 				return View("Error404");
 			}
-
-			if (statusCode == 500)
+			else if (statusCode == 500)
 			{
 				return View("Error500");
 			}
-
-			return View();
+            
+            return View();
 		}
     }
 }

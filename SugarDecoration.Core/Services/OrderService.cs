@@ -64,6 +64,7 @@ namespace SugarDecoration.Core.Services
 			{
 				var model = new OrderServiceModel
 				{
+					Id = order.Id,
 					OrderDate = order.OrderDate.ToString(DateTimeFormat),
 					TotalItemCount = order.Cart.CartItems.Count()
 				};
@@ -82,6 +83,7 @@ namespace SugarDecoration.Core.Services
 		public async Task<OrderDetailsModel> GetOrderDetailsAsync(int orderId)
 		{
 			var order = await repository.GetByIdAsync<Order>(orderId);
+			var cart = await repository.GetByIdAsync<Cart>(order.CartId);
 
 			var model = new OrderDetailsModel
 			{

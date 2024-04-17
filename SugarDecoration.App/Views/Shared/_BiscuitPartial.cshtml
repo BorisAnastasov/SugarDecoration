@@ -7,13 +7,13 @@
 			<h5 class="card-title">@Model.Title</h5>
 		</div>
 		<div class="mb-5 d-flex justify-content-center flex-column align-items-center">
-			<a asp-controller="Cake" asp-action="Details" asp-route-id="@Model.Id" style="width:70%;" class="btn btn-primary mb-2">Details</a>
+			<a asp-controller="Biscuit" asp-action="Details" asp-route-id="@Model.Id" style="width:70%;" class="btn btn-primary mb-2">Детайли</a>
 
 			@if (User.IsInRole("Administrator"))
 			{
 				<div class="d-flex">
-					<a class="me-3 btn btn-warning" asp-area="Admin" asp-controller="Cake" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-					<a class="btn btn-danger" asp-area="Admin" asp-controller="Cake" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+					<a class="me-3 btn btn-warning" asp-area="Admin" asp-controller="Biscuit" asp-action="Edit" asp-route-id="@Model.Id">Промени</a>
+					<a class="btn btn-danger" asp-area="Admin" asp-controller="Biscuit" asp-action="Delete" asp-route-id="@Model.Id">Изтрий</a>
 				</div>
 			}
 		</div>

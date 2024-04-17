@@ -1,4 +1,6 @@
-﻿namespace SugarDecoration.Core.Models.Order
+﻿using SugarDecoration.Core.Models.CartItem;
+
+namespace SugarDecoration.Core.Models.Order
 {
 	public class DeleteOrderViewModel
 	{

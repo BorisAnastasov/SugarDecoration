@@ -1,4 +1,4 @@
-﻿@model DeleteCartViewModel
+﻿@model int
 
 @{
     ViewBag.Title = "Delete Product";
@@ -15,7 +15,7 @@
             </div>
             <div class="card-footer">
                 <form asp-controller="Cart" asp-action="DeleteConfirmedCart" method="post">
-                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="@Model" />
                     <button type="submit" class="btn btn-danger">Confirm Delete</button>
                     <a asp-controller="Cart" asp-action="All" class="btn btn-secondary">Cancel</a>
                 </form>

@@ -30,27 +30,30 @@
 						<li class="nav-item">
 							<a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link text-white" asp-area="" asp-controller="Cake" asp-action="All">Торти</a>
-						</li>
-						@if(User.IsAdmin())
+						@if (User.Identity.IsAuthenticated)
 						{
 							<li class="nav-item">
-								<a class="nav-link text-white" asp-area="Admin" asp-controller="Cake" asp-action="Add">Добави торта</a>
+								<a class="nav-link text-white" asp-area="" asp-controller="Cake" asp-action="All">Торти</a>
 							</li>
-						}
-						<li class="nav-item">
-							<a class="nav-link text-white" asp-area="" asp-controller="Biscuit" asp-action="All">Бисквити</a>
-						</li>
-						@if (User.IsAdmin())
-						{
+							@if (User.IsAdmin())
+							{
+								<li class="nav-item">
+									<a class="nav-link text-white" asp-area="Admin" asp-controller="Cake" asp-action="Add">Добави торта</a>
+								</li>
+							}
 							<li class="nav-item">
-								<a class="nav-link text-white" asp-area="Admin" asp-controller="Biscuit" asp-action="Add">Добави бисквити</a>
+								<a class="nav-link text-white" asp-area="" asp-controller="Biscuit" asp-action="All">Бисквити</a>
+							</li>
+							@if (User.IsAdmin())
+							{
+								<li class="nav-item">
+									<a class="nav-link text-white" asp-area="Admin" asp-controller="Biscuit" asp-action="Add">Добави бисквити</a>
+								</li>
+							}
+							<li class="nav-item">
+								<a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AboutUs">За нас</a>
 							</li>
 						}
-						<li class="nav-item">
-							<a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AboutUs">За нас</a>
-						</li>
 					</ul>
 
 					<ul class="navbar-nav">
@@ -62,12 +65,15 @@
 						}
 						else
 						{
-							<li class="nav-item">
-								<a class="nav-link text-white" asp-area="Admin" asp-controller="Order" asp-action="All"><i class="fa-solid fa-tag"></i> Поръчки</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-white" asp-area="" asp-controller="Cart" asp-action="All"><i class="fa-solid fa-cart-shopping"></i>Количка</a>
-							</li>
+							@if (User.Identity.IsAuthenticated)
+							{
+								<li class="nav-item">
+									<a class="nav-link text-white" asp-area="Admin" asp-controller="Order" asp-action="All"><i class="fa-solid fa-tag"></i> Поръчки</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-white" asp-area="" asp-controller="Cart" asp-action="All"><i class="fa-solid fa-cart-shopping"></i>Количка</a>
+								</li>
+							}
 						}
 						
 

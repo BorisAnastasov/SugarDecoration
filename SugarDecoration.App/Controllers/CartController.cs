@@ -64,24 +64,26 @@ namespace SugarDecoration.App.Controllers
 		}
 
         [HttpGet]
-        public async Task<IActionResult> Add(int cartId, int productId) 
+        [Route("Cart/Add/{productId}")]
+        public async Task<IActionResult> Add(int productId)
         {
-			if (!await cartService.ProductExistByIdAsync(productId)) 
-			{
-				return BadRequest();
-			}
-			if (!(await cartService.UserExistsByIdAsync(User.Id())))
-			{
-				return BadRequest();
-			}
+            if (!(await cartService.UserExistsByIdAsync(User.Id())))
+            {
+                return BadRequest();
+            }
 
-			var model = await cartService.GetCartItemDetailsByIdAsync(productId);
+            if (!await cartService.ProductExistByIdAsync(productId))
+            {
+                return RedirectToAction("Error", "Home", new { statusCode = 404 });
+            }
+
+			var model = await cartService.GetProductInformationByIdAsync(productId);
 
             return View(model);
         }
 
-		[HttpGet]
-		public async Task<IActionResult> Add(int cartId)
+        [HttpGet]
+		public async Task<IActionResult> AddCustom()
 		{
 			if (!(await cartService.UserExistsByIdAsync(User.Id())))
 			{

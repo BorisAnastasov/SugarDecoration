@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.App.Extensions;
 using SugarDecoration.Core.Contracts;
-using SugarDecoration.Core.Contracts.Admin;
 
 namespace SugarDecoration.App.Controllers
 {
-	public class OrderController : BaseController
+    public class OrderController : BaseController
 	{
 		private readonly IOrderService orderService;
 

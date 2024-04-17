@@ -33,7 +33,10 @@ namespace SugarDecoration.Extensions
                 options.AddPolicy("Administrator", policy => policy.RequireRole(AdminRoleName));
                 options.AddPolicy("User", policy => policy.RequireRole(UserRoleName));
             });
-
+			services.ConfigureApplicationCookie(options =>
+			{
+				options.LogoutPath = "/User/Login";
+			});
             
 
             return services;
@@ -58,7 +61,8 @@ namespace SugarDecoration.Extensions
 				options.SignIn.RequireConfirmedAccount = false;
 			})
 			.AddRoles<IdentityRole>()
-			.AddEntityFrameworkStores<SugarDecorationDb>();
+			.AddEntityFrameworkStores<SugarDecorationDb>()
+			.AddDefaultTokenProviders();
 
 			return services;
 		}

@@ -70,6 +70,7 @@ namespace SugarDecoration.Core.Services
 
             var query = new AllQueryCartModel
             {
+                CartId = cart.Id,
                 CartItems = items,
                 ItemsCount = items.Count
             };

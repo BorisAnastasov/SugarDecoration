@@ -1,49 +1,49 @@
 ﻿@model CakeFormModel
 @{
-	ViewBag.Title = "Add new Cake";
+	ViewBag.Title = "Добави нова торта";
 }
 
 <div class="container">
 	<h1 class="text-center">@ViewBag.Title</h1>
     <form asp-action="Edit">
         <div class="form-group">
-            <label asp-for="Title" class="control-label"></label>
+            <label asp-for="Title" class="control-label">Има на тортата</label>
             <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="Price" class="control-label"></label>
+            <label asp-for="Price" class="control-label">Цена</label>
             <input asp-for="Price" class="form-control" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="Layers" class="control-label"></label>
+            <label asp-for="Layers" class="control-label">Етажи</label>
             <input asp-for="Layers" class="form-control" />
             <span asp-validation-for="Layers" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="Form" class="control-label"></label>
+            <label asp-for="Form" class="control-label">Форма</label>
             <input asp-for="Form" class="form-control" />
             <span asp-validation-for="Form" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="ImageUrl" class="control-label"></label>
+            <label asp-for="ImageUrl" class="control-label">Линк на изображението</label>
             <input asp-for="ImageUrl" class="form-control" />
             <span asp-validation-for="ImageUrl" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="Portions" class="control-label"></label>
+            <label asp-for="Portions" class="control-label">Порции</label>
             <input asp-for="Portions" class="form-control" />
             <span asp-validation-for="Portions" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="CategoryId" class="control-label"></label>
+            <label asp-for="CategoryId" class="control-label">Категория</label>
             <select asp-for="CategoryId" class="form-control">
                     @foreach (var item in Model.Categories)
                     {
@@ -54,12 +54,12 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="CreatedOn" class="control-label"></label>
+            <label asp-for="CreatedOn" class="control-label">Създадена на</label>
             <input asp-for="CreatedOn" class="form-control" disabled />
             <span asp-validation-for="CreatedOn" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button style="margin:10px" type="submit" class="btn btn-primary">Запази</button>
     </form>
 </div>
 @section Scripts {

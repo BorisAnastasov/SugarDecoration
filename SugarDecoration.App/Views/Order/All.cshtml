@@ -4,7 +4,7 @@
 }
 
 <div class="container">
-    <h2>Orders</h2>
+    <h2>Поръчки</h2>
     <ul class="list-group">
         @if (Model.Orders.Any())
         {
@@ -13,8 +13,12 @@
                 <li class="list-group-item">
                     <div class="cart-item">
                         <div>
-                            <p>OrderDate: @order.OrderDate</p>
-                            <p>TotalCount: @order.TotalItemCount</p>
+                            <p>Ден на поръчване: @order.OrderDate</p>
+                            <p>Обща бройка: @order.TotalItemCount</p>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" asp-route-id="@order.Id" asp-controller="Order" asp-action="Details">Детайли</a>
+                            <a class="btn btn-primary" asp-route-id="@order.Id" asp-controller="Order" asp-action="Delete">Изтрий</a>
                         </div>
                     </div>
                 </li>
@@ -22,9 +26,8 @@
         }
         else
         {
-            
             <p>
-                There are no orders.
+                В момента няма поръчки.
             </p>
         }
 

@@ -1,7 +1,7 @@
 ﻿@model CartItemFormModel
 
 @{
-    ViewData["Title"] = "Add Cart Item";
+    ViewData["Title"] = "Добавете свое";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -14,18 +14,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="ProductTitle" class="control-label"></label>
-                <input asp-for="ProductTitle" class="form-control" />
-                <span asp-validation-for="ProductTitle" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
                 <input asp-for="Text" class="form-control" />
                 <span asp-validation-for="Text" class="text-danger"></span>
@@ -36,9 +24,8 @@
                 <input asp-for="Quantity" class="form-control" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
-            <input asp-for="ProductId"  class="form-control d-none" />
 
-            <div class="form-group">
+            <div class="form-group m-2">
                 <input type="submit" value="Add" class="btn btn-primary" />
             </div>
         </form>

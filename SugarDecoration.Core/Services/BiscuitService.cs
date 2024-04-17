@@ -67,6 +67,7 @@ namespace SugarDecoration.Core.Services
 		public async Task<BiscuitDetailsModel> GetBiscuitDetailsByIdAsync(int id)
         {
             var biscuit = await repository.GetByIdAsync<Biscuit>(id);
+			var category = await repository.GetByIdAsync<BiscuitCategory>(biscuit.CategoryId);
 
             var biscuitModel = new BiscuitDetailsModel
             {
@@ -75,7 +76,7 @@ namespace SugarDecoration.Core.Services
                 Price = biscuit.Product.Price.ToString(),
                 Quantity = biscuit.Quantity,
                 ImageUrl = biscuit.Product.ImageUrl,
-                Category = biscuit.Category.Name
+                Category = category.Name
             };
 
             return biscuitModel;
