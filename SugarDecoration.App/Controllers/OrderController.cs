@@ -12,18 +12,17 @@ namespace SugarDecoration.App.Controllers
 		{
 			orderService = _orderService;
 		}
-
-		[HttpPost]
-		public async Task<IActionResult> Create(int cardId)
+		[HttpGet]
+		public async Task<IActionResult> Create(int id)
 		{
-			if (!await orderService.CartExistById(cardId))
+			if (!await orderService.CartExistById(id))
 			{
 				return BadRequest();
 			}
 
-			await orderService.CreateOrder(cardId, User.Id());
+			await orderService.CreateOrder(id, User.Id());
 			return RedirectToAction("All", "Order");
-	}
+		}
 
 		[HttpGet]
 		public async Task<IActionResult> All()
@@ -35,7 +34,7 @@ namespace SugarDecoration.App.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Details(int id)
 		{
-			if (await orderService.IsThisTheOwnerOfTheOrder(User.Id(), id))
+			if (!await orderService.IsThisTheOwnerOfTheOrder(User.Id(), id))
 			{
 				return Unauthorized();
 			}

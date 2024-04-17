@@ -1,6 +1,6 @@
 ﻿@model AllOrdersQueryModel
 @{
-    ViewBag.Title = "Всички поръчки";
+	ViewBag.Title = "Всички поръчки";
 }
 
 <div class="container">
@@ -13,18 +13,19 @@
                 <li class="list-group-item">
                     <div class="cart-item">
                         <div>
-                            <p>Дата на поръчване: @order.OrderDate</p>
-                            <p>Общо продукти: @order.TotalItemCount</p>
+                            <p>Ден на поръчване: @order.OrderDate</p>
+                            <p>Обща бройка: @order.TotalItemCount</p>
                         </div>
-                        <a class="btn btn-primary" asp-area="Admin" asp-controller="Order" asp-action="Delete">Изтрий</a>
-                        <a class="btn btn-primary" asp-area="Admin" asp-controller="Order" asp-action="Details">Детайли</a>
+                        <div>
+                            <a class="btn btn-primary btn-warning" asp-route-id="@order.Id" asp-area="Admin" asp-controller="Order" asp-action="Details">Детайли</a>
+                            <a class="btn btn-primary btn-danger" asp-route-id="@order.Id" asp-controller="Order" asp-action="Delete">Изтрий</a>
+                        </div>
                     </div>
                 </li>
-            }double[] arr = Console.ReadLine().Split
+            }
         }
         else
         {
-
             <p>
                 В момента няма поръчки.
             </p>

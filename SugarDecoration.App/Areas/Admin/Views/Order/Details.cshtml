@@ -1,45 +1,56 @@
-﻿@model OrderDetailsModel
+﻿@model SugarDecoration.Core.Models.Order.OrderDetailsModel
 @{
-    ViewBag.Title = $"Всички продукти в поръчка {Model.Id}";
+    ViewBag.Title = "Всички продукти в поръчката";
 }
 
-<div class="container">
-    <h2>Количка</h2>
-    <div style="right:50px;">
-        <a class="btn btn-primary m-2" asp-area="" asp-controller="Cart" asp-action="AddCustom">Добави друго</a>
-    </div>
-    <ul class="list-group">
-        @foreach (var item in Model.Items)
-        {
-            <li class="list-group-item">
-                <div class="cart-item">
-                    <img src="@(item.IsRefToProduct ? @item.ImageUrl : "~/images/NoProduct.bmp")" alt="@(item.IsRefToProduct ? @item.ProductTitle : "Custom item")">
-                    <div>
-                        <h5>@(item.IsRefToProduct ? @item.ProductTitle : "Custom item")</h5>
-                        <p>Бройка: @item.Quantity</p>
-                        <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="Details">Детайли</a>
-                    </div>
-                </div>
-
-            </li>
-        }
-    </ul>
-    <div class="mt-4">
-        Обща бройка: @Model.ItemCount
-    </div>
+<div class="container" style="color:black;">
+	<h1 class="mt-5" style="color:white;">@ViewBag.Title</h1>
+	<div class="mt-4 card p-2">
+		<p>Дата на поръчване: @Model.OrderDate</p>
+		<p>Обща бройка: @Model.ItemCount</p>
+		<hr />
+		<h3>Поръчки:</h3>
+		@if (Model.Items.Any())
+		{
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Име на продукта</th>
+						<th>Снимка</th>
+						<th>Текст</th>
+						<th>Телефонен номер</th>
+						<th>Бройка</th>
+						<th>Има продукт</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model.Items)
+					{
+						<tr>
+							@if (item.IsRefToProduct())
+							{
+								<td>@item.ProductTitle <p>ID: @item.Id</p></td>
+								<td><img src="@item.ImageUrl" alt="Product Image" class="img-fluid" style="max-height: 100px;" /></td>
+							}
+							else
+							{
+								<td>Няма продукт</td>
+								<td>Няма снимка</td>
+							}
+							<td>
+								@item.Text
+							</td>
+							<td>@item.PhoneNumber</td>
+							<td>@item.Quantity</td>
+							<td>@(item.IsRefToProduct() ? "Да" : "Не")</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+		else
+		{
+			<p>Няма продукти.</p>
+		}
+	</div>
 </div>
-
-
-<style>
-    .cart-item {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #dee2e6;
-        padding: 10px;
-    }
-
-        .cart-item img {
-            max-width: 100px;
-            margin-right: 20px;
-        }
-</style>

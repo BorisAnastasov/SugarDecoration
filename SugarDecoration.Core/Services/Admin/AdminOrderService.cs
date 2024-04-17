@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts.Admin;
+using SugarDecoration.Core.Models.CartItem;
 using SugarDecoration.Core.Models.Order;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
@@ -43,10 +44,12 @@ namespace SugarDecoration.Core.Services.Admin
 
             foreach (var order in orders)
             {
+                var items = await repository.AllReadOnly<CartItem>().Where(x => x.CartId == order.CartId).ToListAsync();
                 var model = new OrderServiceModel
                 {
+                    Id = order.Id,
                     OrderDate = order.OrderDate.ToString(DateTimeFormat),
-                    TotalItemCount = order.Cart.CartItems.Count()
+                    TotalItemCount = items.Count
                 };
                 models.Add(model);
             }
@@ -62,16 +65,27 @@ namespace SugarDecoration.Core.Services.Admin
 
         public async Task<OrderDetailsModel> GetOrderDetails(int orderId)
         {
-            var order = await repository.GetByIdAsync<Order>(orderId);
+			var order = await repository.GetByIdAsync<Order>(orderId);
+			var items = await repository.AllReadOnly<CartItem>().Where(x => x.CartId == order.CartId)
+			.Select(i => new CartItemDetailsModel
+			{
+				Id = i.Id,
+				ProductTitle = i.IsRefToProduct() ? i.Product.Title : null,
+				ImageUrl = i.IsRefToProduct() ? i.Product.ImageUrl : null,
+				Text = i.Text,
+				PhoneNumber = i.PhoneNumber,
+				Quantity = i.Quantity
+			}).ToListAsync();
 
-            var model = new OrderDetailsModel
-            {
-                Id = order.Id,
-                OrderDate = order.OrderDate.ToString(DateTimeFormat),
-                ItemCount = order.Cart.CartItems.Count(),
-            };
+			var model = new OrderDetailsModel
+			{
+				Id = order.Id,
+				OrderDate = order.OrderDate.ToString(DateTimeFormat),
+				ItemCount = items.Count,
+				Items = items
+			};
 
-            return model;
-        }
+			return model;
+		}
     }
 }

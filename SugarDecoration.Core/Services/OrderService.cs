@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
+using SugarDecoration.Core.Models.CartItem;
 using SugarDecoration.Core.Models.Order;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
@@ -7,7 +8,7 @@ using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product
 
 namespace SugarDecoration.Core.Services
 {
-	public class OrderService : IOrderService
+    public class OrderService : IOrderService
 	{
 		private readonly IRepository repository;
 		public OrderService(IRepository _repository)
@@ -18,7 +19,14 @@ namespace SugarDecoration.Core.Services
 		public async Task<bool> CartExistById(int cartId)
 		=> repository.GetByIdAsync<Cart>(cartId).Result != null;
 
-		public async Task CreateOrder(int cartId, string userId)
+        public async Task ChangeTheCartStatus(int cartId)
+        {
+			var cart = await repository.GetByIdAsync<Cart>(cartId);
+			cart.IsOrdered = true;
+			await repository.SaveChangesAsync();
+        }
+
+        public async Task CreateOrder(int cartId, string userId)
 		{
 			var order = new Order
 			{
@@ -27,12 +35,12 @@ namespace SugarDecoration.Core.Services
 				OrderDate = DateTime.Now,
 			};
 
-			var cart = await repository.GetByIdAsync<Cart>(cartId);
-			cart.IsOrdered = true;
-
-			await repository.AddAsync(order);
+            await repository.AddAsync(order);
 			await repository.SaveChangesAsync();
-		}
+
+			await ChangeTheCartStatus(cartId);
+
+        }
 
 		public async Task<DeleteOrderViewModel> DeleteOrder(int orderId)
 		{
@@ -62,11 +70,12 @@ namespace SugarDecoration.Core.Services
 
 			foreach (var order in orders) 
 			{
+				var items = await repository.AllReadOnly<CartItem>().Where(x=>x.CartId == order.CartId).ToListAsync();	
 				var model = new OrderServiceModel
 				{
 					Id = order.Id,
 					OrderDate = order.OrderDate.ToString(DateTimeFormat),
-					TotalItemCount = order.Cart.CartItems.Count()
+					TotalItemCount = items.Count
 				};
 				models.Add(model);
 			}
@@ -83,13 +92,23 @@ namespace SugarDecoration.Core.Services
 		public async Task<OrderDetailsModel> GetOrderDetailsAsync(int orderId)
 		{
 			var order = await repository.GetByIdAsync<Order>(orderId);
-			var cart = await repository.GetByIdAsync<Cart>(order.CartId);
+			var items = await repository.AllReadOnly<CartItem>().Where(x => x.CartId == order.CartId)
+			.Select(i => new CartItemDetailsModel
+			{
+				Id = i.Id,
+				ProductTitle = i.IsRefToProduct() ? i.Product.Title : null,
+				ImageUrl = i.IsRefToProduct() ? i.Product.ImageUrl : null,
+				Text = i.Text,
+				PhoneNumber = i.PhoneNumber,
+				Quantity = i.Quantity
+			}).ToListAsync();
 
 			var model = new OrderDetailsModel
 			{
 				Id = order.Id,
 				OrderDate = order.OrderDate.ToString(DateTimeFormat),
-				ItemCount = order.Cart.CartItems.Count(),
+				ItemCount = items.Count,
+				Items = items
 			};
 
 			return model;

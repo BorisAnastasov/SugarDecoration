@@ -13,7 +13,7 @@ namespace SugarDecoration.Core.Contracts
 		Task<CartItemDetailsModel> GetCartItemDetailsByIdAsync(int id);
 		Task AddCartItemAsync(string userId, CartItemFormModel model);
 		Task<CartItemFormModel> EditCartItemAsync(int id);
-		Task EditCartItemAsync(int id, CartItemFormModel model);
+		Task EditCartItemAsync(CartItemFormModel model);
 		Task DeleteCartItemConfirmedAsync(int id);
 		Task<bool> UserExistsByIdAsync(string id);
 		Task<bool> CartItemExistByIdAsync(int id);

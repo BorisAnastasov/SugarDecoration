@@ -1,21 +1,59 @@
-﻿@model CartItemDetailsModel
+﻿@model OrderDetailsModel
 @{
-	ViewBag.Title = "";
-
+	ViewBag.Title = "Детайли за поръчката";
 }
 
-<div class="cart-item">
-    <div class="product-details">
-        <h4>@Model.ProductTitle</h4>
-        <p>@Model.Text</p>
-        @if (Model.IsRefToProduct)
-        {
-            <img src="@Model.ImageUrl" alt="@Model.ProductTitle" />
-        }
-        <p>Quantity: @Model.Quantity</p>
-    </div>
+<div class="container" style="color:black;">
+	<h1 class="mt-5" style="color:white;">@ViewBag.Title</h1>
+	<div class="mt-4 card p-2">
+		<p>Дата на поръчване: @Model.OrderDate</p>
+		<p>Обща бройка: @Model.ItemCount</p>
+		<hr />
+		<h3>Поръчки:</h3>
+		@if (Model.Items.Any())
+		{
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Име на продукта</th>
+						<th>Снимка</th>
+						<th>Текст</th>
+						<th>Телефонен номер</th>
+						<th>Бройка</th>
+						<th>Има продукт</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model.Items)
+					{
+						<tr>
+							@if (item.IsRefToProduct())
+							{
+								<td>@item.ProductTitle <p>ID: @item.Id</p></td>
+								<td><img src="@item.ImageUrl" alt="Product Image" class="img-fluid" style="max-height: 100px;" /></td>
+							}
+							else
+							{
+								<td>Няма продукт</td>
+								<td>Няма снимка</td>
+							}
+							<td>
+								@item.Text
+								<div>
+									<a class="btn btn-primary" asp-route-id="@item.Id" asp-area="" asp-controller="Cart" asp-action="Details">Детайли</a>
+								</div>
+							</td>
+							<td>@item.PhoneNumber</td>
+							<td>@item.Quantity</td>
+							<td>@(item.IsRefToProduct() ? "Да" : "Не")</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+		else
+		{
+			<p>Няма продукти.</p>
+		}
+	</div>
 </div>
-
-
-
-

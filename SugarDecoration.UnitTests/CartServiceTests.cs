@@ -551,7 +551,7 @@ namespace SugarDecoration.UnitTests
 
 			result.Text = "New test";
 
-			await cartService.EditCartItemAsync(1, result);
+			await cartService.EditCartItemAsync(result);
 
 			Assert.AreEqual(repo.GetByIdAsync<CartItem>(1).Result.Text, result.Text);
 		}

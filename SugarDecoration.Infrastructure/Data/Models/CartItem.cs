@@ -32,6 +32,12 @@ namespace SugarDecoration.Infrastructure.Data.Models
         [Comment("Description of order")]
         public string Text { get; set; } = string.Empty;
 
+        [Required]
+        [MaxLength(PhoneNumberMaxLength)]
+        [Phone]
+        [Comment("User's number")]
+        public string PhoneNumber { get; set; } = string.Empty;
+
         public bool IsRefToProduct()
 		=> this.ProductId != null;
 

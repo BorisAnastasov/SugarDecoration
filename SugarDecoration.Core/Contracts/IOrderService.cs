@@ -13,5 +13,6 @@ namespace SugarDecoration.Core.Contracts
 		Task<bool> IsOrderActive(int orderId);
 		Task<bool> CartExistById(int cartId);
 		Task<bool> OrderExistById(int orderId);
+		Task ChangeTheCartStatus(int cartId);
 	}
 }

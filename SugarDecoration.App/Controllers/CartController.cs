@@ -50,7 +50,6 @@ namespace SugarDecoration.App.Controllers
 			return View(cartId);
 		}
 
-		[HttpPost]
 		public async Task<IActionResult> DeleteConfirmedCart(int cartId) 
 		{
 
@@ -143,14 +142,14 @@ namespace SugarDecoration.App.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(int id, CartItemFormModel model)
+		public async Task<IActionResult> Edit(CartItemFormModel model)
 		{
-			if (!await cartService.CartItemExistByIdAsync(id))
+			if (!await cartService.CartItemExistByIdAsync(model.Id))
 			{
 				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
-			await cartService.EditCartItemAsync(id, model);
+			await cartService.EditCartItemAsync( model);
 
 			var userId = User.Id();
 

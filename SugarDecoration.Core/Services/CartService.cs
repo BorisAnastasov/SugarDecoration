@@ -20,7 +20,7 @@ namespace SugarDecoration.Core.Services
 
         public async Task<Cart> GetOrCreateAndGetCart(string userId)
         {
-            var cart = await repository.AllReadOnly<Cart>().FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = await repository.AllReadOnly<Cart>().FirstOrDefaultAsync(c => c.UserId == userId&&!c.IsOrdered);
 
             if (cart == null)
             {
@@ -102,6 +102,7 @@ namespace SugarDecoration.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        
         public async Task<CartItemDetailsModel> GetCartItemDetailsByIdAsync(int id)
         {
             var item = await repository.GetByIdAsync<CartItem>(id);
@@ -110,13 +111,15 @@ namespace SugarDecoration.Core.Services
             {
                 Id = item.Id,
                 Text = item.Text,
+                PhoneNumber = item.PhoneNumber,
                 Quantity = item.Quantity
             };
 
             if (item.IsRefToProduct())
             {
-				model.ProductTitle = item.Product.Title;
-                model.ImageUrl = item.Product.ImageUrl;
+                var product = await repository.GetByIdAsync<Product>(item.ProductId);
+				model.ProductTitle = product.Title;
+                model.ImageUrl = product.ImageUrl;
             }
 
             return model;
@@ -130,6 +133,7 @@ namespace SugarDecoration.Core.Services
             var item = new CartItem
             {
                 Text = model.Text,
+                PhoneNumber = model.PhoneNumber,
                 Quantity = model.Quantity,
                 CartId = cart.Id
             };
@@ -159,24 +163,27 @@ namespace SugarDecoration.Core.Services
             var model = new CartItemFormModel
             {
                 Text = item.Text,
+                PhoneNumber = item.PhoneNumber,
                 Quantity = item.Quantity,
             };
 
             if (item.IsRefToProduct())
             {
+                var product = await repository.GetByIdAsync<Product>(item.ProductId);
                 model.ProductId = item.ProductId;
-                model.ProductTitle = item.Product.Title;
-                model.ImageUrl = item.Product.ImageUrl;
+                model.ProductTitle = product.Title;
+                model.ImageUrl = product.ImageUrl;
             }
 
             return model;
         }
 
-        public async Task EditCartItemAsync(int id, CartItemFormModel model)
+        public async Task EditCartItemAsync(CartItemFormModel model)
         {
-            var item = await repository.GetByIdAsync<CartItem>(id);
+            var item = await repository.GetByIdAsync<CartItem>(model.Id);
 
             item.Text = model.Text;
+            item.PhoneNumber = model.PhoneNumber;
             item.Quantity = model.Quantity;
 
             await repository.SaveChangesAsync();

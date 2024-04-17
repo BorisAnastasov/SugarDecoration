@@ -22,6 +22,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				ProductId = 1,
 				Quantity = 1,
 				Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
+                PhoneNumber = "+398987645"
 			};
 
 			cartItems.Add(cartItem);
@@ -33,7 +34,8 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				ProductId = 2,
 				Quantity = 1,
 				Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
-			};
+                PhoneNumber = "+398987645"
+            };
 
 			cartItems.Add(cartItem);
 
@@ -44,7 +46,8 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
 				ProductId = 3,
 				Quantity = 1,
 				Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
-			};
+                PhoneNumber = "+398987645"
+            };
 
             cartItem = new CartItem
             {
@@ -52,6 +55,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
                 CartId = 1,
                 Quantity = 1,
                 Text = "Бих искал торта с леги нинджаго ако може да е за 30 парчета за Иван на 10.",
+                PhoneNumber = "+398987645"
             };
 
             cartItems.Add(cartItem);
@@ -63,6 +67,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
                 ProductId = 8,
                 Quantity = 1,
                 Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
+                PhoneNumber = "+398987645"
             };
 
             cartItems.Add(cartItem);
@@ -74,6 +79,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
                 ProductId = 2,
                 Quantity = 1,
                 Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
+                PhoneNumber = "+398987645"
             };
 
             cartItems.Add(cartItem);
@@ -85,6 +91,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
                 ProductId = 10,
                 Quantity = 1,
                 Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
+                PhoneNumber = "+398987645"
             };
 
             cartItems.Add(cartItem);
@@ -95,6 +102,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
                 CartId = 2,
                 Quantity = 1,
                 Text = "Бих искал обикновена синя торта само ако може да е за 20 парчета без име.",
+                PhoneNumber = "+398987645"
             };
 
             cartItems.Add(cartItem);
