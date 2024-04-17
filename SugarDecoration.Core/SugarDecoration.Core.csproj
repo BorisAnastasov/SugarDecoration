@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensions\**" />
     <Compile Remove="ViewModels\**" />
+    <EmbeddedResource Remove="Extensions\**" />
     <EmbeddedResource Remove="ViewModels\**" />
+    <None Remove="Extensions\**" />
     <None Remove="ViewModels\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Extensions\" />
   </ItemGroup>
 
   <ItemGroup>

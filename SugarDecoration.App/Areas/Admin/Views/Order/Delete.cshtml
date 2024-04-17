@@ -1,1 +1,30 @@
-﻿
+﻿@model DeleteOrderViewModel
+
+@{
+    ViewBag.Title = "Изтриване на тази поръчка";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div style="color:black;" class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <p class="mb-0"><strong>Създадена на:</strong> @Model.OrderDate</p>
+                <p class="text-danger mt-3">"Сигурни ли сте, че искате да изтриете тази поръчка?"</p>
+            </div>
+            <div class="card-footer">
+                <form asp-area="Admin" asp-controller="Order" asp-action="DeleteConfirmed" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Изтрий</button>
+                    <a asp-area=""  asp-controller="Order" asp-action="All" class="btn btn-secondary">Назад</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

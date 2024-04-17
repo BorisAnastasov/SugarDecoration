@@ -37,10 +37,13 @@ namespace SugarDecoration.Core.Services
 
 			cakesToShow = sorting switch
 			{
-				ProductSorting.Price => cakesToShow.OrderByDescending(c => c.Product.Price),
+                ProductSorting.LowestPrice => cakesToShow.OrderBy(c => c.Product.Price),
+                ProductSorting.HighestPrice => cakesToShow.OrderByDescending(c => c.Product.Price),
+                ProductSorting.Newest => cakesToShow.OrderByDescending(c => c.Product.CreatedOn),
+                ProductSorting.Oldest => cakesToShow.OrderBy(c => c.Product.CreatedOn),
 
-				_ => cakesToShow.OrderByDescending(c => c.Id)
-			};
+                _ => cakesToShow.OrderBy(c => c.Id)
+            };
 
 
 			var cakes = await cakesToShow

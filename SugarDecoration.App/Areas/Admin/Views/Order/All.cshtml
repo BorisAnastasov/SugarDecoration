@@ -1,10 +1,10 @@
 ﻿@model AllOrdersQueryModel
 @{
-    ViewBag.Title = "All Orders";
+    ViewBag.Title = "Всички поръчки";
 }
 
 <div class="container">
-    <h2>Orders</h2>
+    <h2>@ViewBag.Title</h2>
     <ul class="list-group">
         @if (Model.Orders.Any())
         {
@@ -13,20 +13,20 @@
                 <li class="list-group-item">
                     <div class="cart-item">
                         <div>
-                            <p>OrderDate: @order.OrderDate</p>
-                            <p>TotalCount: @order.TotalItemCount</p>
+                            <p>Дата на поръчване: @order.OrderDate</p>
+                            <p>Общо продукти: @order.TotalItemCount</p>
                         </div>
-                        <a class="btn btn-primary" asp-area="Admin" asp-controller="Order" asp-action="Delete">Delete</a>
-                        <a class="btn btn-primary" asp-area="Admin" asp-controller="Order" asp-action="Details">Details</a>
+                        <a class="btn btn-primary" asp-area="Admin" asp-controller="Order" asp-action="Delete">Изтрий</a>
+                        <a class="btn btn-primary" asp-area="Admin" asp-controller="Order" asp-action="Details">Детайли</a>
                     </div>
                 </li>
-            }
+            }double[] arr = Console.ReadLine().Split
         }
         else
         {
 
             <p>
-                There are no orders.
+                В момента няма поръчки.
             </p>
         }
 

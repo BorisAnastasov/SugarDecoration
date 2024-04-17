@@ -19,7 +19,7 @@ namespace SugarDecoration.App.Controllers
         {
 			if (!(await cartService.UserExistsByIdAsync(User.Id())))
 			{
-				return BadRequest();
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
 			var query = await cartService.AllAsync(User.Id());
@@ -30,9 +30,9 @@ namespace SugarDecoration.App.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Details(int id) 
 		{
-			if (!(await cartService.UserExistsByIdAsync(User.Id())))
+			if (!await cartService.UserExistsByIdAsync(User.Id()))
 			{
-				return BadRequest();
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
 			var model = await cartService.GetCartItemDetailsByIdAsync(id);
@@ -45,7 +45,7 @@ namespace SugarDecoration.App.Controllers
 		{
 			if (!(await cartService.UserExistsByIdAsync(User.Id())))
 			{
-				return BadRequest();
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 			return View(cartId);
 		}
@@ -56,7 +56,7 @@ namespace SugarDecoration.App.Controllers
 
 			if (!(await cartService.UserExistsByIdAsync(User.Id())))
 			{
-				return BadRequest();
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 			await cartService.DeleteConfirmedAsync(cartId);
 			
@@ -87,7 +87,7 @@ namespace SugarDecoration.App.Controllers
 		{
 			if (!(await cartService.UserExistsByIdAsync(User.Id())))
 			{
-				return BadRequest();
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
 			var model = new CartItemFormModel();
@@ -109,7 +109,7 @@ namespace SugarDecoration.App.Controllers
 		{
 			if (!await cartService.CartItemExistByIdAsync(id))
 			{
-				return BadRequest();
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
 			return View(id);
@@ -120,7 +120,7 @@ namespace SugarDecoration.App.Controllers
 		{
 			if (!await cartService.CartItemExistByIdAsync(id)) 
 			{
-				return BadRequest();
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 			await cartService.DeleteCartItemConfirmedAsync(id);
 
@@ -134,7 +134,7 @@ namespace SugarDecoration.App.Controllers
 		{
 			if (!await cartService.CartItemExistByIdAsync(id))
 			{
-				return BadRequest();
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
 			var item = await cartService.EditCartItemAsync(id);
@@ -147,7 +147,7 @@ namespace SugarDecoration.App.Controllers
 		{
 			if (!await cartService.CartItemExistByIdAsync(id))
 			{
-				return BadRequest();
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
 			await cartService.EditCartItemAsync(id, model);

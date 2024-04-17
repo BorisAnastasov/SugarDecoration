@@ -36,9 +36,12 @@ namespace SugarDecoration.Core.Services
 
 			biscuitsToShow = sorting switch
 			{
-				ProductSorting.Price => biscuitsToShow.OrderByDescending(c => c.Product.Price),
+				ProductSorting.LowestPrice => biscuitsToShow.OrderBy(c => c.Product.Price),
+				ProductSorting.HighestPrice => biscuitsToShow.OrderByDescending(c => c.Product.Price),
+				ProductSorting.Newest => biscuitsToShow.OrderByDescending(c => c.Product.CreatedOn),
+				ProductSorting.Oldest => biscuitsToShow.OrderBy(c => c.Product.CreatedOn),
 
-				_ => biscuitsToShow.OrderByDescending(c => c.Id)
+				_ => biscuitsToShow.OrderBy(c => c.Id)
 			};
 
 

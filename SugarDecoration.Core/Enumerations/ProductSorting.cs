@@ -3,7 +3,8 @@
     public enum ProductSorting
     {
         Newest = 0,
-        Price = 1,
-
+        Oldest = 1,
+        LowestPrice = 2,
+        HighestPrice = 3
     }
 }

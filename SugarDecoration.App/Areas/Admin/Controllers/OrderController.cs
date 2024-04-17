@@ -24,8 +24,6 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            
-
             var model = await orderService.GetOrderDetails(id);
 
             return View(model);
