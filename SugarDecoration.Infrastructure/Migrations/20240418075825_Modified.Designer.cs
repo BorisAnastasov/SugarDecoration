@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SugarDecoration.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using SugarDecoration.Infrastructure.Data;
 namespace SugarDecoration.Infrastructure.Migrations
 {
     [DbContext(typeof(SugarDecorationDb))]
-    partial class SugarDecorationDbModelSnapshot : ModelSnapshot
+    [Migration("20240418075825_Modified")]
+    partial class Modified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

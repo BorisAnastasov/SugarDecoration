@@ -30,7 +30,6 @@ namespace SugarDecoration.Core.Models.Biscuit
         public IEnumerable<BiscuitCategoryViewModel> Categories { get; set; }
                     = new List<BiscuitCategoryViewModel>();
 
-        [Required(ErrorMessage = RequiredMessage)]
         public string CreatedOn { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]

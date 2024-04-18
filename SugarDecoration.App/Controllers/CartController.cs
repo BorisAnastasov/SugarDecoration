@@ -35,6 +35,7 @@ namespace SugarDecoration.App.Controllers
 				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
+
 			var model = await cartService.GetCartItemDetailsByIdAsync(id);
 
 			return View(model);

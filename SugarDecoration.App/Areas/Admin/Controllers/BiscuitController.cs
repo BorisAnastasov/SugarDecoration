@@ -118,16 +118,6 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
                 return View(model);
             }
 
-            DateTime date = DateTime.Now;
-
-            if (!DateTime.TryParseExact(
-                            model.CreatedOn
-                            , DateTimeFormat
-                            , CultureInfo.InvariantCulture
-                            , DateTimeStyles.None, out date))
-            {
-                ModelState.AddModelError(nameof(model.CreatedOn), $"Invalid date! Format must be: {DateTimeFormat}");
-            }
 
             if (!ModelState.IsValid)
             {

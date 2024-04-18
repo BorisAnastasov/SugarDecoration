@@ -39,7 +39,6 @@ namespace SugarDecoration.Core.Models.Cake
         public IEnumerable<CakeCategoryViewModel> Categories { get; set; } 
                     = new List<CakeCategoryViewModel>();
 
-        [Required(ErrorMessage = RequiredMessage)]
         public string CreatedOn { get; set; } = string.Empty;
 
 

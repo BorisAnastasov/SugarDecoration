@@ -24,10 +24,11 @@ namespace SugarDecoration.Core.Services.Admin
                 Title = model.Title,
                 Price = decimal.Parse(model.Price),
                 ImageUrl = model.ImageUrl,
-                CreatedOn = DateTime.Parse(model.CreatedOn),
+                CreatedOn = DateTime.Now,
             };
             await repository.AddAsync(product);
 
+            await repository.SaveChangesAsync();
 
             var cake = new Cake
             {
@@ -37,7 +38,6 @@ namespace SugarDecoration.Core.Services.Admin
                 CategoryId = model.CategoryId,
                 ProductId = product.Id
             };
-
 
             await repository.AddAsync(cake);
 

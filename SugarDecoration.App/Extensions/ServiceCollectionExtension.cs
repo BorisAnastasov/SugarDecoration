@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Contracts.Admin;
@@ -12,8 +13,8 @@ using static SugarDecoration.Infrastructure.Data.Constants.RoleConstants;
 
 namespace SugarDecoration.Extensions
 {
-    public static class ServiceCollectionExtension
-	{ 
+	public static class ServiceCollectionExtension
+	{
 
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services)
 		{
@@ -28,18 +29,23 @@ namespace SugarDecoration.Extensions
 			services.AddScoped<IOrderService, OrderService>();
 			services.AddTransient<IApplicationUserService, ApplicationUserService>();
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Administrator", policy => policy.RequireRole(AdminRoleName));
-                options.AddPolicy("User", policy => policy.RequireRole(UserRoleName));
-            });
-			services.ConfigureApplicationCookie(options =>
+			services.AddAuthorization(options =>
 			{
-				options.LogoutPath = "/User/Login";
+				options.AddPolicy("Administrator", policy => policy.RequireRole(AdminRoleName));
+				options.AddPolicy("User", policy => policy.RequireRole(UserRoleName));
 			});
-            
+			services.AddAuthentication(options =>
+			{
+				options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			})
+			.AddCookie(options =>
+			{
+				options.LoginPath = "/User/Login";
+			});
 
-            return services;
+
+			return services;
 		}
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
 		{

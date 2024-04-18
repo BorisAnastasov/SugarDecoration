@@ -24,9 +24,11 @@ namespace SugarDecoration.Core.Services.Admin
                 Title = model.Title,
                 Price = decimal.Parse(model.Price),
                 ImageUrl = model.ImageUrl,
-                CreatedOn = DateTime.Parse(model.CreatedOn),
+                CreatedOn = DateTime.Now,
             };
+            await repository.AddAsync(product);
 
+            await repository.SaveChangesAsync();
 
             var biscuit = new Biscuit()
             {
@@ -35,7 +37,6 @@ namespace SugarDecoration.Core.Services.Admin
                 ProductId = product.Id,
             };
 
-            await repository.AddAsync(product);
             await repository.AddAsync(biscuit);
 
             await repository.SaveChangesAsync();

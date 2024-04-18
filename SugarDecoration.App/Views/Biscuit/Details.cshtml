@@ -14,14 +14,15 @@
         </div>
         <div class="card col-8 border-0">
             <p style="font-size:25px;"><u>@Model.Title</u></p>
-            <p>Цена: <b>@Model.Price</b></p>
+            <p>Цена: <b>@Model.Price</b> лв.</p>
+            <p>Брой: <b>@Model.Quantity</b></p>
             <p>Категория: <b>@Model.Category</b></p>
             <div class="form-inline">
                 @if (this.User.IsInRole("Administrator"))
                 {
-                    <a class="btn btn-warning" asp-controller="Biscuit" asp-action="Edit"
+                    <a class="btn btn-warning" asp-area="Admin" asp-controller="Biscuit" asp-action="Edit"
                        asp-route-id="@Model.Id">Промени</a>
-                    <a class="ml-2 btn btn-danger" asp-controller="Biscuit" asp-action="Delete"
+                    <a class="ml-2 btn btn-danger" asp-area="Admin" asp-controller="Biscuit" asp-action="Delete"
                        asp-route-id="@Model.Id">Изтрий</a>
                 }
                 else

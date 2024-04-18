@@ -1,59 +1,45 @@
-﻿@model OrderDetailsModel
+﻿@model CartItemDetailsModel
 @{
-	ViewBag.Title = "Детайли за поръчката";
+    ViewBag.Title = "Детайли за поръчката";
 }
 
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
 <div class="container" style="color:black;">
-	<h1 class="mt-5" style="color:white;">@ViewBag.Title</h1>
-	<div class="mt-4 card p-2">
-		<p>Дата на поръчване: @Model.OrderDate</p>
-		<p>Обща бройка: @Model.ItemCount</p>
-		<hr />
-		<h3>Поръчки:</h3>
-		@if (Model.Items.Any())
-		{
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Име на продукта</th>
-						<th>Снимка</th>
-						<th>Текст</th>
-						<th>Телефонен номер</th>
-						<th>Бройка</th>
-						<th>Има продукт</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model.Items)
-					{
-						<tr>
-							@if (item.IsRefToProduct())
-							{
-								<td>@item.ProductTitle <p>ID: @item.Id</p></td>
-								<td><img src="@item.ImageUrl" alt="Product Image" class="img-fluid" style="max-height: 100px;" /></td>
-							}
-							else
-							{
-								<td>Няма продукт</td>
-								<td>Няма снимка</td>
-							}
-							<td>
-								@item.Text
-								<div>
-									<a class="btn btn-primary" asp-route-id="@item.Id" asp-area="" asp-controller="Cart" asp-action="Details">Детайли</a>
-								</div>
-							</td>
-							<td>@item.PhoneNumber</td>
-							<td>@item.Quantity</td>
-							<td>@(item.IsRefToProduct() ? "Да" : "Не")</td>
-						</tr>
-					}
-				</tbody>
-			</table>
-		}
-		else
-		{
-			<p>Няма продукти.</p>
-		}
-	</div>
+    <div class="row">
+        <div class="col-4">
+            @if (Model.IsRefToProduct())
+            {
+                <img class="card-img-top" style="width: 20rem;"
+                src="@Model.ImageUrl" alt="House Image">
+            }
+
+            else
+            {
+                <img class="card-img-top" style="width: 20rem;"
+                     src="~/images/custom.jpg" alt="House Image">
+            }
+
+        </div>
+        <div class="card col-8 border-0 p-2">
+            <p style="font-size:25px;"><u>@(Model.IsRefToProduct()?Model.ProductTitle:"Собствен продукт")</u></p>
+            <p>Текст: <b>@Model.Text</b></p>
+            <p>Телефонен номер: <b>@Model.PhoneNumber</b></p>
+            <p>Брой: <b>@Model.Quantity</b></p>
+            <div class="form-inline">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-warning" asp-area="" asp-controller="Cart" asp-action="Edit"
+                       asp-route-id="@Model.Id">Промени</a>
+                    <a class="ml-2 btn btn-danger" asp-area="" asp-controller="Cart" asp-action="DeleteFromCart"
+                       asp-route-id="@Model.Id">Изтрий</a>
+                }
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+

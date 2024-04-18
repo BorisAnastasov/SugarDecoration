@@ -107,7 +107,7 @@ namespace SugarDecoration.App.Controllers
 
 				if (result.Succeeded)
 				{
-					return RedirectToAction("Index", "Home");
+					return RedirectToAction("Index", "Home",new { area = ""});
 				}
 			}
 
