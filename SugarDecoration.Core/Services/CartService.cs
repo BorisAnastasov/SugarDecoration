@@ -102,7 +102,6 @@ namespace SugarDecoration.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        
         public async Task<CartItemDetailsModel> GetCartItemDetailsByIdAsync(int id)
         {
             var item = await repository.GetByIdAsync<CartItem>(id);
@@ -162,6 +161,7 @@ namespace SugarDecoration.Core.Services
 
             var model = new CartItemFormModel
             {
+                Id = id,
                 Text = item.Text,
                 PhoneNumber = item.PhoneNumber,
                 Quantity = item.Quantity,
