@@ -21,7 +21,7 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         {
             if (!(await biscuitService.ExistsByIdAsync(id)))
             {
-                return BadRequest();
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
             var model = await biscuitService.DeleteBiscuitAsync(id);
@@ -34,7 +34,7 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         {
             if (!(await biscuitService.ExistsByIdAsync(id)))
             {
-                return BadRequest();
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
             await biscuitService.DeleteBiscuitConfirmedAsync(id);
 
@@ -46,7 +46,7 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         {
             if (!(await biscuitService.ExistsByIdAsync(id)))
             {
-                return BadRequest();
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
             var biscuit = await biscuitService.EditBiscuitAsync(id);
@@ -59,7 +59,7 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         {
             if (!(await biscuitService.ExistsByIdAsync(id)))
             {
-                return BadRequest();
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
             if (!(await biscuitService.BiscuitCategoryExistsByIdAsync(model.CategoryId)))

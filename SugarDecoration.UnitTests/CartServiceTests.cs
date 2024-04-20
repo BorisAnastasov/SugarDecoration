@@ -556,28 +556,6 @@ namespace SugarDecoration.UnitTests
 			Assert.AreEqual(repo.GetByIdAsync<CartItem>(1).Result.Text, result.Text);
 		}
 
-		[Test]
-		public async Task TestUserExists() 
-		{
-			var repo = new Repository(context);
-			cartService = new CartService(repo);
-
-			var user = new ApplicationUser()
-			{
-				Id = "66cad688-c9cc-40db-baae-394c2c3d0d77",
-				FirstName = "Test",
-				LastName = "Test",
-				UserName = "Test123",
-				NormalizedUserName = "TEST123",
-				Email = "test@gmail.com",
-			};
-			await repo.AddAsync(user);
-			await repo.SaveChangesAsync();
-
-			var result = await cartService.UserExistsByIdAsync(user.Id);
-
-			Assert.That(result, Is.True);
-		}
 
 		[Test]
 		public async Task TestCartItemExist() 

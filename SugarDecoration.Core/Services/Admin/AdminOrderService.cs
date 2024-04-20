@@ -87,5 +87,11 @@ namespace SugarDecoration.Core.Services.Admin
 
 			return model;
 		}
+
+        public async Task<bool> IsOrderActive(int orderId)
+        => repository.GetByIdAsync<Order>(orderId).Result.IsActive;
+
+        public async Task<bool> OrderExistById(int orderId)
+        => repository.GetByIdAsync<Order>(orderId).Result != null;
     }
 }

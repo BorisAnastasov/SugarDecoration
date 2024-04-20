@@ -190,8 +190,6 @@ namespace SugarDecoration.Core.Services
 
         }
 
-        public async Task<bool> UserExistsByIdAsync(string id)
-            => await repository.GetByIdAsync<ApplicationUser>(id) != null;
 
         public async Task<bool> CartItemExistByIdAsync(int id)
         => await repository.GetByIdAsync<CartItem>(id) != null;
@@ -218,6 +216,20 @@ namespace SugarDecoration.Core.Services
             };
 
             return model;
+        }
+
+        public async Task<bool> IsThisUserTheCartItemOwnerByIdAsync(int cartItemId, string userId)
+        {
+            var cartItem = await repository.GetByIdAsync<CartItem>(cartItemId);
+
+            return cartItem.Cart.UserId == userId;  
+        }
+
+        public async Task<bool> CartExistByIdAsync(int id)
+        {
+            var cart = await repository.GetByIdAsync<Cart>(id);
+
+            return cart != null;
         }
     }
 }

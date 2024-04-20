@@ -34,10 +34,11 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id) 
         {
-            if (!(await cakeService.ExistsByIdAsync(id))) 
+            if (!(await cakeService.ExistsByIdAsync(id)))
             {
-                return BadRequest();    
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
+
             var cake = await cakeService.GetCakeDetailsByIdAsync(id);
 
             return View(cake);

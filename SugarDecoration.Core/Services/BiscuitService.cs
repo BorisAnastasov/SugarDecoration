@@ -79,7 +79,8 @@ namespace SugarDecoration.Core.Services
                 Price = biscuit.Product.Price.ToString(),
                 Quantity = biscuit.Quantity,
                 ImageUrl = biscuit.Product.ImageUrl,
-                Category = category.Name
+                Category = category.Name,
+				ProductId = biscuit.ProductId
             };
 
             return biscuitModel;

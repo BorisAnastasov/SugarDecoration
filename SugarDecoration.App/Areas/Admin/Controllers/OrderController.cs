@@ -11,7 +11,6 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
 		public OrderController(IAdminOrderService _orderService)
         {
             orderService = _orderService;
-            
         }
 
         [HttpGet]
@@ -24,6 +23,17 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
+
+            if (!await orderService.OrderExistById(id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+            if (!await orderService.IsOrderActive(id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
             var model = await orderService.GetOrderDetails(id);
 
             return View(model);
@@ -32,6 +42,18 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+
+            if (!await orderService.OrderExistById(id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+            if (!await orderService.IsOrderActive(id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+
             var model = await orderService.DeleteOrder(id);
 
             return View(model);
@@ -40,6 +62,18 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
+            if (!await orderService.OrderExistById(id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+            if (!await orderService.IsOrderActive(id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+
             await orderService.DeleteOrderConfirmed(id);
 
             return RedirectToAction("All");

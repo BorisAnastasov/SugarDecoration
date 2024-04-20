@@ -34,9 +34,13 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
+            if (!User.Identity!.IsAuthenticated) 
+            {
+                return Redirect("/User/Register");
+            }
             if (!(await biscuitService.ExistsByIdAsync(id)))
             {
-                return BadRequest();
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
             var biscuit = await biscuitService.GetBiscuitDetailsByIdAsync(id);

@@ -10,7 +10,7 @@
         <li class="nav-item">
             @if (await user.UserFullName(User.Id()) is var fullName && fullName != null)
             {
-                <a class="nav-link text-white">Здравейте, @fullName</a>
+                <a class="nav-link text-white">Здравейте, @fullName!</a>
             }
             else
             {

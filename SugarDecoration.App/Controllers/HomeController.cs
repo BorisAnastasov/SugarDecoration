@@ -21,24 +21,25 @@ namespace SugarDecoration.App.Controllers
             return View(products);
         }
 
-        public async Task<IActionResult> AboutUs()
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        
+
+        public IActionResult Error403()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(int statusCode)
+        public IActionResult Error404() 
         {
-			if (statusCode == 404)
-			{
-				return View("Error404");
-			}
-			else if (statusCode == 500)
-			{
-				return View("Error500");
-			}
-            
             return View();
-		}
+        }
+
+        public IActionResult Error500()
+        {
+            return View();
+        }
     }
 }

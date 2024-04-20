@@ -1,13 +1,12 @@
 ﻿using SugarDecoration.Core.Attributes;
 using SugarDecoration.Core.Models.CakeCategory;
-using SugarDecoration.Core.Models.Contracts;
 using System.ComponentModel.DataAnnotations;
 using static SugarDecoration.Core.Constants.MessageConstants;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
 
 namespace SugarDecoration.Core.Models.Cake
 {
-    public class CakeFormModel:IFormProductModel
+    public class CakeFormModel
     {
 
         [Required(ErrorMessage = RequiredMessage)]

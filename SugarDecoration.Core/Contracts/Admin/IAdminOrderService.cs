@@ -11,5 +11,8 @@ namespace SugarDecoration.Core.Contracts.Admin
         Task DeleteOrderConfirmed(int orderId);
 
         Task<OrderDetailsModel> GetOrderDetails(int orderId);
+        Task<bool> OrderExistById(int orderId);
+        Task<bool> IsOrderActive(int orderId);
+
     }
 }

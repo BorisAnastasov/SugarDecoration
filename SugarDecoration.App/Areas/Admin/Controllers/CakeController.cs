@@ -20,7 +20,7 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         {
             if (!(await cakeService.ExistsByIdAsync(id)))
             {
-                return BadRequest();
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
             var model = await cakeService.DeleteCakeAsync(id);
@@ -33,8 +33,9 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         {
             if (!(await cakeService.ExistsByIdAsync(id)))
             {
-                return BadRequest();
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
+
             await cakeService.DeleteCakeConfirmedAsync(id);
 
             return RedirectToAction("All", "Cake", new { area = "" });
@@ -45,7 +46,7 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         {
             if (!(await cakeService.ExistsByIdAsync(id)))
             {
-                return BadRequest();
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
             var cake = await cakeService.EditCakeAsync(id);
@@ -56,11 +57,11 @@ namespace SugarDecoration.App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, CakeFormModel model)
         {
-
             if (!(await cakeService.ExistsByIdAsync(id)))
             {
-                return BadRequest();
+                return RedirectToAction("Error404", "Home", new { area = "" });
             }
+
 
             if (!(await cakeService.CakeCategoryExists(model.CategoryId)))
             {

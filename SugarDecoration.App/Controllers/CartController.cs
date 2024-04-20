@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using SugarDecoration.App.Extensions;
 using SugarDecoration.Core.Contracts;
 using SugarDecoration.Core.Models.CartItem;
 
 namespace SugarDecoration.App.Controllers
 {
-	public class CartController : BaseController
+    public class CartController : BaseController
     {
         private readonly ICartService cartService;
 
@@ -17,10 +18,10 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
         public async Task<IActionResult> All() 
         {
-			if (!(await cartService.UserExistsByIdAsync(User.Id())))
-			{
-				return RedirectToAction("Error", "Home", new { statusCode = 404 });
-			}
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
 
 			var query = await cartService.AllAsync(User.Id());
 
@@ -30,13 +31,22 @@ namespace SugarDecoration.App.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Details(int id) 
 		{
-			if (!await cartService.UserExistsByIdAsync(User.Id()))
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
+
+			if (!await cartService.CartItemExistByIdAsync(id)) 
 			{
-				return RedirectToAction("Error", "Home", new { statusCode = 404 });
+				return RedirectToAction("Error404", "Home", new { area = ""});
 			}
 
+			if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id())) 
+			{
+                return RedirectToAction("Error403", "Home", new { area = "" });
+            }
 
-			var model = await cartService.GetCartItemDetailsByIdAsync(id);
+            var model = await cartService.GetCartItemDetailsByIdAsync(id);
 
 			return View(model);
 		}
@@ -44,21 +54,43 @@ namespace SugarDecoration.App.Controllers
 		[HttpGet]
 		public async Task<IActionResult> DeleteCart(int cartId) 
 		{
-			if (!(await cartService.UserExistsByIdAsync(User.Id())))
-			{
-				return RedirectToAction("Error", "Home", new { statusCode = 404 });
-			}
-			return View(cartId);
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
+
+            if (!await cartService.CartExistByIdAsync(cartId))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+            if (!await cartService.IsThisUserTheCartOwnerByIdAsync(cartId, User.Id()))
+            {
+                return RedirectToAction("Error403", "Home", new { area = "" });
+            }
+
+            return View(cartId);
 		}
 
 		public async Task<IActionResult> DeleteConfirmedCart(int cartId) 
 		{
 
-			if (!(await cartService.UserExistsByIdAsync(User.Id())))
-			{
-				return RedirectToAction("Error", "Home", new { statusCode = 404 });
-			}
-			await cartService.DeleteConfirmedAsync(cartId);
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
+
+            if (!await cartService.CartExistByIdAsync(cartId))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+            if (!await cartService.IsThisUserTheCartOwnerByIdAsync(cartId, User.Id()))
+            {
+                return RedirectToAction("Error403", "Home", new { area = "" });
+            }
+
+            await cartService.DeleteConfirmedAsync(cartId);
 			
 			return RedirectToAction(nameof(All));
 		}
@@ -67,14 +99,14 @@ namespace SugarDecoration.App.Controllers
         [Route("Cart/Add/{productId}")]
         public async Task<IActionResult> Add(int productId)
         {
-            if (!(await cartService.UserExistsByIdAsync(User.Id())))
+            if (!User.Identity!.IsAuthenticated)
             {
-                return BadRequest();
+                return Redirect("/User/Register");
             }
 
             if (!await cartService.ProductExistByIdAsync(productId))
             {
-                return RedirectToAction("Error", "Home", new { statusCode = 404 });
+                return RedirectToAction("Error404", "Home");
             }
 
 			var model = await cartService.GetProductInformationByIdAsync(productId);
@@ -85,12 +117,12 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
 		public async Task<IActionResult> AddCustom()
 		{
-			if (!(await cartService.UserExistsByIdAsync(User.Id())))
-			{
-				return RedirectToAction("Error", "Home", new { statusCode = 404 });
-			}
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
 
-			var model = new CartItemFormModel();
+            var model = new CartItemFormModel();
 
 			return View(model);
 		}
@@ -98,6 +130,15 @@ namespace SugarDecoration.App.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddToCart(CartItemFormModel model)
 		{
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return Redirect(Request.GetDisplayUrl());
+            }
 
             await cartService.AddCartItemAsync(User.Id(), model);
 
@@ -107,22 +148,43 @@ namespace SugarDecoration.App.Controllers
         [HttpGet]
 		public async Task<IActionResult> DeleteFromCart(int id)
 		{
-			if (!await cartService.CartItemExistByIdAsync(id))
-			{
-				return RedirectToAction("Error", "Home", new { statusCode = 404 });
-			}
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
 
-			return View(id);
+            if (!await cartService.CartItemExistByIdAsync(id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()))
+            {
+                return RedirectToAction("Error403", "Home", new { area = "" });
+            }
+
+            return View(id);
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> DeleteConfirmedFromCart(int id)
 		{
-			if (!await cartService.CartItemExistByIdAsync(id)) 
-			{
-				return RedirectToAction("Error", "Home", new { statusCode = 404 });
-			}
-			await cartService.DeleteCartItemConfirmedAsync(id);
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
+
+            if (!await cartService.CartItemExistByIdAsync(id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()))
+            {
+                return RedirectToAction("Error403", "Home", new { area = "" });
+            }
+
+            await cartService.DeleteCartItemConfirmedAsync(id);
 
 			var userId = User.Id();
 
@@ -132,12 +194,22 @@ namespace SugarDecoration.App.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Edit(int id) 
 		{
-			if (!await cartService.CartItemExistByIdAsync(id))
-			{
-				return RedirectToAction("Error", "Home", new { statusCode = 404 });
-			}
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
 
-			var item = await cartService.EditCartItemAsync(id);
+            if (!await cartService.CartItemExistByIdAsync(id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
+
+            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()))
+            {
+                return RedirectToAction("Error403", "Home", new { area = "" });
+            }
+
+            var item = await cartService.EditCartItemAsync(id);
 
 			return View(item);
 		}
@@ -145,16 +217,30 @@ namespace SugarDecoration.App.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit(CartItemFormModel model)
 		{
-			if (!await cartService.CartItemExistByIdAsync(model.Id))
-			{
-				return RedirectToAction("Error", "Home", new { statusCode = 404 });
-			}
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/User/Register");
+            }
 
-			await cartService.EditCartItemAsync( model);
+            if (!await cartService.CartItemExistByIdAsync(model.Id))
+            {
+                return RedirectToAction("Error404", "Home", new { area = "" });
+            }
 
-			var userId = User.Id();
+            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(model.Id, User.Id()))
+            {
+                return RedirectToAction("Error403", "Home", new { area = "" });
+            }
 
-			return RedirectToAction(nameof(All), new { userId });
+            if (!ModelState.IsValid)
+            {
+                return Redirect(Request.GetDisplayUrl());
+            }
+
+            await cartService.EditCartItemAsync( model);
+
+
+			return RedirectToAction(nameof(All));
 		}
 	}
 }
