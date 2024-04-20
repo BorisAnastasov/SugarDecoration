@@ -192,6 +192,11 @@ namespace SugarDecoration.App.Controllers
 				return RedirectToAction("All", "Order", new { area = "Admin" });
 			}
 
+            if (User.IsAdmin()) 
+            {
+				return RedirectToAction("All", "Order", new { area = "Admin" });
+			}
+
 			var userId = User.Id();
 
 			return RedirectToAction(nameof(All), new { userId });
