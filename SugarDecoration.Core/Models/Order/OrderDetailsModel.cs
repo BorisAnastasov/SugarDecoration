@@ -7,6 +7,7 @@ namespace SugarDecoration.Core.Models.Order
         public int Id { get; set; }
 		public string OrderDate { get; set; } = string.Empty;
 		public int ItemCount { get; set; }
+        public string UserName { get; set; } = string.Empty;
         public IEnumerable<CartItemDetailsModel> Items { get; set; } = new List<CartItemDetailsModel>();
     }
 }

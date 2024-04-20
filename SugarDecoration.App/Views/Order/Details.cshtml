@@ -30,7 +30,7 @@
 							@if (item.IsRefToProduct())
 							{
 								<td>@item.ProductTitle <p>ID: @item.Id</p></td>
-								<td><img src="@item.ImageUrl" alt="Product Image" class="img-fluid" style="max-height: 100px;" /></td>
+								<td><img src="@Url.Content(item.ImageUrl)" alt="Product Image" class="img-fluid" style="max-height: 100px;" /></td>
 							}
 							else
 							{
@@ -39,9 +39,6 @@
 							}
 							<td>
 								@item.Text
-								<div>
-									<a class="btn btn-primary" asp-route-id="@item.Id" asp-area="" asp-controller="Cart" asp-action="Details">Детайли</a>
-								</div>
 							</td>
 							<td>@item.PhoneNumber</td>
 							<td>@item.Quantity</td>

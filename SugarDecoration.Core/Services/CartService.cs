@@ -221,8 +221,9 @@ namespace SugarDecoration.Core.Services
         public async Task<bool> IsThisUserTheCartItemOwnerByIdAsync(int cartItemId, string userId)
         {
             var cartItem = await repository.GetByIdAsync<CartItem>(cartItemId);
+            var cart = await repository.GetByIdAsync<Cart>(cartItem.CartId);
 
-            return cartItem.Cart.UserId == userId;  
+            return cart.UserId == userId;  
         }
 
         public async Task<bool> CartExistByIdAsync(int id)

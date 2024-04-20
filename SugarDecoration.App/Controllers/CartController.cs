@@ -6,7 +6,7 @@ using SugarDecoration.Core.Models.CartItem;
 
 namespace SugarDecoration.App.Controllers
 {
-    public class CartController : BaseController
+	public class CartController : BaseController
     {
         private readonly ICartService cartService;
 
@@ -41,7 +41,7 @@ namespace SugarDecoration.App.Controllers
 				return RedirectToAction("Error404", "Home", new { area = ""});
 			}
 
-			if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id())) 
+			if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()) && !User.IsAdmin()) 
 			{
                 return RedirectToAction("Error403", "Home", new { area = "" });
             }
@@ -158,8 +158,9 @@ namespace SugarDecoration.App.Controllers
                 return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
-            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()))
-            {
+            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()) && !User.IsAdmin())
+
+			{
                 return RedirectToAction("Error403", "Home", new { area = "" });
             }
 
@@ -179,12 +180,17 @@ namespace SugarDecoration.App.Controllers
                 return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
-            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()))
+            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()) && !User.IsAdmin())
             {
                 return RedirectToAction("Error403", "Home", new { area = "" });
             }
 
             await cartService.DeleteCartItemConfirmedAsync(id);
+
+			if (User.IsAdmin())
+			{
+				return RedirectToAction("All", "Order", new { area = "Admin" });
+			}
 
 			var userId = User.Id();
 
@@ -204,7 +210,7 @@ namespace SugarDecoration.App.Controllers
                 return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
-            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()))
+            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(id, User.Id()) && !User.IsAdmin())
             {
                 return RedirectToAction("Error403", "Home", new { area = "" });
             }
@@ -214,9 +220,9 @@ namespace SugarDecoration.App.Controllers
 			return View(item);
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> Edit(CartItemFormModel model)
-		{
+        [HttpPost]
+        public async Task<IActionResult> Edit(CartItemFormModel model)
+        {
             if (!User.Identity!.IsAuthenticated)
             {
                 return Redirect("/User/Register");
@@ -227,7 +233,7 @@ namespace SugarDecoration.App.Controllers
                 return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
-            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(model.Id, User.Id()))
+            if (!await cartService.IsThisUserTheCartItemOwnerByIdAsync(model.Id, User.Id()) && !User.IsAdmin())
             {
                 return RedirectToAction("Error403", "Home", new { area = "" });
             }
@@ -237,8 +243,12 @@ namespace SugarDecoration.App.Controllers
                 return Redirect(Request.GetDisplayUrl());
             }
 
-            await cartService.EditCartItemAsync( model);
+            await cartService.EditCartItemAsync(model);
 
+            if (User.IsAdmin()) 
+            {
+                return RedirectToAction("All", "Order", new { area = "Admin"});
+            }
 
 			return RedirectToAction(nameof(All));
 		}

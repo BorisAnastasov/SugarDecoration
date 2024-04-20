@@ -47,7 +47,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 4,
                 Quantity = 6,
-                CategoryId = 1,
+                CategoryId = 2,
                 ProductId = 24
             });
 
@@ -56,7 +56,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 5,
                 Quantity = 9,
-                CategoryId = 1,
+                CategoryId = 3,
                 ProductId = 25
             });
 
@@ -65,7 +65,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 6,
                 Quantity = 8,
-                CategoryId = 1,
+                CategoryId = 2,
                 ProductId = 26
             });
 
@@ -83,7 +83,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 8,
                 Quantity = 4,
-                CategoryId = 1,
+                CategoryId = 3,
                 ProductId = 28
             });
 
@@ -92,7 +92,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 9,
                 Quantity = 6,
-                CategoryId = 1,
+                CategoryId =3,
                 ProductId = 29
             });
 
@@ -101,7 +101,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 10,
                 Quantity = 8,
-                CategoryId = 1,
+                CategoryId = 3,
                 ProductId = 30
             });
 
@@ -137,7 +137,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 14,
                 Quantity = 6,
-                CategoryId = 3,
+                CategoryId = 2,
                 ProductId = 34
             });
 
@@ -146,7 +146,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 15,
                 Quantity = 8,
-                CategoryId = 3,
+                CategoryId = 2,
                 ProductId = 35
             });
 
@@ -155,7 +155,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 16,
                 Quantity = 5,
-                CategoryId = 3,
+                CategoryId = 2,
                 ProductId = 36
             });
 
@@ -182,7 +182,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             {
                 Id = 19,
                 Quantity = 2,
-                CategoryId = 3,
+                CategoryId = 2,
                 ProductId = 39
             });
 

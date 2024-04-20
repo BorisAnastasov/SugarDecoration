@@ -1,4 +1,4 @@
-﻿@model SugarDecoration.Core.Models.Order.OrderDetailsModel
+﻿@model OrderDetailsModel
 @{
     ViewBag.Title = "Всички продукти в поръчката";
 }
@@ -8,6 +8,7 @@
 	<div class="mt-4 card p-2">
 		<p>Дата на поръчване: @Model.OrderDate</p>
 		<p>Обща бройка: @Model.ItemCount</p>
+		<p>Клиент: @Model.UserName</p>
 		<hr />
 		<h3>Поръчки:</h3>
 		@if (Model.Items.Any())
@@ -30,7 +31,7 @@
 							@if (item.IsRefToProduct())
 							{
 								<td>@item.ProductTitle <p>ID: @item.Id</p></td>
-								<td><img src="@item.ImageUrl" alt="Product Image" class="img-fluid" style="max-height: 100px;" /></td>
+								<td><img src="@Url.Content(item.ImageUrl)" alt="Product Image" class="img-fluid" style="max-height: 100px;" /></td>
 							}
 							else
 							{
@@ -39,6 +40,9 @@
 							}
 							<td>
 								@item.Text
+								<a class="btn btn-primary" asp-route-id="@item.Id" asp-area="" asp-controller="Cart" asp-action="Details">Детайли</a>
+								<a class="btn btn-primary btn-warning" asp-route-id="@item.Id" asp-area="" asp-controller="Cart" asp-action="Edit">Промени</a>
+								<a class="btn btn-primary btn-danger" asp-route-id="@item.Id" asp-area="" asp-controller="Cart" asp-action="DeleteFromCart">Изтрий</a>
 							</td>
 							<td>@item.PhoneNumber</td>
 							<td>@item.Quantity</td>

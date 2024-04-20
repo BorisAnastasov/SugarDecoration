@@ -63,7 +63,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             cartItem = new CartItem
             {
                 Id = 5,
-                CartId = 2,
+                CartId = 1,
                 ProductId = 8,
                 Quantity = 1,
                 Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
@@ -75,7 +75,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             cartItem = new CartItem
             {
                 Id = 6,
-                CartId = 2,
+                CartId = 1,
                 ProductId = 2,
                 Quantity = 1,
                 Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
@@ -87,7 +87,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             cartItem = new CartItem
             {
                 Id = 7,
-                CartId = 2,
+                CartId = 1,
                 ProductId = 10,
                 Quantity = 1,
                 Text = "Бих искал такава торта само ако може да е за 30 парчета за Иван на 10.",
@@ -99,7 +99,7 @@ namespace SugarDecoration.Infrastructure.Data.Configuration
             cartItem = new CartItem
             {
                 Id = 8,
-                CartId = 2,
+                CartId = 1,
                 Quantity = 1,
                 Text = "Бих искал обикновена синя торта само ако може да е за 20 парчета без име.",
                 PhoneNumber = "+398987645"

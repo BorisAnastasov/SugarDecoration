@@ -4,6 +4,7 @@ using SugarDecoration.Core.Models.CartItem;
 using SugarDecoration.Core.Models.Order;
 using SugarDecoration.Infrastructure.Data.Contracts;
 using SugarDecoration.Infrastructure.Data.Models;
+using SugarDecoration.Infrastructure.Data.Models.Account;
 using static SugarDecoration.Infrastructure.Data.Constants.DataConstants.Product;
 
 namespace SugarDecoration.Core.Services.Admin
@@ -77,12 +78,15 @@ namespace SugarDecoration.Core.Services.Admin
 				Quantity = i.Quantity
 			}).ToListAsync();
 
+            var user = await repository.GetByIdAsync<ApplicationUser>(order.UserId);
+
 			var model = new OrderDetailsModel
 			{
 				Id = order.Id,
 				OrderDate = order.OrderDate.ToString(DateTimeFormat),
 				ItemCount = items.Count,
-				Items = items
+				Items = items,
+                UserName = user.FirstName + " " + user.LastName,
 			};
 
 			return model;

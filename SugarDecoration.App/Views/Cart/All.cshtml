@@ -16,7 +16,7 @@
                 <div class="cart-item">
                     @if (item.IsRefToProduct)
                     {
-                        <img src="@item.ImageUrl" alt="@item.ProductTitle">
+                        <img src="@Url.Content(item.ImageUrl)" alt="@item.ProductTitle">
                     }
                     else
                     {

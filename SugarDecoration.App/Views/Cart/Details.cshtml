@@ -12,7 +12,7 @@
             @if (Model.IsRefToProduct())
             {
                 <img class="card-img-top" style="width: 20rem;"
-                src="@Model.ImageUrl" alt="House Image">
+                src="@Url.Content(Model.ImageUrl)" alt="House Image">
             }
 
             else
@@ -24,7 +24,7 @@
         </div>
         <div class="card col-8 border-0 p-2">
             <p style="font-size:25px;"><u>@(Model.IsRefToProduct()?Model.ProductTitle:"Собствен продукт")</u></p>
-            <p>Текст: <b>@Model.Text</b></p>
+            <p>Допълнителна информация: <b>@Model.Text</b></p>
             <p>Телефонен номер: <b>@Model.PhoneNumber</b></p>
             <p>Брой: <b>@Model.Quantity</b></p>
             <div class="form-inline">

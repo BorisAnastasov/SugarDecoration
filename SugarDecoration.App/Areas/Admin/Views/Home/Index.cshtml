@@ -42,7 +42,7 @@
 						@foreach (var cake in cakes)
 						{
 							<div class="carousel-item @(cake == cakes.First() ? "active" : "")">
-								<img class="d-block w-100" style="height: 400px; object-fit: contain;" src="@cake.ImageUrl" alt="@cake.Title">
+								<img class="d-block w-100" style="height: 400px; object-fit: contain;" src="@Url.Content(cake.ImageUrl)" alt="@cake.Title">
 								<div class="carousel-caption d-none d-md-block">
 									<h5>
 										<a class="btn btn-primary" asp-controller="Cake" asp-action="Details" asp-route-id="@cake.Id">@cake.Title</a>
@@ -85,7 +85,7 @@
 						@foreach (var biscuit in biscuits)
 						{
 							<div class="carousel-item @(biscuit == biscuits.First() ? "active" : "")">
-								<img class="d-block w-100" style="height: 400px; object-fit: contain;" src="@biscuit.ImageUrl" alt="@biscuit.Title">
+								<img class="d-block w-100" style="height: 400px; object-fit: contain;" src="@Url.Content(biscuit.ImageUrl)" alt="@biscuit.Title">
 								<div class="carousel-caption d-none d-md-block">
 									<h5>
 										<a class="btn btn-primary" asp-controller="Biscuit" asp-action="Details" asp-route-id="@biscuit.Id">@biscuit.Title</a>

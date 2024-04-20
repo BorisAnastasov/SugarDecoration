@@ -62,8 +62,11 @@ namespace SugarDecoration.App.Controllers
 
 			var result = await userManager.CreateAsync(user, model.Password);
 
+
 			if (result.Succeeded)
 			{
+				await userManager.AddToRoleAsync(user, "User");
+
 				return RedirectToAction("Login", "User");
 			}
 
